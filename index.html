@@ -1,0 +1,1539 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP End-of-Session Check-In & Master Portal</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- QRCode.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Firebase Compatibility SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030814;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+    .sap-glass {
+      background: rgba(8, 18, 38, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(0, 143, 211, 0.25);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+    }
+    .sap-glass-header {
+      background: rgba(4, 11, 24, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 143, 211, 0.2);
+    }
+    .sap-btn-primary {
+      background: linear-gradient(135deg, #008FD3 0%, #005A9E 50%, #002D62 100%);
+      transition: all 0.2s ease;
+    }
+    .sap-btn-primary:hover {
+      background: linear-gradient(135deg, #18A2E8 0%, #006BB8 50%, #003B80 100%);
+      box-shadow: 0 0 22px rgba(0, 143, 211, 0.5);
+    }
+    .sap-input {
+      background: rgba(5, 13, 28, 0.92);
+      border: 1px solid rgba(71, 85, 105, 0.55);
+      transition: all 0.2s ease;
+    }
+    .sap-input:focus {
+      border-color: #008FD3;
+      box-shadow: 0 0 0 3px rgba(0, 143, 211, 0.3);
+      outline: none;
+    }
+    .sap-official-badge {
+      background-color: #ffffff;
+      border-radius: 1rem;
+      padding: 0.6rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.9);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030814;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 143, 211, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 143, 211, 0.8);
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.22; transform: scale(1); }
+      50% { opacity: 0.42; transform: scale(1.05); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 7s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-sky-500 selection:text-white">
+
+  <!-- Ambient Constellation Particle Canvas -->
+  <canvas id="constellationCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Ambient Blue Glows -->
+  <div class="fixed -top-32 -left-32 w-96 h-96 rounded-full bg-sky-500/15 blur-[120px] pointer-events-none z-0 animate-pulse-glow"></div>
+  <div class="fixed -bottom-32 -right-32 w-96 h-96 rounded-full bg-blue-600/15 blur-[130px] pointer-events-none z-0 animate-pulse-glow" style="animation-delay: -3.5s;"></div>
+
+  <!-- Toast Notification System -->
+  <div id="toastRoot" class="fixed top-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm pointer-events-none"></div>
+
+  <!-- Navigation Header -->
+  <header class="sap-glass-header sticky top-0 z-40 px-4 sm:px-8 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Official SAP Logo Badge -->
+      <div class="flex items-center gap-3.5 cursor-pointer" onclick="switchMainView('customer')">
+        <div class="sap-official-badge shrink-0">
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
+            onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
+            alt="SAP Logo" 
+            class="h-6 sm:h-7 w-auto object-contain block"
+          >
+        </div>
+        <div class="border-l border-slate-700/80 pl-3">
+          <div class="flex items-center gap-2">
+            <span class="text-sm sm:text-base font-extrabold tracking-tight text-white">Customer Check-In</span>
+            <span id="navViewBadge" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30">
+              End-of-Session
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 hidden sm:block">Customer & Attendee Registration</p>
+        </div>
+      </div>
+
+      <!-- Navigation Switcher -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800">
+          <button id="navBtnCustomer" onclick="switchMainView('customer')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-sky-400 bg-sky-950/80 border border-sky-800/50">
+            <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+            <span>Customer Page</span>
+          </button>
+          <button id="navBtnMaster" onclick="switchMainView('master')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+            <span>Master Portal</span>
+          </button>
+        </div>
+
+        <button id="btnMasterLogout" onclick="handleMasterLogout()" class="hidden px-3 py-1.5 rounded-lg text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-950/40 hover:bg-rose-950/70 border border-rose-800/40 transition flex items-center gap-1.5" title="Lock Master Portal">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Logout</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION CONTAINER -->
+  <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center">
+
+    <!-- VIEW 1: CUSTOMER END-OF-SESSION CHECK-IN -->
+    <section id="customerView" class="w-full max-w-md mx-auto py-6">
+      
+      <!-- Official SAP Logo Badge on Customer Check-In Page -->
+      <div class="text-center mb-6">
+        <div class="inline-block mb-3.5">
+          <div class="sap-official-badge p-3 sm:p-4">
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
+              onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
+              alt="SAP Logo" 
+              class="h-12 sm:h-14 w-auto object-contain block"
+            >
+          </div>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+          Session Check-In
+        </h2>
+
+        <!-- Read-Only Company Name Badge (Set by Master User QR) -->
+        <div class="mt-3 flex items-center justify-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/15 text-sky-300 text-xs sm:text-sm font-bold border border-sky-500/30 shadow-sm">
+            <i data-lucide="building" class="w-4 h-4 text-sky-400"></i>
+            <span>Company:</span>
+            <span id="customerCompanyNameDisplay" class="text-white font-extrabold">General Session</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Form Card (Strictly Full Name and Business Email) -->
+      <div class="sap-glass rounded-3xl p-6 sm:p-8 border border-sky-500/30 shadow-2xl relative overflow-hidden">
+        
+        <form id="customerCheckInForm" onsubmit="handleCustomerCheckIn(event)" class="space-y-4">
+          
+          <div>
+            <label for="customerFullName" class="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5 flex items-center gap-1.5">
+              <i data-lucide="user" class="w-3.5 h-3.5 text-sky-400"></i>
+              Full Name <span class="text-rose-400">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="customerFullName" 
+              required 
+              autocomplete="name"
+              placeholder="e.g. John Doe"
+              class="w-full sap-input rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 text-sm outline-none"
+            >
+          </div>
+
+          <div>
+            <label for="customerEmailAddress" class="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5 flex items-center gap-1.5">
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-sky-400"></i>
+              Business Email <span class="text-rose-400">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="customerEmailAddress" 
+              required 
+              autocomplete="email"
+              placeholder="john.doe@company.com"
+              class="w-full sap-input rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 text-sm outline-none"
+            >
+          </div>
+
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              id="btnSubmitCustomer"
+              class="w-full sap-btn-primary text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/30 transition transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>Submit Check-In</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Immediate Clean Confirmation State -->
+        <div id="customerSuccessCard" class="hidden text-center py-6 space-y-4">
+          <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
+            <i data-lucide="check" class="w-8 h-8"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-extrabold text-white">Thank you!</h3>
+            <p class="text-sm text-slate-300 mt-1">Your details have been submitted successfully.</p>
+            <p id="submittedCustomerSummary" class="text-xs text-sky-300 mt-2 font-mono font-semibold"></p>
+          </div>
+          <div class="pt-2">
+            <button onclick="resetCustomerForm()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition border border-slate-700 flex items-center justify-center gap-2 mx-auto">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+              <span>Submit Another Response</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Switch to Master Login -->
+      <div class="text-center mt-6">
+        <button onclick="switchMainView('master')" class="text-xs text-slate-400 hover:text-sky-400 transition flex items-center justify-center gap-1.5 mx-auto font-medium">
+          <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+          <span>Master User Portal</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- VIEW 2: MASTER USER LOGIN -->
+    <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-8">
+      <div class="sap-glass rounded-3xl p-6 sm:p-8 border border-sky-500/30 shadow-2xl relative">
+        
+        <!-- Official SAP Logo Badge -->
+        <div class="text-center mb-3">
+          <div class="sap-official-badge p-2.5 sm:p-3">
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
+              onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
+              alt="SAP Logo" 
+              class="h-8 sm:h-9 w-auto object-contain block"
+            >
+          </div>
+        </div>
+
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-black text-white">Master Host Login</h2>
+          <p class="text-xs text-slate-400 mt-1">Sign in to manage company QR codes and attendee data.</p>
+        </div>
+
+        <!-- Master Login Form: password is completely blank, no hints -->
+        <form id="masterLoginForm" onsubmit="handleMasterLogin(event)" class="space-y-4">
+          <div>
+            <label for="masterUsernameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+              Master Username
+            </label>
+            <input 
+              type="text" 
+              id="masterUsernameInput" 
+              required 
+              value="admin"
+              autocomplete="username"
+              class="w-full sap-input rounded-xl px-4 py-3 text-sm text-slate-100 outline-none"
+            >
+          </div>
+
+          <div>
+            <label for="masterPasswordInput" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+              Universal Password
+            </label>
+            <div class="relative">
+              <input 
+                type="password" 
+                id="masterPasswordInput" 
+                required 
+                value=""
+                autocomplete="current-password"
+                placeholder=""
+                class="w-full sap-input rounded-xl px-4 py-3 text-sm text-slate-100 outline-none pr-10"
+              >
+              <button type="button" onclick="togglePasswordVisibility('masterPasswordInput')" class="absolute right-3 top-3.5 text-slate-400 hover:text-slate-200">
+                <i data-lucide="eye" class="w-4 h-4" id="masterEyeIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="loginErrorMessage" class="hidden text-xs text-rose-400 bg-rose-950/50 border border-rose-800/50 rounded-xl p-3 text-center">
+            Invalid credentials. Please verify your universal password.
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full sap-btn-primary text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-sky-600/30 transition flex items-center justify-center gap-2 cursor-pointer mt-1"
+          >
+            <i data-lucide="unlock" class="w-4 h-4"></i>
+            <span>Unlock Master Dashboard</span>
+          </button>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- VIEW 3: MASTER DASHBOARD -->
+    <section id="masterDashboardView" class="hidden w-full space-y-6">
+      
+      <!-- Metrics Bar -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        
+        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-500/30 text-sky-400 flex items-center justify-center shrink-0">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Total Attendees</p>
+            <h3 id="statTotalAttendees" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          </div>
+        </div>
+
+        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
+            <i data-lucide="building" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Companies</p>
+            <h3 id="statTotalCompanies" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          </div>
+        </div>
+
+        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+            <i data-lucide="calendar" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Today's Check-Ins</p>
+            <h3 id="statTodayAttendees" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          </div>
+        </div>
+
+        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+            <i data-lucide="mail" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Unique Emails</p>
+            <h3 id="statUniqueEmails" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigation Tabs & Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <button id="tabBtnAttendees" onclick="switchMasterTab('attendees')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-primary text-white shadow-md shadow-sky-600/30">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            <span>Attendee Responses</span>
+          </button>
+          <button id="tabBtnCompanies" onclick="switchMasterTab('companies')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800">
+            <i data-lucide="qr-code" class="w-4 h-4"></i>
+            <span>Companies & End QR Codes</span>
+          </button>
+        </div>
+
+        <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 border border-sky-500/40 transition flex items-center gap-2 shadow-sm">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>Create Company QR</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: ATTENDEE RESPONSES & BULK EMAIL TOOLS -->
+      <div id="tabContentAttendees" class="space-y-4">
+        
+        <!-- Filter Toolbar & Bulk Email Actions -->
+        <div class="sap-glass rounded-2xl p-4 border border-sky-500/20 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+          
+          <div class="flex flex-1 flex-col sm:flex-row gap-2">
+            <!-- Search by Name or Email -->
+            <div class="relative flex-1">
+              <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
+              <input 
+                type="text" 
+                id="searchAttendeeInput" 
+                oninput="renderAttendeesTable()" 
+                placeholder="Search by attendee name or email..." 
+                class="w-full sap-input text-xs sm:text-sm text-slate-100 rounded-xl pl-10 pr-4 py-2.5 outline-none"
+              >
+            </div>
+            <!-- Filter by Company -->
+            <div class="sm:w-60">
+              <select 
+                id="filterCompanySelect" 
+                onchange="renderAttendeesTable()" 
+                class="w-full sap-input text-xs sm:text-sm text-slate-200 rounded-xl px-3 py-2.5 outline-none"
+              >
+                <option value="ALL">All Companies</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- BULK EMAIL SUITE (Clean & Direct) -->
+          <div class="flex items-center gap-2 shrink-0">
+            
+            <!-- One-Click Bulk Copy All Emails (Comma-separated for BCC) -->
+            <button 
+              onclick="copyAllFilteredEmails()" 
+              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/40 cursor-pointer"
+              title="Copy all attendee emails directly into clipboard for BCC"
+            >
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span>Copy All Emails</span>
+            </button>
+
+            <!-- Copy Names & Emails formatted -->
+            <button 
+              onclick="copyAllFilteredNamesAndEmails()" 
+              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-primary text-white transition flex items-center justify-center gap-1.5 shadow-lg shadow-sky-950/40 cursor-pointer"
+              title="Copy Name <email> list"
+            >
+              <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+              <span>Copy Names & Emails</span>
+            </button>
+
+            <!-- CSV Export -->
+            <button 
+              onclick="exportAttendeesCSV()" 
+              class="p-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" 
+              title="Export CSV spreadsheet"
+            >
+              <i data-lucide="download" class="w-4 h-4"></i>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Table of Attendee Responses -->
+        <div class="sap-glass rounded-2xl border border-sky-500/20 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs sm:text-sm">
+              <thead class="bg-slate-900/90 text-slate-400 font-bold border-b border-slate-800 uppercase tracking-wider text-[11px]">
+                <tr>
+                  <th class="py-3.5 px-4">Attendee Name</th>
+                  <th class="py-3.5 px-4">Email Address</th>
+                  <th class="py-3.5 px-4">Company</th>
+                  <th class="py-3.5 px-4">Submitted At</th>
+                  <th class="py-3.5 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attendeesTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty State -->
+          <div id="noAttendeesState" class="hidden text-center py-12 px-4 space-y-3">
+            <div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center mx-auto text-slate-500">
+              <i data-lucide="inbox" class="w-6 h-6"></i>
+            </div>
+            <p class="text-sm text-slate-300 font-semibold">No customer responses recorded yet.</p>
+            <p class="text-xs text-slate-500">Present the QR code at the end of the session to collect customer names and emails.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: COMPANIES & END-OF-SESSION QR CODES -->
+      <div id="tabContentCompanies" class="hidden space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-white">End-of-Session QR Codes</h3>
+            <p class="text-xs text-slate-400">Display full-screen on the projector at the end of your session or copy the QR link.</p>
+          </div>
+          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-primary text-white transition flex items-center gap-1.5 shadow-md shadow-sky-600/30">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Add Company</span>
+          </button>
+        </div>
+
+        <!-- Companies Grid -->
+        <div id="companiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Empty Companies State -->
+        <div id="noCompaniesState" class="hidden sap-glass rounded-2xl p-12 text-center border border-sky-500/20 space-y-3">
+          <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center mx-auto text-sky-400">
+            <i data-lucide="presentation" class="w-6 h-6"></i>
+          </div>
+          <h4 class="text-base font-bold text-white">No Companies Created</h4>
+          <p class="text-xs text-slate-400 max-w-sm mx-auto">Create a company name to generate the end-of-session QR code.</p>
+          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-primary text-white inline-flex items-center gap-1.5">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Create Company QR</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL 1: CREATE COMPANY QR (STRICTLY COMPANY NAME) -->
+  <div id="createCompanyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
+    <div class="sap-glass max-w-md w-full rounded-3xl p-6 border border-sky-500/30 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i data-lucide="building" class="w-4 h-4 text-sky-400"></i>
+          <span>Create Company QR</span>
+        </h3>
+        <button onclick="closeModal('createCompanyModal')" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="createCompanyForm" onsubmit="handleCreateCompany(event)" class="space-y-4 mt-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-200 mb-1.5">Company Name *</label>
+          <input 
+            type="text" 
+            id="newCompanyNameInput" 
+            required 
+            placeholder="e.g. E-Finance, Saudi Aramco, Deloitte" 
+            class="w-full sap-input rounded-xl px-3.5 py-3 text-xs text-white placeholder-slate-500 outline-none"
+          >
+          <p class="text-[11px] text-slate-400 mt-1">This company name will be locked on the check-in form for attendees who scan this QR.</p>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-800">
+          <button type="button" onclick="closeModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white bg-slate-800 transition">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-primary text-white transition flex items-center gap-1.5 shadow-md shadow-sky-600/30">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            <span>Create & Show QR</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: FULL-SCREEN END-OF-SESSION PRESENTATION MODE -->
+  <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl hidden">
+    
+    <button onclick="closeModal('presentationModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2.5 rounded-xl bg-slate-900 border border-slate-800 z-50">
+      <i data-lucide="x" class="w-6 h-6"></i>
+    </button>
+
+    <div class="w-full max-w-2xl text-center space-y-6 animate-in fade-in zoom-in duration-200">
+      
+      <!-- Official SAP Logo Badge on Projector Screen -->
+      <div class="flex justify-center">
+        <div class="sap-official-badge p-3 sm:p-4">
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
+            onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
+            alt="SAP Logo" 
+            class="h-14 sm:h-16 w-auto object-contain block"
+          >
+        </div>
+      </div>
+
+      <div>
+        <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/40">
+          End-of-Session Registration
+        </span>
+        <h2 id="presentCompanyTitle" class="text-3xl sm:text-5xl font-black text-white mt-2">
+          Company Name
+        </h2>
+        <p class="text-sm sm:text-base text-slate-300 mt-1">Please scan the QR code to enter your Name and Email.</p>
+      </div>
+
+      <!-- Centered QR Container -->
+      <div class="inline-block p-6 sm:p-8 bg-white rounded-3xl shadow-2xl border-4 border-sky-500/40 my-2">
+        <div id="presentationQrDiv" class="flex items-center justify-center"></div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button id="btnDownloadPresentQr" class="px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-primary text-white flex items-center gap-2">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Save QR as PNG</span>
+        </button>
+        <button id="btnCopyPresentUrl" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-2">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+          <span>Copy Check-In Link</span>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-500 font-mono" id="presentationUrlText"></p>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
+    <div class="sap-glass max-w-sm w-full rounded-2xl p-5 border border-sky-500/20 shadow-2xl relative text-center space-y-4">
+      <div class="w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center mx-auto">
+        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h4 id="deleteConfirmTitle" class="text-base font-bold text-white">Confirm Removal</h4>
+        <p id="deleteConfirmDesc" class="text-xs text-slate-400 mt-1">This action cannot be reversed.</p>
+      </div>
+      <div class="flex items-center justify-center gap-2 pt-2">
+        <button id="btnCancelDelete" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+          Cancel
+        </button>
+        <button id="btnProceedDelete" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Constellation Background Script -->
+  <script>
+    (function initConstellationBackground() {
+      const canvas = document.getElementById('constellationCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+      const particleCount = 48;
+      let mouse = { x: null, y: null, radius: 140 };
+
+      function resizeCanvas() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+      window.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.55;
+          this.vy = (Math.random() - 0.5) * 0.55;
+          this.radius = Math.random() * 1.6 + 1;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+
+          if (mouse.x !== null && mouse.y !== null) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < mouse.radius) {
+              this.x -= (dx / dist) * 1.2;
+              this.y -= (dy / dist) * 1.2;
+            }
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(0, 143, 211, 0.55)';
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            let dx = particles[i].x - particles[j].x;
+            let dy = particles[i].y - particles[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 125) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              let alpha = 0.22 * (1 - dist / 125);
+              ctx.strokeStyle = `rgba(0, 143, 211, ${alpha})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+
+  <!-- FIREBASE CONFIGURATION & APPLICATION ENGINE -->
+  <script>
+    /* ======================================================== */
+    /* FIREBASE CONFIGURATION (CONNECTED TO YOUR PROJECT)       */
+    /* ======================================================== */
+    const firebaseConfig = {
+      apiKey: "AIzaSyAlFaHbpYc8MpUmPuAiaMgegVCGQqbXtGI",
+      authDomain: "sap-email-handler.firebaseapp.com",
+      projectId: "sap-email-handler",
+      storageBucket: "sap-email-handler.firebasestorage.app",
+      messagingSenderId: "312773214066",
+      appId: "1:312773214066:web:0f4180f98fb6477f2827eb",
+      measurementId: "G-QBX3GRSVM6"
+    };
+
+    let firestoreDb = null;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      firestoreDb = firebase.firestore();
+      console.log("Firebase connected successfully to sap-email-handler.");
+    } catch (err) {
+      console.error("Firebase initialization failed:", err);
+    }
+
+    /* ======================================================== */
+    /* APPLICATION STATE & STORAGE                              */
+    /* ======================================================== */
+    window.AppState = {
+      isMasterAuthenticated: false,
+      currentView: 'customer',
+      currentMasterTab: 'attendees',
+      companies: JSON.parse(localStorage.getItem('sap_companies') || '[]'),
+      attendees: JSON.parse(localStorage.getItem('sap_attendees') || '[]'),
+      activeCompanyId: null
+    };
+
+    if (window.AppState.companies.length === 0) {
+      window.AppState.companies = [
+        { id: 'comp_efinance', name: 'E-Finance', createdAt: Date.now() - 3600000 },
+        { id: 'comp_aramco', name: 'Saudi Aramco', createdAt: Date.now() - 7200000 }
+      ];
+      localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      if (sessionStorage.getItem('sap_master_logged_in') === 'true') {
+        window.AppState.isMasterAuthenticated = true;
+      }
+
+      initViewFromUrl();
+      initRealtimeFirestoreSync();
+      refreshAllDataViews();
+    });
+
+    // Real-Time Multi-Device Cloud Listener
+    function initRealtimeFirestoreSync() {
+      if (!firestoreDb) return;
+
+      firestoreDb.collection('companies').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+        if (!snapshot.empty) {
+          const comps = [];
+          snapshot.forEach(doc => comps.push({ id: doc.id, ...doc.data() }));
+          window.AppState.companies = comps;
+          localStorage.setItem('sap_companies', JSON.stringify(comps));
+          refreshAllDataViews();
+        }
+      }, err => console.warn("Companies sync warning:", err));
+
+      firestoreDb.collection('attendees').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+        const atts = [];
+        snapshot.forEach(doc => atts.push({ id: doc.id, ...doc.data() }));
+        window.AppState.attendees = atts;
+        localStorage.setItem('sap_attendees', JSON.stringify(atts));
+        refreshAllDataViews();
+      }, err => console.warn("Attendees sync warning:", err));
+    }
+
+    function getQueryParam(key) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(key);
+    }
+
+    function initViewFromUrl() {
+      const compParam = getQueryParam('company') || getQueryParam('session');
+      if (compParam) {
+        const existing = window.AppState.companies.find(c => c.id === compParam || c.name.toLowerCase() === compParam.toLowerCase());
+        if (existing) {
+          window.AppState.activeCompanyId = existing.id;
+        } else {
+          const newComp = { id: 'comp_' + Date.now(), name: compParam, createdAt: Date.now() };
+          window.AppState.companies.unshift(newComp);
+          localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
+          if (firestoreDb) firestoreDb.collection('companies').doc(newComp.id).set(newComp);
+          window.AppState.activeCompanyId = newComp.id;
+        }
+      } else {
+        if (window.AppState.companies.length > 0) {
+          window.AppState.activeCompanyId = window.AppState.companies[0].id;
+        }
+      }
+      switchMainView('customer');
+    }
+
+    function refreshAllDataViews() {
+      updateCustomerCompanyDisplay();
+      updateCompanyFilterDropdown();
+      renderAttendeesTable();
+      renderCompaniesGrid();
+      updateMetrics();
+      lucide.createIcons();
+    }
+
+    function updateCustomerCompanyDisplay() {
+      const label = document.getElementById('customerCompanyNameDisplay');
+      const activeComp = window.AppState.companies.find(c => c.id === window.AppState.activeCompanyId);
+      if (label) {
+        label.innerText = activeComp ? activeComp.name : "SAP Session";
+      }
+    }
+
+    function updateCompanyFilterDropdown() {
+      const filterSelect = document.getElementById('filterCompanySelect');
+      if (!filterSelect) return;
+      const currentVal = filterSelect.value;
+      filterSelect.innerHTML = '<option value="ALL">All Companies</option>';
+      window.AppState.companies.forEach(comp => {
+        const opt = document.createElement('option');
+        opt.value = comp.id;
+        opt.textContent = comp.name;
+        filterSelect.appendChild(opt);
+      });
+      filterSelect.value = currentVal || 'ALL';
+    }
+
+    /* ======================================================== */
+    /* CUSTOMER SUBMISSION (WRITES DIRECT TO FIRESTORE)        */
+    /* ======================================================== */
+    async function handleCustomerCheckIn(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('customerFullName');
+      const emailInput = document.getElementById('customerEmailAddress');
+
+      const fullName = (nameInput.value || '').trim();
+      const email = (emailInput.value || '').trim().toLowerCase();
+
+      if (!fullName || !email) {
+        showToast("Please enter your name and email.", "error");
+        return;
+      }
+
+      const activeComp = window.AppState.companies.find(c => c.id === window.AppState.activeCompanyId) || {
+        id: 'comp_default',
+        name: 'SAP Session'
+      };
+
+      const record = {
+        fullName: fullName,
+        email: email,
+        companyId: activeComp.id,
+        companyName: activeComp.name,
+        timestamp: Date.now()
+      };
+
+      // Push to Firestore Cloud
+      if (firestoreDb) {
+        try {
+          await firestoreDb.collection('attendees').add(record);
+        } catch (err) {
+          console.error("Firestore push error:", err);
+        }
+      }
+
+      // Local store fallback
+      const localRecord = { id: 'att_' + Date.now(), ...record };
+      window.AppState.attendees.unshift(localRecord);
+      localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
+
+      // Show confirmation state
+      document.getElementById('customerCheckInForm').classList.add('hidden');
+      document.getElementById('customerSuccessCard').classList.remove('hidden');
+      document.getElementById('submittedCustomerSummary').innerText = `${fullName} • ${email} • ${activeComp.name}`;
+
+      showToast("Thank you! Your details have been submitted.", "success");
+      refreshAllDataViews();
+    }
+
+    function resetCustomerForm() {
+      document.getElementById('customerFullName').value = '';
+      document.getElementById('customerEmailAddress').value = '';
+      document.getElementById('customerSuccessCard').classList.add('hidden');
+      document.getElementById('customerCheckInForm').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    /* ======================================================== */
+    /* VIEW SWITCHING & MASTER AUTHENTICATION                   */
+    /* ======================================================== */
+    function switchMainView(target) {
+      const customerView = document.getElementById('customerView');
+      const masterLoginView = document.getElementById('masterLoginView');
+      const masterDashView = document.getElementById('masterDashboardView');
+      const navBadge = document.getElementById('navViewBadge');
+      const navBtnCustomer = document.getElementById('navBtnCustomer');
+      const navBtnMaster = document.getElementById('navBtnMaster');
+      const btnLogout = document.getElementById('btnMasterLogout');
+
+      customerView.classList.add('hidden');
+      masterLoginView.classList.add('hidden');
+      masterDashView.classList.add('hidden');
+
+      if (target === 'customer') {
+        window.AppState.currentView = 'customer';
+        customerView.classList.remove('hidden');
+        navBadge.innerText = 'End-of-Session';
+        navBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30';
+
+        navBtnCustomer.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-sky-400 bg-sky-950/80 border border-sky-800/50';
+        navBtnMaster.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white';
+        btnLogout.classList.add('hidden');
+        updateCustomerCompanyDisplay();
+      } else if (target === 'master') {
+        navBtnCustomer.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white';
+        navBtnMaster.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-sky-400 bg-sky-950/80 border border-sky-800/50';
+
+        if (window.AppState.isMasterAuthenticated) {
+          window.AppState.currentView = 'master-dash';
+          masterDashView.classList.remove('hidden');
+          navBadge.innerText = 'Master Portal';
+          navBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+          btnLogout.classList.remove('hidden');
+          renderAttendeesTable();
+          renderCompaniesGrid();
+          updateMetrics();
+        } else {
+          window.AppState.currentView = 'master-login';
+          masterLoginView.classList.remove('hidden');
+          navBadge.innerText = 'Master Login';
+          navBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
+          btnLogout.classList.add('hidden');
+        }
+      }
+      lucide.createIcons();
+    }
+
+    function handleMasterLogin(e) {
+      if (e) e.preventDefault();
+      const u = (document.getElementById('masterUsernameInput').value || '').trim().toLowerCase();
+      const p = (document.getElementById('masterPasswordInput').value || '').trim();
+      const errEl = document.getElementById('loginErrorMessage');
+
+      const isValid = (u === 'admin' && (p === 'sap2025' || p === 'sap' || p === 'master2025')) ||
+                      (p === 'sap2025');
+
+      if (isValid) {
+        window.AppState.isMasterAuthenticated = true;
+        sessionStorage.setItem('sap_master_logged_in', 'true');
+        errEl.classList.add('hidden');
+        showToast("Master portal unlocked.", "success");
+        switchMainView('master');
+      } else {
+        errEl.classList.remove('hidden');
+      }
+    }
+
+    function handleMasterLogout() {
+      window.AppState.isMasterAuthenticated = false;
+      sessionStorage.removeItem('sap_master_logged_in');
+      document.getElementById('masterPasswordInput').value = '';
+      showToast("Master portal locked.", "info");
+      switchMainView('customer');
+    }
+
+    function togglePasswordVisibility(id) {
+      const inp = document.getElementById(id);
+      const icon = document.getElementById('masterEyeIcon');
+      if (!inp) return;
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        if (icon) icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        inp.type = 'password';
+        if (icon) icon.setAttribute('data-lucide', 'eye');
+      }
+      lucide.createIcons();
+    }
+
+    function switchMasterTab(tab) {
+      window.AppState.currentMasterTab = tab;
+      const tabAttendees = document.getElementById('tabContentAttendees');
+      const tabCompanies = document.getElementById('tabContentCompanies');
+      const btnAttendees = document.getElementById('tabBtnAttendees');
+      const btnCompanies = document.getElementById('tabBtnCompanies');
+
+      tabAttendees.classList.add('hidden');
+      tabCompanies.classList.add('hidden');
+
+      const activeClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-primary text-white shadow-md shadow-sky-600/30';
+      const inactiveClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800';
+
+      btnAttendees.className = inactiveClass;
+      btnCompanies.className = inactiveClass;
+
+      if (tab === 'attendees') {
+        tabAttendees.classList.remove('hidden');
+        btnAttendees.className = activeClass;
+        renderAttendeesTable();
+      } else if (tab === 'companies') {
+        tabCompanies.classList.remove('hidden');
+        btnCompanies.className = activeClass;
+        renderCompaniesGrid();
+      }
+      lucide.createIcons();
+    }
+
+    /* ======================================================== */
+    /* BULK EMAIL TOOLS & ATTENDEE DATABASE                     */
+    /* ======================================================== */
+    function getFilteredAttendees() {
+      const searchTerm = (document.getElementById('searchAttendeeInput')?.value || '').toLowerCase();
+      const filterComp = document.getElementById('filterCompanySelect')?.value || 'ALL';
+
+      return window.AppState.attendees.filter(att => {
+        const matchesSearch = (att.fullName || '').toLowerCase().includes(searchTerm) || 
+                              (att.email || '').toLowerCase().includes(searchTerm);
+        const matchesCompany = filterComp === 'ALL' || att.companyId === filterComp;
+        return matchesSearch && matchesCompany;
+      });
+    }
+
+    function renderAttendeesTable() {
+      const tbody = document.getElementById('attendeesTableBody');
+      const emptyState = document.getElementById('noAttendeesState');
+      if (!tbody) return;
+
+      const filtered = getFilteredAttendees();
+      tbody.innerHTML = '';
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        filtered.forEach(item => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-800/40 transition group';
+
+          const timeDisplay = item.timestamp ? new Date(item.timestamp).toLocaleString(undefined, {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          }) : 'Just now';
+
+          tr.innerHTML = `
+            <td class="py-3.5 px-4 font-bold text-white whitespace-nowrap">
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 flex items-center justify-center font-bold text-xs">
+                  ${(item.fullName || 'A').charAt(0).toUpperCase()}
+                </div>
+                <span>${escapeHtml(item.fullName || 'Attendee')}</span>
+              </div>
+            </td>
+            <td class="py-3.5 px-4 text-sky-300 font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <span>${escapeHtml(item.email || '')}</span>
+                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email: ${escapeHtml(item.email || '')}', 'success');" title="Copy email" class="opacity-0 group-hover:opacity-100 p-1 hover:text-white transition">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </td>
+            <td class="py-3.5 px-4">
+              <span class="inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+                ${escapeHtml(item.companyName || 'General Session')}
+              </span>
+            </td>
+            <td class="py-3.5 px-4 text-slate-400 text-xs whitespace-nowrap">
+              ${timeDisplay}
+            </td>
+            <td class="py-3.5 px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email!', 'success');" class="p-1.5 rounded-lg text-slate-400 hover:text-sky-400 hover:bg-slate-800 transition" title="Copy Email">
+                  <i data-lucide="copy" class="w-4 h-4"></i>
+                </button>
+                <button onclick="copyNameAndEmail('${escapeHtml(item.fullName)}', '${escapeHtml(item.email)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-800 transition" title="Copy Name & Email">
+                  <i data-lucide="clipboard" class="w-4 h-4"></i>
+                </button>
+                <button onclick="promptDeleteAttendee('${item.id}', '${escapeHtml(item.fullName)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-950/40 transition" title="Delete record">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+      lucide.createIcons();
+    }
+
+    function copyNameAndEmail(name, email) {
+      const text = `${name} <${email}>`;
+      copyToClipboard(text);
+      showToast(`Copied: ${text}`, "success");
+    }
+
+    function copyAllFilteredEmails() {
+      const filtered = getFilteredAttendees();
+      const uniqueEmails = [...new Set(filtered.map(a => (a.email || '').trim()).filter(Boolean))];
+
+      if (uniqueEmails.length === 0) {
+        showToast("No emails to copy.", "error");
+        return;
+      }
+
+      const bccString = uniqueEmails.join(', ');
+      copyToClipboard(bccString);
+      showToast(`Copied ${uniqueEmails.length} email(s) for BCC!`, "success");
+    }
+
+    function copyAllFilteredNamesAndEmails() {
+      const filtered = getFilteredAttendees();
+      if (filtered.length === 0) {
+        showToast("No attendees to copy.", "error");
+        return;
+      }
+
+      const formatted = filtered.map(a => `${a.fullName} <${a.email}>`).join(', ');
+      copyToClipboard(formatted);
+      showToast(`Copied ${filtered.length} Name & Email pair(s)!`, "success");
+    }
+
+    function exportAttendeesCSV() {
+      const list = window.AppState.attendees;
+      if (list.length === 0) {
+        showToast("No attendee records to export.", "error");
+        return;
+      }
+
+      const headers = ["Full Name", "Email Address", "Company", "Check-In Timestamp"];
+      const rows = list.map(item => [
+        `"${(item.fullName || '').replace(/"/g, '""')}"`,
+        `"${(item.email || '').replace(/"/g, '""')}"`,
+        `"${(item.companyName || '').replace(/"/g, '""')}"`,
+        `"${item.timestamp ? new Date(item.timestamp).toISOString() : ''}"`
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `sap_attendees_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("CSV file exported successfully!", "success");
+    }
+
+    /* ======================================================== */
+    /* COMPANY QR MANAGEMENT & PRESENTATION MODE                */
+    /* ======================================================== */
+    function renderCompaniesGrid() {
+      const grid = document.getElementById('companiesGrid');
+      const emptyState = document.getElementById('noCompaniesState');
+      if (!grid) return;
+
+      grid.innerHTML = '';
+      const list = window.AppState.companies;
+
+      if (list.length === 0) {
+        emptyState.classList.remove('hidden');
+        return;
+      } else {
+        emptyState.classList.add('hidden');
+      }
+
+      list.forEach(comp => {
+        const count = window.AppState.attendees.filter(a => a.companyId === comp.id).length;
+        const checkinUrl = getCompanyCheckInUrl(comp.id);
+        const qrContainerId = `qr_card_${comp.id}`;
+
+        const card = document.createElement('div');
+        card.className = 'sap-glass rounded-2xl p-5 border border-sky-500/20 flex flex-col justify-between space-y-4 hover:border-sky-500/40 transition relative';
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h4 class="font-extrabold text-white text-base leading-snug">${escapeHtml(comp.name)}</h4>
+                <p class="text-[11px] text-sky-400 font-bold uppercase tracking-wider mt-0.5">End-of-Session QR</p>
+              </div>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30 whitespace-nowrap">
+                ${count} ${count === 1 ? 'Attendee' : 'Attendees'}
+              </span>
+            </div>
+
+            <!-- Mini QR Preview -->
+            <div class="mt-4 p-3 bg-white rounded-xl flex items-center justify-center cursor-pointer shadow-md hover:scale-[1.02] transition" onclick="openPresentationMode('${comp.id}')" title="Click to Present on Projector Screen">
+              <div id="${qrContainerId}" class="w-[140px] h-[140px] flex items-center justify-center"></div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="copyCompanyLink('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center justify-center gap-1.5 border border-slate-700">
+                <i data-lucide="link" class="w-3.5 h-3.5 text-sky-400"></i>
+                <span>Copy Link</span>
+              </button>
+              <button onclick="openPresentationMode('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold sap-btn-primary text-white transition flex items-center justify-center gap-1.5 shadow-sm">
+                <i data-lucide="presentation" class="w-3.5 h-3.5"></i>
+                <span>Present</span>
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+              <button onclick="openCustomerViewForCompany('${comp.id}')" class="hover:text-sky-300 underline flex items-center gap-1">
+                <i data-lucide="external-link" class="w-3 h-3"></i>
+                Open Customer Page
+              </button>
+              <button onclick="promptDeleteCompany('${comp.id}', '${escapeHtml(comp.name)}')" class="text-rose-400 hover:text-rose-300 hover:underline">
+                Remove
+              </button>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+
+        // Render QR
+        setTimeout(() => {
+          const container = document.getElementById(qrContainerId);
+          if (container && window.QRCode) {
+            container.innerHTML = '';
+            new QRCode(container, {
+              text: checkinUrl,
+              width: 140,
+              height: 140,
+              colorDark: "#030814",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.M
+            });
+          }
+        }, 50);
+      });
+
+      lucide.createIcons();
+    }
+
+    function getCompanyCheckInUrl(companyId) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('company', companyId);
+      return url.toString();
+    }
+
+    function copyCompanyLink(companyId) {
+      const url = getCompanyCheckInUrl(companyId);
+      copyToClipboard(url);
+      showToast("Company check-in QR link copied!", "success");
+    }
+
+    function openCustomerViewForCompany(companyId) {
+      window.AppState.activeCompanyId = companyId;
+      switchMainView('customer');
+    }
+
+    // Create Company (STRICTLY Company Name)
+    async function handleCreateCompany(e) {
+      e.preventDefault();
+      const input = document.getElementById('newCompanyNameInput');
+      const name = (input.value || '').trim();
+
+      if (!name) return;
+
+      const newComp = {
+        id: 'comp_' + Date.now(),
+        name: name,
+        createdAt: Date.now()
+      };
+
+      if (firestoreDb) {
+        try {
+          await firestoreDb.collection('companies').doc(newComp.id).set(newComp);
+        } catch (err) {
+          console.error("Firestore company save failed:", err);
+        }
+      }
+
+      window.AppState.companies.unshift(newComp);
+      localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
+      input.value = '';
+      closeModal('createCompanyModal');
+
+      refreshAllDataViews();
+      showToast(`Company "${name}" created with End-of-Session QR!`, "success");
+
+      // Immediately open Presentation mode for this company
+      openPresentationMode(newComp.id);
+    }
+
+    // Presentation Mode (Full-Screen Projector with Official SAP Logo Badge)
+    function openPresentationMode(companyId) {
+      const comp = window.AppState.companies.find(c => c.id === companyId);
+      if (!comp) return;
+
+      const titleEl = document.getElementById('presentCompanyTitle');
+      const qrDiv = document.getElementById('presentationQrDiv');
+      const urlText = document.getElementById('presentationUrlText');
+      const btnDownload = document.getElementById('btnDownloadPresentQr');
+      const btnCopy = document.getElementById('btnCopyPresentUrl');
+
+      const url = getCompanyCheckInUrl(companyId);
+
+      titleEl.innerText = comp.name;
+      urlText.innerText = url;
+      qrDiv.innerHTML = '';
+
+      new QRCode(qrDiv, {
+        text: url,
+        width: 250,
+        height: 250,
+        colorDark: "#030814",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      btnCopy.onclick = () => {
+        copyToClipboard(url);
+        showToast("Check-in link copied to clipboard!", "success");
+      };
+
+      btnDownload.onclick = () => {
+        setTimeout(() => {
+          const canvas = qrDiv.querySelector('canvas');
+          const img = qrDiv.querySelector('img');
+          let dataUrl = canvas ? canvas.toDataURL("image/png") : (img ? img.src : "");
+          if (dataUrl) {
+            const a = document.createElement('a');
+            a.download = `SAP_EndSession_QR_${comp.name.replace(/\s+/g, '_')}.png`;
+            a.href = dataUrl;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast("QR Code image downloaded!", "success");
+          }
+        }, 120);
+      };
+
+      openModal('presentationModal');
+    }
+
+    function updateMetrics() {
+      const atts = window.AppState.attendees;
+      const comps = window.AppState.companies;
+
+      document.getElementById('statTotalAttendees').innerText = atts.length;
+      document.getElementById('statTotalCompanies').innerText = comps.length;
+
+      const today = new Date().toDateString();
+      const todayCount = atts.filter(a => a.timestamp && new Date(a.timestamp).toDateString() === today).length;
+      document.getElementById('statTodayAttendees').innerText = todayCount;
+
+      const uniqueEmails = new Set(atts.map(a => (a.email || '').toLowerCase().trim()).filter(Boolean));
+      document.getElementById('statUniqueEmails').innerText = uniqueEmails.size;
+    }
+
+    function promptDeleteCompany(id, name) {
+      showDeleteConfirmation(
+        `Remove Company "${name}"?`,
+        "The QR code for this company will be removed. All previously collected attendee data remains safe.",
+        async () => {
+          if (firestoreDb) {
+            try { await firestoreDb.collection('companies').doc(id).delete(); } catch (e) {}
+          }
+          window.AppState.companies = window.AppState.companies.filter(c => c.id !== id);
+          localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
+          if (window.AppState.activeCompanyId === id) {
+            window.AppState.activeCompanyId = window.AppState.companies[0]?.id || null;
+          }
+          refreshAllDataViews();
+          showToast(`Company "${name}" removed.`, "info");
+        }
+      );
+    }
+
+    function promptDeleteAttendee(id, name) {
+      showDeleteConfirmation(
+        `Remove Attendee "${name}"?`,
+        "This response will be removed from your records.",
+        async () => {
+          if (firestoreDb) {
+            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
+          }
+          window.AppState.attendees = window.AppState.attendees.filter(a => a.id !== id);
+          localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
+          refreshAllDataViews();
+          showToast(`Attendee record removed.`, "info");
+        }
+      );
+    }
+
+    function showDeleteConfirmation(title, desc, callback) {
+      const modal = document.getElementById('deleteConfirmModal');
+      document.getElementById('deleteConfirmTitle').innerText = title;
+      document.getElementById('deleteConfirmDesc').innerText = desc;
+
+      const btnProceed = document.getElementById('btnProceedDelete');
+      const btnCancel = document.getElementById('btnCancelDelete');
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        btnProceed.onclick = null;
+        btnCancel.onclick = null;
+      };
+
+      btnProceed.onclick = () => {
+        cleanup();
+        if (callback) callback();
+      };
+      btnCancel.onclick = cleanup;
+
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.remove('hidden');
+        lucide.createIcons();
+      }
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    }
+
+    function copyToClipboard(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.left = "-999999px";
+      textarea.style.top = "-999999px";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.error('Copy execution error:', err);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById('toastRoot');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      let borderStyle = "border-sky-500/50 bg-slate-900/95 text-sky-200";
+      let icon = "info";
+
+      if (type === "success") {
+        borderStyle = "border-emerald-500/50 bg-slate-900/95 text-emerald-200";
+        icon = "check-circle-2";
+      } else if (type === "error") {
+        borderStyle = "border-rose-500/50 bg-slate-900/95 text-rose-200";
+        icon = "alert-circle";
+      }
+
+      toast.className = `p-3.5 rounded-2xl border shadow-2xl backdrop-blur-md flex items-center gap-2.5 text-xs font-bold transform transition-all duration-300 pointer-events-auto opacity-0 translate-y-2 ${borderStyle}`;
+      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4 shrink-0"></i><span>${escapeHtml(message)}</span>`;
+
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-0', 'translate-y-2');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+
+</body>
+</html>
+
+```
