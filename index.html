@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 <head>
@@ -56,6 +55,7 @@
       box-shadow: 0 0 0 3px rgba(0, 143, 211, 0.3);
       outline: none;
     }
+    /* Official SAP White Badge Container */
     .sap-official-badge {
       background-color: #ffffff;
       border-radius: 1rem;
@@ -175,12 +175,12 @@
           <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/15 text-sky-300 text-xs sm:text-sm font-bold border border-sky-500/30 shadow-sm">
             <i data-lucide="building" class="w-4 h-4 text-sky-400"></i>
             <span>Company:</span>
-            <span id="customerCompanyNameDisplay" class="text-white font-extrabold">General Session</span>
+            <span id="customerCompanyNameDisplay" class="text-white font-extrabold">SAP Session</span>
           </div>
         </div>
       </div>
 
-      <!-- Customer Form Card (Strictly Full Name and Business Email) -->
+      <!-- Customer Form Card -->
       <div class="sap-glass rounded-3xl p-6 sm:p-8 border border-sky-500/30 shadow-2xl relative overflow-hidden">
         
         <form id="customerCheckInForm" onsubmit="handleCustomerCheckIn(event)" class="space-y-4">
@@ -228,7 +228,7 @@
 
         </form>
 
-        <!-- Immediate Clean Confirmation State -->
+        <!-- Immediate Confirmation State -->
         <div id="customerSuccessCard" class="hidden text-center py-6 space-y-4">
           <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
             <i data-lucide="check" class="w-8 h-8"></i>
@@ -279,7 +279,7 @@
           <p class="text-xs text-slate-400 mt-1">Sign in to manage company QR codes and attendee data.</p>
         </div>
 
-        <!-- Master Login Form: password is completely blank, no hints -->
+        <!-- Master Login Form: password field completely blank -->
         <form id="masterLoginForm" onsubmit="handleMasterLogin(event)" class="space-y-4">
           <div>
             <label for="masterUsernameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
@@ -401,11 +401,9 @@
       <!-- TAB 1: ATTENDEE RESPONSES & BULK EMAIL TOOLS -->
       <div id="tabContentAttendees" class="space-y-4">
         
-        <!-- Filter Toolbar & Bulk Email Actions -->
         <div class="sap-glass rounded-2xl p-4 border border-sky-500/20 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
           
           <div class="flex flex-1 flex-col sm:flex-row gap-2">
-            <!-- Search by Name or Email -->
             <div class="relative flex-1">
               <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
               <input 
@@ -416,7 +414,6 @@
                 class="w-full sap-input text-xs sm:text-sm text-slate-100 rounded-xl pl-10 pr-4 py-2.5 outline-none"
               >
             </div>
-            <!-- Filter by Company -->
             <div class="sm:w-60">
               <select 
                 id="filterCompanySelect" 
@@ -428,10 +425,9 @@
             </div>
           </div>
 
-          <!-- BULK EMAIL SUITE (Clean & Direct) -->
+          <!-- BULK EMAIL SUITE -->
           <div class="flex items-center gap-2 shrink-0">
             
-            <!-- One-Click Bulk Copy All Emails (Comma-separated for BCC) -->
             <button 
               onclick="copyAllFilteredEmails()" 
               class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/40 cursor-pointer"
@@ -441,7 +437,6 @@
               <span>Copy All Emails</span>
             </button>
 
-            <!-- Copy Names & Emails formatted -->
             <button 
               onclick="copyAllFilteredNamesAndEmails()" 
               class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-primary text-white transition flex items-center justify-center gap-1.5 shadow-lg shadow-sky-950/40 cursor-pointer"
@@ -451,7 +446,6 @@
               <span>Copy Names & Emails</span>
             </button>
 
-            <!-- CSV Export -->
             <button 
               onclick="exportAttendeesCSV()" 
               class="p-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" 
@@ -477,12 +471,11 @@
                 </tr>
               </thead>
               <tbody id="attendeesTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-                <!-- Dynamically populated -->
+                <!-- Populated dynamically -->
               </tbody>
             </table>
           </div>
 
-          <!-- Empty State -->
           <div id="noAttendeesState" class="hidden text-center py-12 px-4 space-y-3">
             <div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center mx-auto text-slate-500">
               <i data-lucide="inbox" class="w-6 h-6"></i>
@@ -510,10 +503,9 @@
 
         <!-- Companies Grid -->
         <div id="companiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Dynamically populated -->
+          <!-- Populated dynamically -->
         </div>
 
-        <!-- Empty Companies State -->
         <div id="noCompaniesState" class="hidden sap-glass rounded-2xl p-12 text-center border border-sky-500/20 space-y-3">
           <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center mx-auto text-sky-400">
             <i data-lucide="presentation" class="w-6 h-6"></i>
@@ -532,7 +524,7 @@
 
   </main>
 
-  <!-- MODAL 1: CREATE COMPANY QR (STRICTLY COMPANY NAME) -->
+  <!-- MODAL 1: CREATE COMPANY QR -->
   <div id="createCompanyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
     <div class="sap-glass max-w-md w-full rounded-3xl p-6 border border-sky-500/30 shadow-2xl relative">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -571,7 +563,7 @@
     </div>
   </div>
 
-  <!-- MODAL 2: FULL-SCREEN END-OF-SESSION PRESENTATION MODE -->
+  <!-- MODAL 2: FULL-SCREEN PRESENTATION MODE -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl hidden">
     
     <button onclick="closeModal('presentationModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2.5 rounded-xl bg-slate-900 border border-slate-800 z-50">
@@ -602,7 +594,6 @@
         <p class="text-sm sm:text-base text-slate-300 mt-1">Please scan the QR code to enter your Name and Email.</p>
       </div>
 
-      <!-- Centered QR Container -->
       <div class="inline-block p-6 sm:p-8 bg-white rounded-3xl shadow-2xl border-4 border-sky-500/40 my-2">
         <div id="presentationQrDiv" class="flex items-center justify-center"></div>
       </div>
@@ -737,7 +728,7 @@
   <!-- FIREBASE CONFIGURATION & APPLICATION ENGINE -->
   <script>
     /* ======================================================== */
-    /* FIREBASE CONFIGURATION (CONNECTED TO YOUR PROJECT)       */
+    /* FIREBASE CONFIGURATION                                   */
     /* ======================================================== */
     const firebaseConfig = {
       apiKey: "AIzaSyAlFaHbpYc8MpUmPuAiaMgegVCGQqbXtGI",
@@ -759,7 +750,7 @@
     }
 
     /* ======================================================== */
-    /* APPLICATION STATE & STORAGE                              */
+    /* APPLICATION STATE                                        */
     /* ======================================================== */
     window.AppState = {
       isMasterAuthenticated: false,
@@ -769,14 +760,6 @@
       attendees: JSON.parse(localStorage.getItem('sap_attendees') || '[]'),
       activeCompanyId: null
     };
-
-    if (window.AppState.companies.length === 0) {
-      window.AppState.companies = [
-        { id: 'comp_efinance', name: 'E-Finance', createdAt: Date.now() - 3600000 },
-        { id: 'comp_aramco', name: 'Saudi Aramco', createdAt: Date.now() - 7200000 }
-      ];
-      localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
-    }
 
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
@@ -790,18 +773,24 @@
       refreshAllDataViews();
     });
 
-    // Real-Time Multi-Device Cloud Listener
+    // Real-Time Multi-Device Cloud Listener (Deduplicating names automatically)
     function initRealtimeFirestoreSync() {
       if (!firestoreDb) return;
 
       firestoreDb.collection('companies').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
-        if (!snapshot.empty) {
-          const comps = [];
-          snapshot.forEach(doc => comps.push({ id: doc.id, ...doc.data() }));
-          window.AppState.companies = comps;
-          localStorage.setItem('sap_companies', JSON.stringify(comps));
-          refreshAllDataViews();
-        }
+        const comps = [];
+        const seenNames = new Set();
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const cleanName = (data.name || '').trim().toLowerCase();
+          if (cleanName && !seenNames.has(cleanName)) {
+            seenNames.add(cleanName);
+            comps.push({ id: doc.id, ...data });
+          }
+        });
+        window.AppState.companies = comps;
+        localStorage.setItem('sap_companies', JSON.stringify(comps));
+        refreshAllDataViews();
       }, err => console.warn("Companies sync warning:", err));
 
       firestoreDb.collection('attendees').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
@@ -818,23 +807,16 @@
       return params.get(key);
     }
 
+    // Safely reads the URL without ever creating new database entries on attendees' phones
     function initViewFromUrl() {
       const compParam = getQueryParam('company') || getQueryParam('session');
       if (compParam) {
-        const existing = window.AppState.companies.find(c => c.id === compParam || c.name.toLowerCase() === compParam.toLowerCase());
-        if (existing) {
-          window.AppState.activeCompanyId = existing.id;
-        } else {
-          const newComp = { id: 'comp_' + Date.now(), name: compParam, createdAt: Date.now() };
-          window.AppState.companies.unshift(newComp);
-          localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
-          if (firestoreDb) firestoreDb.collection('companies').doc(newComp.id).set(newComp);
-          window.AppState.activeCompanyId = newComp.id;
-        }
-      } else {
-        if (window.AppState.companies.length > 0) {
-          window.AppState.activeCompanyId = window.AppState.companies[0].id;
-        }
+        const existing = window.AppState.companies.find(c => 
+          c.name.toLowerCase() === compParam.toLowerCase() || c.id === compParam
+        );
+        window.AppState.activeCompanyId = existing ? existing.id : compParam;
+      } else if (window.AppState.companies.length > 0) {
+        window.AppState.activeCompanyId = window.AppState.companies[0].id;
       }
       switchMainView('customer');
     }
@@ -850,9 +832,13 @@
 
     function updateCustomerCompanyDisplay() {
       const label = document.getElementById('customerCompanyNameDisplay');
-      const activeComp = window.AppState.companies.find(c => c.id === window.AppState.activeCompanyId);
+      const compParam = getQueryParam('company') || getQueryParam('session');
+      const activeComp = window.AppState.companies.find(c => 
+        c.id === window.AppState.activeCompanyId || 
+        (compParam && c.name.toLowerCase() === compParam.toLowerCase())
+      );
       if (label) {
-        label.innerText = activeComp ? activeComp.name : "SAP Session";
+        label.innerText = activeComp ? activeComp.name : (compParam || "SAP Session");
       }
     }
 
@@ -886,9 +872,13 @@
         return;
       }
 
-      const activeComp = window.AppState.companies.find(c => c.id === window.AppState.activeCompanyId) || {
-        id: 'comp_default',
-        name: 'SAP Session'
+      const compParam = getQueryParam('company') || getQueryParam('session');
+      const activeComp = window.AppState.companies.find(c => 
+        c.id === window.AppState.activeCompanyId || 
+        (compParam && c.name.toLowerCase() === compParam.toLowerCase())
+      ) || {
+        id: 'comp_' + (compParam || 'general').toLowerCase().replace(/\s+/g, '_'),
+        name: compParam || 'SAP Session'
       };
 
       const record = {
@@ -908,12 +898,12 @@
         }
       }
 
-      // Local store fallback
+      // Local store update
       const localRecord = { id: 'att_' + Date.now(), ...record };
       window.AppState.attendees.unshift(localRecord);
       localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
 
-      // Show confirmation state
+      // Show confirmation
       document.getElementById('customerCheckInForm').classList.add('hidden');
       document.getElementById('customerSuccessCard').classList.remove('hidden');
       document.getElementById('submittedCustomerSummary').innerText = `${fullName} • ${email} • ${activeComp.name}`;
@@ -1210,7 +1200,7 @@
       }
 
       list.forEach(comp => {
-        const count = window.AppState.attendees.filter(a => a.companyId === comp.id).length;
+        const count = window.AppState.attendees.filter(a => a.companyId === comp.id || (a.companyName && a.companyName.toLowerCase() === comp.name.toLowerCase())).length;
         const checkinUrl = getCompanyCheckInUrl(comp.id);
         const qrContainerId = `qr_card_${comp.id}`;
 
@@ -1229,13 +1219,11 @@
               </span>
             </div>
 
-            <!-- Mini QR Preview -->
             <div class="mt-4 p-3 bg-white rounded-xl flex items-center justify-center cursor-pointer shadow-md hover:scale-[1.02] transition" onclick="openPresentationMode('${comp.id}')" title="Click to Present on Projector Screen">
               <div id="${qrContainerId}" class="w-[140px] h-[140px] flex items-center justify-center"></div>
             </div>
           </div>
 
-          <!-- Actions -->
           <div class="space-y-2 pt-2 border-t border-slate-800">
             <div class="grid grid-cols-2 gap-2">
               <button onclick="copyCompanyLink('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center justify-center gap-1.5 border border-slate-700">
@@ -1282,9 +1270,12 @@
       lucide.createIcons();
     }
 
+    // Embeds the clean human-readable name in the query parameter
     function getCompanyCheckInUrl(companyId) {
-      const url = new URL(window.location.href);
-      url.searchParams.set('company', companyId);
+      const comp = window.AppState.companies.find(c => c.id === companyId);
+      const cleanName = comp ? comp.name : companyId;
+      const url = new URL(window.location.origin + window.location.pathname);
+      url.searchParams.set('company', cleanName);
       return url.toString();
     }
 
@@ -1299,13 +1290,22 @@
       switchMainView('customer');
     }
 
-    // Create Company (STRICTLY Company Name)
+    // Creates the company only once and checks for existing duplicates
     async function handleCreateCompany(e) {
       e.preventDefault();
       const input = document.getElementById('newCompanyNameInput');
       const name = (input.value || '').trim();
 
       if (!name) return;
+
+      const existing = window.AppState.companies.find(c => c.name.toLowerCase() === name.toLowerCase());
+      if (existing) {
+        showToast(`Company "${name}" already exists!`, "error");
+        input.value = '';
+        closeModal('createCompanyModal');
+        openPresentationMode(existing.id);
+        return;
+      }
 
       const newComp = {
         id: 'comp_' + Date.now(),
@@ -1328,12 +1328,9 @@
 
       refreshAllDataViews();
       showToast(`Company "${name}" created with End-of-Session QR!`, "success");
-
-      // Immediately open Presentation mode for this company
       openPresentationMode(newComp.id);
     }
 
-    // Presentation Mode (Full-Screen Projector with Official SAP Logo Badge)
     function openPresentationMode(companyId) {
       const comp = window.AppState.companies.find(c => c.id === companyId);
       if (!comp) return;
@@ -1535,4 +1532,3 @@
 
 </body>
 </html>
-
