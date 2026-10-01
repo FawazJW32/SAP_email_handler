@@ -15,7 +15,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -55,7 +55,6 @@
       box-shadow: 0 0 0 3px rgba(0, 143, 211, 0.3);
       outline: none;
     }
-    /* Official SAP White Badge Container */
     .sap-official-badge {
       background-color: #ffffff;
       border-radius: 1rem;
@@ -90,21 +89,17 @@
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-sky-500 selection:text-white">
 
-  <!-- Ambient Constellation Particle Canvas -->
   <canvas id="constellationCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-  <!-- Ambient Blue Glows -->
   <div class="fixed -top-32 -left-32 w-96 h-96 rounded-full bg-sky-500/15 blur-[120px] pointer-events-none z-0 animate-pulse-glow"></div>
   <div class="fixed -bottom-32 -right-32 w-96 h-96 rounded-full bg-blue-600/15 blur-[130px] pointer-events-none z-0 animate-pulse-glow" style="animation-delay: -3.5s;"></div>
 
-  <!-- Toast Notification System -->
   <div id="toastRoot" class="fixed top-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm pointer-events-none"></div>
 
   <!-- Navigation Header -->
   <header class="sap-glass-header sticky top-0 z-40 px-4 sm:px-8 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
-      <!-- Official SAP Logo Badge -->
       <div class="flex items-center gap-3.5 cursor-pointer" onclick="switchMainView('customer')">
         <div class="sap-official-badge shrink-0">
           <img 
@@ -125,7 +120,6 @@
         </div>
       </div>
 
-      <!-- Navigation Switcher -->
       <div class="flex items-center gap-2 sm:gap-3">
         <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800">
           <button id="navBtnCustomer" onclick="switchMainView('customer')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-sky-400 bg-sky-950/80 border border-sky-800/50">
@@ -147,13 +141,11 @@
     </div>
   </header>
 
-  <!-- MAIN APPLICATION CONTAINER -->
+  <!-- Main Container -->
   <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center">
 
     <!-- VIEW 1: CUSTOMER END-OF-SESSION CHECK-IN -->
     <section id="customerView" class="w-full max-w-md mx-auto py-6">
-      
-      <!-- Official SAP Logo Badge on Customer Check-In Page -->
       <div class="text-center mb-6">
         <div class="inline-block mb-3.5">
           <div class="sap-official-badge p-3 sm:p-4">
@@ -170,7 +162,6 @@
           Session Check-In
         </h2>
 
-        <!-- Read-Only Company Name Badge (Set by Master User QR) -->
         <div class="mt-3 flex items-center justify-center">
           <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/15 text-sky-300 text-xs sm:text-sm font-bold border border-sky-500/30 shadow-sm">
             <i data-lucide="building" class="w-4 h-4 text-sky-400"></i>
@@ -180,11 +171,8 @@
         </div>
       </div>
 
-      <!-- Customer Form Card -->
       <div class="sap-glass rounded-3xl p-6 sm:p-8 border border-sky-500/30 shadow-2xl relative overflow-hidden">
-        
         <form id="customerCheckInForm" onsubmit="handleCustomerCheckIn(event)" class="space-y-4">
-          
           <div>
             <label for="customerFullName" class="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5 flex items-center gap-1.5">
               <i data-lucide="user" class="w-3.5 h-3.5 text-sky-400"></i>
@@ -225,10 +213,8 @@
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
           </div>
-
         </form>
 
-        <!-- Immediate Confirmation State -->
         <div id="customerSuccessCard" class="hidden text-center py-6 space-y-4">
           <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
             <i data-lucide="check" class="w-8 h-8"></i>
@@ -245,24 +231,19 @@
             </button>
           </div>
         </div>
-
       </div>
 
-      <!-- Quick Switch to Master Login -->
       <div class="text-center mt-6">
         <button onclick="switchMainView('master')" class="text-xs text-slate-400 hover:text-sky-400 transition flex items-center justify-center gap-1.5 mx-auto font-medium">
           <i data-lucide="shield" class="w-3.5 h-3.5"></i>
           <span>Master User Portal</span>
         </button>
       </div>
-
     </section>
 
     <!-- VIEW 2: MASTER USER LOGIN -->
     <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-8">
       <div class="sap-glass rounded-3xl p-6 sm:p-8 border border-sky-500/30 shadow-2xl relative">
-        
-        <!-- Official SAP Logo Badge -->
         <div class="text-center mb-3">
           <div class="sap-official-badge p-2.5 sm:p-3">
             <img 
@@ -279,7 +260,6 @@
           <p class="text-xs text-slate-400 mt-1">Sign in to manage company QR codes and attendee data.</p>
         </div>
 
-        <!-- Master Login Form: password field completely blank -->
         <form id="masterLoginForm" onsubmit="handleMasterLogin(event)" class="space-y-4">
           <div>
             <label for="masterUsernameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
@@ -327,16 +307,13 @@
             <span>Unlock Master Dashboard</span>
           </button>
         </form>
-
       </div>
     </section>
 
     <!-- VIEW 3: MASTER DASHBOARD -->
     <section id="masterDashboardView" class="hidden w-full space-y-6">
       
-      <!-- Metrics Bar -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        
         <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
           <div class="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-500/30 text-sky-400 flex items-center justify-center shrink-0">
             <i data-lucide="users" class="w-6 h-6"></i>
@@ -347,7 +324,7 @@
           </div>
         </div>
 
-        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
+        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-blue-500/20 flex items-center gap-4">
           <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
             <i data-lucide="building" class="w-6 h-6"></i>
           </div>
@@ -357,7 +334,7 @@
           </div>
         </div>
 
-        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
+        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-emerald-500/20 flex items-center gap-4">
           <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
             <i data-lucide="calendar" class="w-6 h-6"></i>
           </div>
@@ -367,7 +344,7 @@
           </div>
         </div>
 
-        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
+        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-amber-500/20 flex items-center gap-4">
           <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
             <i data-lucide="mail" class="w-6 h-6"></i>
           </div>
@@ -376,10 +353,8 @@
             <h3 id="statUniqueEmails" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
           </div>
         </div>
-
       </div>
 
-      <!-- Navigation Tabs & Actions -->
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div class="flex items-center gap-2">
           <button id="tabBtnAttendees" onclick="switchMasterTab('attendees')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-primary text-white shadow-md shadow-sky-600/30">
@@ -398,11 +373,9 @@
         </button>
       </div>
 
-      <!-- TAB 1: ATTENDEE RESPONSES & BULK EMAIL TOOLS -->
+      <!-- TAB 1: ATTENDEE RESPONSES -->
       <div id="tabContentAttendees" class="space-y-4">
-        
         <div class="sap-glass rounded-2xl p-4 border border-sky-500/20 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
-          
           <div class="flex flex-1 flex-col sm:flex-row gap-2">
             <div class="relative flex-1">
               <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
@@ -425,9 +398,7 @@
             </div>
           </div>
 
-          <!-- BULK EMAIL SUITE -->
           <div class="flex items-center gap-2 shrink-0">
-            
             <button 
               onclick="copyAllFilteredEmails()" 
               class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/40 cursor-pointer"
@@ -453,11 +424,9 @@
             >
               <i data-lucide="download" class="w-4 h-4"></i>
             </button>
-
           </div>
         </div>
 
-        <!-- Table of Attendee Responses -->
         <div class="sap-glass rounded-2xl border border-sky-500/20 overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs sm:text-sm">
@@ -470,9 +439,7 @@
                   <th class="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody id="attendeesTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-                <!-- Populated dynamically -->
-              </tbody>
+              <tbody id="attendeesTableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
             </table>
           </div>
 
@@ -484,12 +451,10 @@
             <p class="text-xs text-slate-500">Present the QR code at the end of the session to collect customer names and emails.</p>
           </div>
         </div>
-
       </div>
 
-      <!-- TAB 2: COMPANIES & END-OF-SESSION QR CODES -->
+      <!-- TAB 2: COMPANIES & QR CODES -->
       <div id="tabContentCompanies" class="hidden space-y-4">
-        
         <div class="flex items-center justify-between">
           <div>
             <h3 class="text-base font-bold text-white">End-of-Session QR Codes</h3>
@@ -501,10 +466,7 @@
           </button>
         </div>
 
-        <!-- Companies Grid -->
-        <div id="companiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Populated dynamically -->
-        </div>
+        <div id="companiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
         <div id="noCompaniesState" class="hidden sap-glass rounded-2xl p-12 text-center border border-sky-500/20 space-y-3">
           <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center mx-auto text-sky-400">
@@ -517,7 +479,6 @@
             <span>Create Company QR</span>
           </button>
         </div>
-
       </div>
 
     </section>
@@ -544,7 +505,7 @@
             type="text" 
             id="newCompanyNameInput" 
             required 
-            placeholder="e.g. E-Finance, Saudi Aramco, Deloitte" 
+            placeholder="e.g. Aramco, Deloitte, STC" 
             class="w-full sap-input rounded-xl px-3.5 py-3 text-xs text-white placeholder-slate-500 outline-none"
           >
           <p class="text-[11px] text-slate-400 mt-1">This company name will be locked on the check-in form for attendees who scan this QR.</p>
@@ -565,14 +526,11 @@
 
   <!-- MODAL 2: FULL-SCREEN PRESENTATION MODE -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl hidden">
-    
     <button onclick="closeModal('presentationModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2.5 rounded-xl bg-slate-900 border border-slate-800 z-50">
       <i data-lucide="x" class="w-6 h-6"></i>
     </button>
 
     <div class="w-full max-w-2xl text-center space-y-6 animate-in fade-in zoom-in duration-200">
-      
-      <!-- Official SAP Logo Badge on Projector Screen -->
       <div class="flex justify-center">
         <div class="sap-official-badge p-3 sm:p-4">
           <img 
@@ -613,7 +571,7 @@
     </div>
   </div>
 
-  <!-- Delete Confirmation Modal -->
+  <!-- Delete Modal -->
   <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
     <div class="sap-glass max-w-sm w-full rounded-2xl p-5 border border-sky-500/20 shadow-2xl relative text-center space-y-4">
       <div class="w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center mx-auto">
@@ -634,7 +592,7 @@
     </div>
   </div>
 
-  <!-- Constellation Background Script -->
+  <!-- Ambient Particles -->
   <script>
     (function initConstellationBackground() {
       const canvas = document.getElementById('constellationCanvas');
@@ -693,17 +651,13 @@
         }
       }
 
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
+      for (let i = 0; i < particleCount; i++) particles.push(new Particle());
 
       function animate() {
         ctx.clearRect(0, 0, width, height);
-
         for (let i = 0; i < particles.length; i++) {
           particles[i].update();
           particles[i].draw();
-
           for (let j = i + 1; j < particles.length; j++) {
             let dx = particles[i].x - particles[j].x;
             let dy = particles[i].y - particles[j].y;
@@ -725,11 +679,8 @@
     })();
   </script>
 
-  <!-- FIREBASE CONFIGURATION & APPLICATION ENGINE -->
+  <!-- FIREBASE CONFIGURATION & ENGINE -->
   <script>
-    /* ======================================================== */
-    /* FIREBASE CONFIGURATION                                   */
-    /* ======================================================== */
     const firebaseConfig = {
       apiKey: "AIzaSyAlFaHbpYc8MpUmPuAiaMgegVCGQqbXtGI",
       authDomain: "sap-email-handler.firebaseapp.com",
@@ -752,11 +703,25 @@
     /* ======================================================== */
     /* APPLICATION STATE                                        */
     /* ======================================================== */
+    let rawLocalComps = JSON.parse(localStorage.getItem('sap_companies') || '[]');
+
+    // Startup Deduplication: Immediately flushes any corrupted duplicate cards from local cache
+    const seenOnLoad = new Set();
+    const cleanLocalComps = [];
+    rawLocalComps.forEach(comp => {
+      const clean = (comp.name || '').trim().toLowerCase();
+      if (clean && !seenOnLoad.has(clean)) {
+        seenOnLoad.add(clean);
+        cleanLocalComps.push(comp);
+      }
+    });
+    localStorage.setItem('sap_companies', JSON.stringify(cleanLocalComps));
+
     window.AppState = {
       isMasterAuthenticated: false,
       currentView: 'customer',
       currentMasterTab: 'attendees',
-      companies: JSON.parse(localStorage.getItem('sap_companies') || '[]'),
+      companies: cleanLocalComps,
       attendees: JSON.parse(localStorage.getItem('sap_attendees') || '[]'),
       activeCompanyId: null
     };
@@ -773,29 +738,48 @@
       refreshAllDataViews();
     });
 
-    // Real-Time Multi-Device Cloud Listener (Deduplicating names automatically)
+    // Real-Time Listener (Strictly deduplicates docs by both ID and Name)
     function initRealtimeFirestoreSync() {
       if (!firestoreDb) return;
 
-      firestoreDb.collection('companies').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+      firestoreDb.collection('companies').onSnapshot(snapshot => {
         const comps = [];
         const seenNames = new Set();
+        const seenIds = new Set();
+
         snapshot.forEach(doc => {
           const data = doc.data();
           const cleanName = (data.name || '').trim().toLowerCase();
-          if (cleanName && !seenNames.has(cleanName)) {
+          const docId = doc.id;
+
+          if (cleanName && !seenNames.has(cleanName) && !seenIds.has(docId)) {
             seenNames.add(cleanName);
-            comps.push({ id: doc.id, ...data });
+            seenIds.add(docId);
+            comps.push({ id: docId, ...data });
           }
         });
+
+        // Sort newest first
+        comps.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
         window.AppState.companies = comps;
         localStorage.setItem('sap_companies', JSON.stringify(comps));
         refreshAllDataViews();
       }, err => console.warn("Companies sync warning:", err));
 
-      firestoreDb.collection('attendees').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+      firestoreDb.collection('attendees').onSnapshot(snapshot => {
         const atts = [];
-        snapshot.forEach(doc => atts.push({ id: doc.id, ...doc.data() }));
+        const seenAttIds = new Set();
+
+        snapshot.forEach(doc => {
+          if (!seenAttIds.has(doc.id)) {
+            seenAttIds.add(doc.id);
+            atts.push({ id: doc.id, ...doc.data() });
+          }
+        });
+
+        atts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
         window.AppState.attendees = atts;
         localStorage.setItem('sap_attendees', JSON.stringify(atts));
         refreshAllDataViews();
@@ -807,7 +791,6 @@
       return params.get(key);
     }
 
-    // Safely reads the URL without ever creating new database entries on attendees' phones
     function initViewFromUrl() {
       const compParam = getQueryParam('company') || getQueryParam('session');
       if (compParam) {
@@ -857,7 +840,7 @@
     }
 
     /* ======================================================== */
-    /* CUSTOMER SUBMISSION (WRITES DIRECT TO FIRESTORE)        */
+    /* CUSTOMER SUBMISSION                                      */
     /* ======================================================== */
     async function handleCustomerCheckIn(e) {
       e.preventDefault();
@@ -877,7 +860,7 @@
         c.id === window.AppState.activeCompanyId || 
         (compParam && c.name.toLowerCase() === compParam.toLowerCase())
       ) || {
-        id: 'comp_' + (compParam || 'general').toLowerCase().replace(/\s+/g, '_'),
+        id: 'comp_' + (compParam || 'general').toLowerCase().replace(/[^a-z0-9]/g, '_'),
         name: compParam || 'SAP Session'
       };
 
@@ -889,7 +872,6 @@
         timestamp: Date.now()
       };
 
-      // Push to Firestore Cloud
       if (firestoreDb) {
         try {
           await firestoreDb.collection('attendees').add(record);
@@ -898,12 +880,10 @@
         }
       }
 
-      // Local store update
       const localRecord = { id: 'att_' + Date.now(), ...record };
       window.AppState.attendees.unshift(localRecord);
       localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
 
-      // Show confirmation
       document.getElementById('customerCheckInForm').classList.add('hidden');
       document.getElementById('customerSuccessCard').classList.remove('hidden');
       document.getElementById('submittedCustomerSummary').innerText = `${fullName} • ${email} • ${activeComp.name}`;
@@ -921,7 +901,7 @@
     }
 
     /* ======================================================== */
-    /* VIEW SWITCHING & MASTER AUTHENTICATION                   */
+    /* MASTER AUTHENTICATION                                    */
     /* ======================================================== */
     function switchMainView(target) {
       const customerView = document.getElementById('customerView');
@@ -1250,7 +1230,6 @@
 
         grid.appendChild(card);
 
-        // Render QR
         setTimeout(() => {
           const container = document.getElementById(qrContainerId);
           if (container && window.QRCode) {
@@ -1270,7 +1249,6 @@
       lucide.createIcons();
     }
 
-    // Embeds the clean human-readable name in the query parameter
     function getCompanyCheckInUrl(companyId) {
       const comp = window.AppState.companies.find(c => c.id === companyId);
       const cleanName = comp ? comp.name : companyId;
@@ -1290,7 +1268,7 @@
       switchMainView('customer');
     }
 
-    // Creates the company only once and checks for existing duplicates
+    // Single-Source Company Creation (No double-unshifting)
     async function handleCreateCompany(e) {
       e.preventDefault();
       const input = document.getElementById('newCompanyNameInput');
@@ -1307,8 +1285,9 @@
         return;
       }
 
+      const compId = 'comp_' + name.toLowerCase().replace(/[^a-z0-9]/g, '_');
       const newComp = {
-        id: 'comp_' + Date.now(),
+        id: compId,
         name: name,
         createdAt: Date.now()
       };
@@ -1318,17 +1297,24 @@
           await firestoreDb.collection('companies').doc(newComp.id).set(newComp);
         } catch (err) {
           console.error("Firestore company save failed:", err);
+          saveCompanyLocally(newComp);
         }
+      } else {
+        saveCompanyLocally(newComp);
       }
 
-      window.AppState.companies.unshift(newComp);
-      localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
       input.value = '';
       closeModal('createCompanyModal');
-
-      refreshAllDataViews();
       showToast(`Company "${name}" created with End-of-Session QR!`, "success");
       openPresentationMode(newComp.id);
+    }
+
+    function saveCompanyLocally(newComp) {
+      if (!window.AppState.companies.some(c => c.id === newComp.id || c.name.toLowerCase() === newComp.name.toLowerCase())) {
+        window.AppState.companies.unshift(newComp);
+        localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
+        refreshAllDataViews();
+      }
     }
 
     function openPresentationMode(companyId) {
@@ -1465,7 +1451,9 @@
 
     function closeModal(id) {
       const el = document.getElementById(id);
-      if (el) el.classList.add('hidden');
+      if (el) {
+        el.classList.add('hidden');
+      }
     }
 
     function copyToClipboard(text) {
