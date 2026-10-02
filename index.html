@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,126 +15,120 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #030814;
-      color: #f1f5f9;
+      background-color: #ffffff;
+      color: #0f172a;
       overflow-x: hidden;
     }
-    .sap-glass {
-      background: rgba(8, 18, 38, 0.88);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(0, 143, 211, 0.25);
-      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+    .sap-blue-gradient {
+      color: #0070F2;
+      background: linear-gradient(135deg, #0070F2 0%, #0050B3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .sap-glass-header {
-      background: rgba(4, 11, 24, 0.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(0, 143, 211, 0.2);
+    .sap-pill-nav {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
     }
-    .sap-btn-primary {
-      background: linear-gradient(135deg, #008FD3 0%, #005A9E 50%, #002D62 100%);
+    .sap-card-white {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05);
+    }
+    .sap-btn-dark {
+      background-color: #0f172a;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sap-btn-dark:hover {
+      background-color: #1e293b;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.25);
+    }
+    .sap-btn-blue {
+      background: linear-gradient(135deg, #0070F2 0%, #0056BF 100%);
       transition: all 0.2s ease;
     }
-    .sap-btn-primary:hover {
-      background: linear-gradient(135deg, #18A2E8 0%, #006BB8 50%, #003B80 100%);
-      box-shadow: 0 0 22px rgba(0, 143, 211, 0.5);
+    .sap-btn-blue:hover {
+      background: linear-gradient(135deg, #0080FF 0%, #0060D5 100%);
+      box-shadow: 0 8px 22px -4px rgba(0, 112, 242, 0.35);
+      transform: translateY(-1px);
     }
     .sap-input {
-      background: rgba(5, 13, 28, 0.92);
-      border: 1px solid rgba(71, 85, 105, 0.55);
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
       transition: all 0.2s ease;
     }
     .sap-input:focus {
-      border-color: #008FD3;
-      box-shadow: 0 0 0 3px rgba(0, 143, 211, 0.3);
+      border-color: #0070F2;
+      box-shadow: 0 0 0 3px rgba(0, 112, 242, 0.15);
       outline: none;
     }
-    .sap-official-badge {
-      background-color: #ffffff;
-      border-radius: 1rem;
-      padding: 0.6rem 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.9);
+    .glow-violet {
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, rgba(216, 180, 254, 0.06) 50%, transparent 70%);
     }
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+    .glow-blue {
+      background: radial-gradient(circle, rgba(0, 112, 242, 0.14) 0%, rgba(186, 230, 253, 0.05) 50%, transparent 70%);
     }
-    ::-webkit-scrollbar-track {
-      background: #030814;
+    @keyframes floatGem {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
     }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(0, 143, 211, 0.4);
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0, 143, 211, 0.8);
-    }
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.22; transform: scale(1); }
-      50% { opacity: 0.42; transform: scale(1.05); }
-    }
-    .animate-pulse-glow {
-      animation: pulseGlow 7s ease-in-out infinite;
+    .animate-gem {
+      animation: floatGem 6s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col relative selection:bg-sky-500 selection:text-white">
+<body class="min-h-screen flex flex-col relative">
 
-  <canvas id="constellationCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+  <!-- Ambient Light Mesh Spots -->
+  <div class="fixed top-0 right-0 w-[600px] h-[600px] glow-violet pointer-events-none z-0"></div>
+  <div class="fixed top-32 left-0 w-[500px] h-[500px] glow-blue pointer-events-none z-0"></div>
 
-  <div class="fixed -top-32 -left-32 w-96 h-96 rounded-full bg-sky-500/15 blur-[120px] pointer-events-none z-0 animate-pulse-glow"></div>
-  <div class="fixed -bottom-32 -right-32 w-96 h-96 rounded-full bg-blue-600/15 blur-[130px] pointer-events-none z-0 animate-pulse-glow" style="animation-delay: -3.5s;"></div>
-
+  <!-- Toast Notification System -->
   <div id="toastRoot" class="fixed top-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm pointer-events-none"></div>
 
-  <!-- Navigation Header -->
-  <header class="sap-glass-header sticky top-0 z-40 px-4 sm:px-8 py-3">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+  <!-- Floating Nav Header -->
+  <header class="sticky top-4 z-40 px-4 sm:px-8 max-w-7xl mx-auto w-full">
+    <div class="sap-pill-nav rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
       
-      <div class="flex items-center gap-3.5 cursor-pointer" onclick="switchMainView('customer')">
-        <div class="sap-official-badge shrink-0">
-          <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
-            onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
-            alt="SAP Logo" 
-            class="h-6 sm:h-7 w-auto object-contain block"
-          >
-        </div>
-        <div class="border-l border-slate-700/80 pl-3">
-          <div class="flex items-center gap-2">
-            <span class="text-sm sm:text-base font-extrabold tracking-tight text-white">Customer Check-In</span>
-            <span id="navViewBadge" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30">
-              End-of-Session
-            </span>
-          </div>
-          <p class="text-[11px] text-slate-400 hidden sm:block">Customer & Attendee Registration</p>
-        </div>
+      <!-- Official SAP Logo Badge -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchMainView('customer')">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
+          alt="SAP Logo" 
+          class="h-6 sm:h-7 w-auto object-contain block"
+        >
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 hidden md:inline border-l border-slate-200 pl-3">
+          Session Check-In
+        </span>
       </div>
 
-      <div class="flex items-center gap-2 sm:gap-3">
-        <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800">
-          <button id="navBtnCustomer" onclick="switchMainView('customer')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-sky-400 bg-sky-950/80 border border-sky-800/50">
-            <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
-            <span>Customer Page</span>
-          </button>
-          <button id="navBtnMaster" onclick="switchMainView('master')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
-            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-            <span>Master Portal</span>
-          </button>
-        </div>
+      <!-- Center Navigation Links -->
+      <nav id="customerNavLinks" class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <a href="#checkin-hero" class="hover:text-blue-600 transition">Check-In</a>
+        <a href="#how-it-works" class="hover:text-blue-600 transition">How It Works</a>
+        <a href="#session-resources" class="hover:text-blue-600 transition">Session Overview</a>
+      </nav>
 
-        <button id="btnMasterLogout" onclick="handleMasterLogout()" class="hidden px-3 py-1.5 rounded-lg text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-950/40 hover:bg-rose-950/70 border border-rose-800/40 transition flex items-center gap-1.5" title="Lock Master Portal">
+      <!-- View Switcher -->
+      <div class="flex items-center gap-2">
+        <button id="navBtnCustomer" onclick="switchMainView('customer')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition">
+          Attendee Page
+        </button>
+        <button id="navBtnMaster" onclick="switchMainView('master')" class="sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm">
+          <span>Master Portal</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+        <button id="btnMasterLogout" onclick="handleMasterLogout()" class="hidden px-3 py-1.5 rounded-xl text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 hover:bg-rose-100 transition" title="Lock Portal">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Logout</span>
         </button>
       </div>
 
@@ -142,127 +136,278 @@
   </header>
 
   <!-- Main Container -->
-  <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center">
+  <main class="relative z-10 flex-1 w-full mx-auto flex flex-col justify-center">
 
-    <!-- VIEW 1: CUSTOMER END-OF-SESSION CHECK-IN -->
-    <section id="customerView" class="w-full max-w-md mx-auto py-6">
-      <div class="text-center mb-6">
-        <div class="inline-block mb-3.5">
-          <div class="sap-official-badge p-3 sm:p-4">
+    <!-- ======================================================== -->
+    <!-- VIEW 1: ATTENDEE CHECK-IN VIEW                           -->
+    <!-- ======================================================== -->
+    <div id="customerView" class="w-full">
+      
+      <!-- HERO & FORM SECTION -->
+      <section id="checkin-hero" class="max-w-7xl mx-auto px-4 sm:px-8 pt-10 sm:pt-16 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left Column: Copy -->
+        <div class="lg:col-span-7 space-y-6 text-left">
+          
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[11px] font-extrabold uppercase tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+            <span>SAP Customer Session Registration</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.08]">
+            Your Presence.<br>
+            <span class="sap-blue-gradient">One Scan.</span><br>
+            Connected.
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 max-w-lg leading-relaxed">
+            Please register your attendance for today's session with your name and business email to receive the presented materials and follow-up resources.
+          </p>
+
+          <!-- Current Session Badge -->
+          <div class="flex items-center gap-3 pt-1">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 shadow-sm">
+              <i data-lucide="building-2" class="w-4 h-4 text-blue-600"></i>
+              <span>Company Session:</span>
+              <span id="customerCompanyNameDisplay" class="text-slate-900 font-extrabold">SAP Session</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Check-In Form Card with Faceted Gem Graphic -->
+        <div class="lg:col-span-5 relative">
+          
+          <div class="absolute -top-12 -right-8 w-28 h-28 hidden sm:block animate-gem pointer-events-none z-20">
+            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-2xl">
+              <polygon points="50,5 92,30 50,95 8,30" fill="url(#gemGrad1)" />
+              <polygon points="50,5 50,95 8,30" fill="url(#gemGrad2)" opacity="0.85" />
+              <polygon points="50,5 92,30 50,42" fill="#c084fc" opacity="0.9" />
+              <polygon points="50,5 8,30 50,42" fill="#9333ea" opacity="0.75" />
+              <polygon points="8,30 50,42 50,95" fill="#6366f1" opacity="0.95" />
+              <polygon points="92,30 50,42 50,95" fill="#3b82f6" opacity="0.8" />
+              <defs>
+                <linearGradient id="gemGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#a855f7" />
+                  <stop offset="50%" stop-color="#6366f1" />
+                  <stop offset="100%" stop-color="#3b82f6" />
+                </linearGradient>
+                <linearGradient id="gemGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#7c3aed" />
+                  <stop offset="100%" stop-color="#1e1b4b" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="sap-card-white rounded-3xl p-6 sm:p-8 relative z-10 text-left">
+            <div class="mb-5">
+              <h2 class="text-xl font-extrabold text-slate-900">Check-In Form</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Please provide your details below.</p>
+            </div>
+
+            <form id="customerCheckInForm" onsubmit="handleCustomerCheckIn(event)" class="space-y-4">
+              <div>
+                <label for="customerFullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <i data-lucide="user" class="w-3.5 h-3.5 text-blue-600"></i>
+                  Full Name <span class="text-rose-500">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="customerFullName" 
+                  required 
+                  autocomplete="name"
+                  placeholder="e.g. John Doe"
+                  class="w-full sap-input rounded-xl px-4 py-3 text-slate-800 text-sm outline-none"
+                >
+              </div>
+
+              <div>
+                <label for="customerEmailAddress" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <i data-lucide="mail" class="w-3.5 h-3.5 text-blue-600"></i>
+                  Business Email <span class="text-rose-500">*</span>
+                </label>
+                <input 
+                  type="email" 
+                  id="customerEmailAddress" 
+                  required 
+                  autocomplete="email"
+                  placeholder="name@company.com"
+                  class="w-full sap-input rounded-xl px-4 py-3 text-slate-800 text-sm outline-none"
+                >
+              </div>
+
+              <div class="pt-2">
+                <button 
+                  type="submit" 
+                  id="btnSubmitCustomer"
+                  class="w-full sap-btn-dark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer text-sm"
+                >
+                  <span>Submit Check-In</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </form>
+
+            <!-- Confirmation State -->
+            <div id="customerSuccessCard" class="hidden text-center py-6 space-y-4">
+              <div class="w-14 h-14 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                <i data-lucide="check" class="w-7 h-7"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-extrabold text-slate-900">Thank you!</h3>
+                <p class="text-xs text-slate-600 mt-1">Your details have been registered successfully.</p>
+                <p id="submittedCustomerSummary" class="text-xs text-blue-600 mt-2 font-mono font-semibold"></p>
+              </div>
+              <div class="pt-2">
+                <button onclick="resetCustomerForm()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition border border-slate-200 flex items-center justify-center gap-2 mx-auto">
+                  <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                  <span>Submit Another Response</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- HOW IT WORKS SECTION -->
+      <section id="how-it-works" class="py-16 bg-slate-50/70 border-t border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-10">
+          
+          <div class="space-y-3 max-w-xl mx-auto">
+            <span class="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-blue-100/70 text-blue-700">
+              How It Works
+            </span>
+            <p class="text-xs sm:text-sm text-slate-500">
+              A quick check-in process to capture customer attendance and facilitate post-session follow-ups.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+                <i data-lucide="qr-code" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-black text-sm text-slate-900">1. Scan QR</h4>
+              <p class="text-[11px] text-slate-500 leading-relaxed">Attendees scan the presenter's company-specific QR code.</p>
+            </div>
+
+            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mx-auto">
+                <i data-lucide="edit-3" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-black text-sm text-slate-900">2. Enter Details</h4>
+              <p class="text-[11px] text-slate-500 leading-relaxed">Submit only Full Name and Business Email.</p>
+            </div>
+
+            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto">
+                <i data-lucide="zap" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-black text-sm text-slate-900">3. Live Sync</h4>
+              <p class="text-[11px] text-slate-500 leading-relaxed">Responses sync directly into the host portal in real time.</p>
+            </div>
+
+            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                <i data-lucide="mail-check" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-black text-sm text-slate-900">4. Follow-Up</h4>
+              <p class="text-[11px] text-slate-500 leading-relaxed">Presenters copy all attendee emails for BCC outreach with one click.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SESSION RESOURCES SECTION -->
+      <section id="session-resources" class="py-16 max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-10">
+        <div class="space-y-2">
+          <span class="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-blue-100/70 text-blue-700">
+            Session Overview
+          </span>
+          <h2 class="text-3xl font-black text-slate-900">What you receive</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div class="sap-card-white p-8 rounded-3xl space-y-4">
+            <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-800">
+              <i data-lucide="file-text" class="w-7 h-7"></i>
+            </div>
+            <h4 class="font-extrabold text-base text-slate-900">Presentation Materials</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Receive the slide decks, solution architecture diagrams, and session notes presented today.
+            </p>
+          </div>
+
+          <div class="sap-card-white p-8 rounded-3xl space-y-4 border-2 border-blue-100 relative">
+            <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mx-auto text-blue-600">
+              <i data-lucide="share-2" class="w-7 h-7"></i>
+            </div>
+            <h4 class="font-extrabold text-base text-slate-900">Direct Collaboration</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Stay in touch with your SAP solution team for technical discovery and follow-up discussions.
+            </p>
+          </div>
+
+          <div class="sap-card-white p-8 rounded-3xl space-y-4">
+            <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-800">
+              <i data-lucide="layers" class="w-7 h-7"></i>
+            </div>
+            <h4 class="font-extrabold text-base text-slate-900">Post-Session Assets</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Access product roadmaps, documentation guides, and upcoming enablement workshops.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="bg-slate-950 text-white py-14 px-4 sm:px-8 border-t border-slate-900 text-center space-y-6">
+        <div class="max-w-4xl mx-auto space-y-4">
+          <div class="flex justify-center mb-2">
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
-              onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
               alt="SAP Logo" 
-              class="h-12 sm:h-14 w-auto object-contain block"
+              class="h-7 w-auto object-contain brightness-0 invert"
             >
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black tracking-tight text-white">
+            SAP Customer Check-In Platform
+          </h3>
+          <p class="text-xs text-slate-400 max-w-md mx-auto">
+            Streamlined attendee check-in and data capture for enterprise enablement sessions and workshops.
+          </p>
+          <div class="pt-6 border-t border-slate-900 text-[11px] text-slate-500 space-y-1">
+            <p>SAP Customer Enablement & Workshop Sessions</p>
+            <p>© 2026 SAP SE. All rights reserved.</p>
           </div>
         </div>
+      </footer>
 
-        <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
-          Session Check-In
-        </h2>
+    </div>
 
-        <div class="mt-3 flex items-center justify-center">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/15 text-sky-300 text-xs sm:text-sm font-bold border border-sky-500/30 shadow-sm">
-            <i data-lucide="building" class="w-4 h-4 text-sky-400"></i>
-            <span>Company:</span>
-            <span id="customerCompanyNameDisplay" class="text-white font-extrabold">SAP Session</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="sap-glass rounded-3xl p-6 sm:p-8 border border-sky-500/30 shadow-2xl relative overflow-hidden">
-        <form id="customerCheckInForm" onsubmit="handleCustomerCheckIn(event)" class="space-y-4">
-          <div>
-            <label for="customerFullName" class="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5 flex items-center gap-1.5">
-              <i data-lucide="user" class="w-3.5 h-3.5 text-sky-400"></i>
-              Full Name <span class="text-rose-400">*</span>
-            </label>
-            <input 
-              type="text" 
-              id="customerFullName" 
-              required 
-              autocomplete="name"
-              placeholder="e.g. John Doe"
-              class="w-full sap-input rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 text-sm outline-none"
-            >
-          </div>
-
-          <div>
-            <label for="customerEmailAddress" class="block text-xs font-bold uppercase tracking-wider text-slate-200 mb-1.5 flex items-center gap-1.5">
-              <i data-lucide="mail" class="w-3.5 h-3.5 text-sky-400"></i>
-              Business Email <span class="text-rose-400">*</span>
-            </label>
-            <input 
-              type="email" 
-              id="customerEmailAddress" 
-              required 
-              autocomplete="email"
-              placeholder="john.doe@company.com"
-              class="w-full sap-input rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 text-sm outline-none"
-            >
-          </div>
-
-          <div class="pt-2">
-            <button 
-              type="submit" 
-              id="btnSubmitCustomer"
-              class="w-full sap-btn-primary text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/30 transition transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>Submit Check-In</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </form>
-
-        <div id="customerSuccessCard" class="hidden text-center py-6 space-y-4">
-          <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
-            <i data-lucide="check" class="w-8 h-8"></i>
-          </div>
-          <div>
-            <h3 class="text-xl font-extrabold text-white">Thank you!</h3>
-            <p class="text-sm text-slate-300 mt-1">Your details have been submitted successfully.</p>
-            <p id="submittedCustomerSummary" class="text-xs text-sky-300 mt-2 font-mono font-semibold"></p>
-          </div>
-          <div class="pt-2">
-            <button onclick="resetCustomerForm()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition border border-slate-700 flex items-center justify-center gap-2 mx-auto">
-              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-              <span>Submit Another Response</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-6">
-        <button onclick="switchMainView('master')" class="text-xs text-slate-400 hover:text-sky-400 transition flex items-center justify-center gap-1.5 mx-auto font-medium">
-          <i data-lucide="shield" class="w-3.5 h-3.5"></i>
-          <span>Master User Portal</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- VIEW 2: MASTER USER LOGIN -->
-    <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-8">
-      <div class="sap-glass rounded-3xl p-6 sm:p-8 border border-sky-500/30 shadow-2xl relative">
-        <div class="text-center mb-3">
-          <div class="sap-official-badge p-2.5 sm:p-3">
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
-              onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
-              alt="SAP Logo" 
-              class="h-8 sm:h-9 w-auto object-contain block"
-            >
-          </div>
-        </div>
-
+    <!-- ======================================================== -->
+    <!-- VIEW 2: MASTER USER LOGIN                                -->
+    <!-- ======================================================== -->
+    <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-12 px-4">
+      <div class="sap-card-white rounded-3xl p-6 sm:p-8 relative text-left">
         <div class="text-center mb-6">
-          <h2 class="text-2xl font-black text-white">Master Host Login</h2>
-          <p class="text-xs text-slate-400 mt-1">Sign in to manage company QR codes and attendee data.</p>
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
+            alt="SAP Logo" 
+            class="h-8 w-auto object-contain mx-auto mb-3"
+          >
+          <h2 class="text-2xl font-black text-slate-900">Host Master Login</h2>
+          <p class="text-xs text-slate-500 mt-1">Sign in to manage company QR codes and attendee data.</p>
         </div>
 
         <form id="masterLoginForm" onsubmit="handleMasterLogin(event)" class="space-y-4">
           <div>
-            <label for="masterUsernameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+            <label for="masterUsernameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
               Master Username
             </label>
             <input 
@@ -271,12 +416,12 @@
               required 
               value="admin"
               autocomplete="username"
-              class="w-full sap-input rounded-xl px-4 py-3 text-sm text-slate-100 outline-none"
+              class="w-full sap-input rounded-xl px-4 py-3 text-sm text-slate-900 outline-none"
             >
           </div>
 
           <div>
-            <label for="masterPasswordInput" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+            <label for="masterPasswordInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
               Universal Password
             </label>
             <div class="relative">
@@ -287,21 +432,21 @@
                 value=""
                 autocomplete="current-password"
                 placeholder=""
-                class="w-full sap-input rounded-xl px-4 py-3 text-sm text-slate-100 outline-none pr-10"
+                class="w-full sap-input rounded-xl px-4 py-3 text-sm text-slate-900 outline-none pr-10"
               >
-              <button type="button" onclick="togglePasswordVisibility('masterPasswordInput')" class="absolute right-3 top-3.5 text-slate-400 hover:text-slate-200">
+              <button type="button" onclick="togglePasswordVisibility('masterPasswordInput')" class="absolute right-3 top-3.5 text-slate-400 hover:text-slate-600">
                 <i data-lucide="eye" class="w-4 h-4" id="masterEyeIcon"></i>
               </button>
             </div>
           </div>
 
-          <div id="loginErrorMessage" class="hidden text-xs text-rose-400 bg-rose-950/50 border border-rose-800/50 rounded-xl p-3 text-center">
+          <div id="loginErrorMessage" class="hidden text-xs text-rose-600 bg-rose-50 border border-rose-200 rounded-xl p-3 text-center font-medium">
             Invalid credentials. Please verify your universal password.
           </div>
 
           <button 
             type="submit" 
-            class="w-full sap-btn-primary text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-sky-600/30 transition flex items-center justify-center gap-2 cursor-pointer mt-1"
+            class="w-full sap-btn-dark text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer mt-1 text-sm"
           >
             <i data-lucide="unlock" class="w-4 h-4"></i>
             <span>Unlock Master Dashboard</span>
@@ -310,72 +455,76 @@
       </div>
     </section>
 
-    <!-- VIEW 3: MASTER DASHBOARD -->
-    <section id="masterDashboardView" class="hidden w-full space-y-6">
+    <!-- ======================================================== -->
+    <!-- VIEW 3: MASTER DASHBOARD                                 -->
+    <!-- ======================================================== -->
+    <section id="masterDashboardView" class="hidden w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6">
       
+      <!-- Metrics Bar -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-sky-500/20 flex items-center gap-4">
-          <div class="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-500/30 text-sky-400 flex items-center justify-center shrink-0">
+        <div class="sap-card-white rounded-2xl p-4 sm:p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
             <i data-lucide="users" class="w-6 h-6"></i>
           </div>
-          <div>
-            <p class="text-xs text-slate-400 font-medium">Total Attendees</p>
-            <h3 id="statTotalAttendees" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          <div class="text-left">
+            <p class="text-xs text-slate-500 font-semibold">Total Attendees</p>
+            <h3 id="statTotalAttendees" class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">0</h3>
           </div>
         </div>
 
-        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-blue-500/20 flex items-center gap-4">
-          <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
+        <div class="sap-card-white rounded-2xl p-4 sm:p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
             <i data-lucide="building" class="w-6 h-6"></i>
           </div>
-          <div>
-            <p class="text-xs text-slate-400 font-medium">Companies</p>
-            <h3 id="statTotalCompanies" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          <div class="text-left">
+            <p class="text-xs text-slate-500 font-semibold">Companies</p>
+            <h3 id="statTotalCompanies" class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">0</h3>
           </div>
         </div>
 
-        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-emerald-500/20 flex items-center gap-4">
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+        <div class="sap-card-white rounded-2xl p-4 sm:p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
             <i data-lucide="calendar" class="w-6 h-6"></i>
           </div>
-          <div>
-            <p class="text-xs text-slate-400 font-medium">Today's Check-Ins</p>
-            <h3 id="statTodayAttendees" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          <div class="text-left">
+            <p class="text-xs text-slate-500 font-semibold">Today's Check-Ins</p>
+            <h3 id="statTodayAttendees" class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">0</h3>
           </div>
         </div>
 
-        <div class="sap-glass rounded-2xl p-4 sm:p-5 border border-amber-500/20 flex items-center gap-4">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+        <div class="sap-card-white rounded-2xl p-4 sm:p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
             <i data-lucide="mail" class="w-6 h-6"></i>
           </div>
-          <div>
-            <p class="text-xs text-slate-400 font-medium">Unique Emails</p>
-            <h3 id="statUniqueEmails" class="text-xl sm:text-2xl font-black text-white mt-0.5">0</h3>
+          <div class="text-left">
+            <p class="text-xs text-slate-500 font-semibold">Unique Emails</p>
+            <h3 id="statUniqueEmails" class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">0</h3>
           </div>
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+      <!-- Navigation Tabs & Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
         <div class="flex items-center gap-2">
-          <button id="tabBtnAttendees" onclick="switchMasterTab('attendees')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-primary text-white shadow-md shadow-sky-600/30">
+          <button id="tabBtnAttendees" onclick="switchMasterTab('attendees')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white">
             <i data-lucide="users" class="w-4 h-4"></i>
             <span>Attendee Responses</span>
           </button>
-          <button id="tabBtnCompanies" onclick="switchMasterTab('companies')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800">
+          <button id="tabBtnCompanies" onclick="switchMasterTab('companies')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200">
             <i data-lucide="qr-code" class="w-4 h-4"></i>
             <span>Companies & End QR Codes</span>
           </button>
         </div>
 
-        <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 border border-sky-500/40 transition flex items-center gap-2 shadow-sm">
+        <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span>Create Company QR</span>
         </button>
       </div>
 
       <!-- TAB 1: ATTENDEE RESPONSES -->
-      <div id="tabContentAttendees" class="space-y-4">
-        <div class="sap-glass rounded-2xl p-4 border border-sky-500/20 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div id="tabContentAttendees" class="space-y-4 text-left">
+        <div class="sap-card-white rounded-2xl p-4 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
           <div class="flex flex-1 flex-col sm:flex-row gap-2">
             <div class="relative flex-1">
               <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
@@ -384,24 +533,25 @@
                 id="searchAttendeeInput" 
                 oninput="renderAttendeesTable()" 
                 placeholder="Search by attendee name or email..." 
-                class="w-full sap-input text-xs sm:text-sm text-slate-100 rounded-xl pl-10 pr-4 py-2.5 outline-none"
+                class="w-full sap-input text-xs sm:text-sm text-slate-900 rounded-xl pl-10 pr-4 py-2.5 outline-none"
               >
             </div>
             <div class="sm:w-60">
               <select 
                 id="filterCompanySelect" 
                 onchange="renderAttendeesTable()" 
-                class="w-full sap-input text-xs sm:text-sm text-slate-200 rounded-xl px-3 py-2.5 outline-none"
+                class="w-full sap-input text-xs sm:text-sm text-slate-700 rounded-xl px-3 py-2.5 outline-none"
               >
                 <option value="ALL">All Companies</option>
               </select>
             </div>
           </div>
 
+          <!-- Bulk Email Suite -->
           <div class="flex items-center gap-2 shrink-0">
             <button 
               onclick="copyAllFilteredEmails()" 
-              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/40 cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
               title="Copy all attendee emails directly into clipboard for BCC"
             >
               <i data-lucide="copy" class="w-4 h-4"></i>
@@ -410,7 +560,7 @@
 
             <button 
               onclick="copyAllFilteredNamesAndEmails()" 
-              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-primary text-white transition flex items-center justify-center gap-1.5 shadow-lg shadow-sky-950/40 cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-dark text-white transition flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
               title="Copy Name <email> list"
             >
               <i data-lucide="clipboard-list" class="w-4 h-4"></i>
@@ -419,7 +569,7 @@
 
             <button 
               onclick="exportAttendeesCSV()" 
-              class="p-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" 
+              class="p-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition" 
               title="Export CSV spreadsheet"
             >
               <i data-lucide="download" class="w-4 h-4"></i>
@@ -427,10 +577,10 @@
           </div>
         </div>
 
-        <div class="sap-glass rounded-2xl border border-sky-500/20 overflow-hidden">
+        <div class="sap-card-white rounded-2xl overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs sm:text-sm">
-              <thead class="bg-slate-900/90 text-slate-400 font-bold border-b border-slate-800 uppercase tracking-wider text-[11px]">
+              <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200 uppercase tracking-wider text-[11px]">
                 <tr>
                   <th class="py-3.5 px-4">Attendee Name</th>
                   <th class="py-3.5 px-4">Email Address</th>
@@ -439,28 +589,28 @@
                   <th class="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody id="attendeesTableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+              <tbody id="attendeesTableBody" class="divide-y divide-slate-100 text-slate-700"></tbody>
             </table>
           </div>
 
           <div id="noAttendeesState" class="hidden text-center py-12 px-4 space-y-3">
-            <div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center mx-auto text-slate-500">
+            <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400">
               <i data-lucide="inbox" class="w-6 h-6"></i>
             </div>
-            <p class="text-sm text-slate-300 font-semibold">No customer responses recorded yet.</p>
-            <p class="text-xs text-slate-500">Present the QR code at the end of the session to collect customer names and emails.</p>
+            <p class="text-sm text-slate-700 font-semibold">No customer responses recorded yet.</p>
+            <p class="text-xs text-slate-400">Present the QR code at the end of the session to collect attendee names and emails.</p>
           </div>
         </div>
       </div>
 
       <!-- TAB 2: COMPANIES & QR CODES -->
-      <div id="tabContentCompanies" class="hidden space-y-4">
+      <div id="tabContentCompanies" class="hidden space-y-4 text-left">
         <div class="flex items-center justify-between">
           <div>
-            <h3 class="text-base font-bold text-white">End-of-Session QR Codes</h3>
-            <p class="text-xs text-slate-400">Display full-screen on the projector at the end of your session or copy the QR link.</p>
+            <h3 class="text-base font-bold text-slate-900">End-of-Session QR Codes</h3>
+            <p class="text-xs text-slate-500">Display full-screen on the projector at the end of your session or copy the QR link.</p>
           </div>
-          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-primary text-white transition flex items-center gap-1.5 shadow-md shadow-sky-600/30">
+          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Add Company</span>
           </button>
@@ -468,13 +618,13 @@
 
         <div id="companiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-        <div id="noCompaniesState" class="hidden sap-glass rounded-2xl p-12 text-center border border-sky-500/20 space-y-3">
-          <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center mx-auto text-sky-400">
+        <div id="noCompaniesState" class="hidden sap-card-white rounded-2xl p-12 text-center space-y-3">
+          <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto text-blue-600">
             <i data-lucide="presentation" class="w-6 h-6"></i>
           </div>
-          <h4 class="text-base font-bold text-white">No Companies Created</h4>
-          <p class="text-xs text-slate-400 max-w-sm mx-auto">Create a company name to generate the end-of-session QR code.</p>
-          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-primary text-white inline-flex items-center gap-1.5">
+          <h4 class="text-base font-bold text-slate-900">No Companies Created</h4>
+          <p class="text-xs text-slate-500 max-w-sm mx-auto">Create a company name to generate the end-of-session QR code.</p>
+          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white inline-flex items-center gap-1.5">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Create Company QR</span>
           </button>
@@ -486,36 +636,36 @@
   </main>
 
   <!-- MODAL 1: CREATE COMPANY QR -->
-  <div id="createCompanyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
-    <div class="sap-glass max-w-md w-full rounded-3xl p-6 border border-sky-500/30 shadow-2xl relative">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <h3 class="text-base font-bold text-white flex items-center gap-2">
-          <i data-lucide="building" class="w-4 h-4 text-sky-400"></i>
+  <div id="createCompanyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden">
+    <div class="sap-card-white max-w-md w-full rounded-3xl p-6 relative text-left">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="building" class="w-4 h-4 text-blue-600"></i>
           <span>Create Company QR</span>
         </h3>
-        <button onclick="closeModal('createCompanyModal')" class="text-slate-400 hover:text-white p-1">
+        <button onclick="closeModal('createCompanyModal')" class="text-slate-400 hover:text-slate-700 p-1">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <form id="createCompanyForm" onsubmit="handleCreateCompany(event)" class="space-y-4 mt-4">
         <div>
-          <label class="block text-xs font-bold text-slate-200 mb-1.5">Company Name *</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">Company Name *</label>
           <input 
             type="text" 
             id="newCompanyNameInput" 
             required 
             placeholder="e.g. Aramco, Deloitte, STC" 
-            class="w-full sap-input rounded-xl px-3.5 py-3 text-xs text-white placeholder-slate-500 outline-none"
+            class="w-full sap-input rounded-xl px-3.5 py-3 text-xs text-slate-900 placeholder-slate-400 outline-none"
           >
-          <p class="text-[11px] text-slate-400 mt-1">This company name will be locked on the check-in form for attendees who scan this QR.</p>
+          <p class="text-[11px] text-slate-500 mt-1">This company name will be locked on the check-in form for attendees who scan this QR.</p>
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-800">
-          <button type="button" onclick="closeModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white bg-slate-800 transition">
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+          <button type="button" onclick="closeModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 transition">
             Cancel
           </button>
-          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-primary text-white transition flex items-center gap-1.5 shadow-md shadow-sky-600/30">
+          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm">
             <i data-lucide="check" class="w-3.5 h-3.5"></i>
             <span>Create & Show QR</span>
           </button>
@@ -530,21 +680,20 @@
       <i data-lucide="x" class="w-6 h-6"></i>
     </button>
 
-    <div class="w-full max-w-2xl text-center space-y-6 animate-in fade-in zoom-in duration-200">
+    <div class="w-full max-w-2xl text-center space-y-6">
       <div class="flex justify-center">
-        <div class="sap-official-badge p-3 sm:p-4">
+        <div class="bg-white rounded-2xl p-3 shadow-md inline-block">
           <img 
             src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
-            onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/800px-SAP_2011_logo.svg.png';" 
             alt="SAP Logo" 
-            class="h-14 sm:h-16 w-auto object-contain block"
+            class="h-10 sm:h-12 w-auto object-contain block"
           >
         </div>
       </div>
 
       <div>
-        <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/40">
-          End-of-Session Registration
+        <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30">
+          End-of-Session Check-In
         </span>
         <h2 id="presentCompanyTitle" class="text-3xl sm:text-5xl font-black text-white mt-2">
           Company Name
@@ -552,12 +701,12 @@
         <p class="text-sm sm:text-base text-slate-300 mt-1">Please scan the QR code to enter your Name and Email.</p>
       </div>
 
-      <div class="inline-block p-6 sm:p-8 bg-white rounded-3xl shadow-2xl border-4 border-sky-500/40 my-2">
+      <div class="inline-block p-6 sm:p-8 bg-white rounded-3xl shadow-2xl border-4 border-blue-500/40 my-2">
         <div id="presentationQrDiv" class="flex items-center justify-center"></div>
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-3">
-        <button id="btnDownloadPresentQr" class="px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-primary text-white flex items-center gap-2">
+        <button id="btnDownloadPresentQr" class="px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-blue text-white flex items-center gap-2">
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>Save QR as PNG</span>
         </button>
@@ -571,113 +720,26 @@
     </div>
   </div>
 
-  <!-- Delete Modal -->
-  <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
-    <div class="sap-glass max-w-sm w-full rounded-2xl p-5 border border-sky-500/20 shadow-2xl relative text-center space-y-4">
-      <div class="w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center mx-auto">
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden">
+    <div class="sap-card-white max-w-sm w-full rounded-2xl p-5 relative text-center space-y-4">
+      <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
         <i data-lucide="alert-triangle" class="w-6 h-6"></i>
       </div>
       <div>
-        <h4 id="deleteConfirmTitle" class="text-base font-bold text-white">Confirm Removal</h4>
-        <p id="deleteConfirmDesc" class="text-xs text-slate-400 mt-1">This action cannot be reversed.</p>
+        <h4 id="deleteConfirmTitle" class="text-base font-bold text-slate-900">Confirm Removal</h4>
+        <p id="deleteConfirmDesc" class="text-xs text-slate-500 mt-1">This action cannot be reversed.</p>
       </div>
       <div class="flex items-center justify-center gap-2 pt-2">
-        <button id="btnCancelDelete" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+        <button id="btnCancelDelete" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
           Cancel
         </button>
-        <button id="btnProceedDelete" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition">
+        <button id="btnProceedDelete" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition">
           Delete
         </button>
       </div>
     </div>
   </div>
-
-  <!-- Ambient Particles -->
-  <script>
-    (function initConstellationBackground() {
-      const canvas = document.getElementById('constellationCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let width, height;
-      let particles = [];
-      const particleCount = 48;
-      let mouse = { x: null, y: null, radius: 140 };
-
-      function resizeCanvas() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-      });
-      window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-      });
-
-      class Particle {
-        constructor() {
-          this.x = Math.random() * width;
-          this.y = Math.random() * height;
-          this.vx = (Math.random() - 0.5) * 0.55;
-          this.vy = (Math.random() - 0.5) * 0.55;
-          this.radius = Math.random() * 1.6 + 1;
-        }
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          if (this.x < 0 || this.x > width) this.vx *= -1;
-          if (this.y < 0 || this.y > height) this.vy *= -1;
-
-          if (mouse.x !== null && mouse.y !== null) {
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < mouse.radius) {
-              this.x -= (dx / dist) * 1.2;
-              this.y -= (dy / dist) * 1.2;
-            }
-          }
-        }
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(0, 143, 211, 0.55)';
-          ctx.fill();
-        }
-      }
-
-      for (let i = 0; i < particleCount; i++) particles.push(new Particle());
-
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        for (let i = 0; i < particles.length; i++) {
-          particles[i].update();
-          particles[i].draw();
-          for (let j = i + 1; j < particles.length; j++) {
-            let dx = particles[i].x - particles[j].x;
-            let dy = particles[i].y - particles[j].y;
-            let dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 125) {
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              let alpha = 0.22 * (1 - dist / 125);
-              ctx.strokeStyle = `rgba(0, 143, 211, ${alpha})`;
-              ctx.lineWidth = 0.8;
-              ctx.stroke();
-            }
-          }
-        }
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
-  </script>
 
   <!-- FIREBASE CONFIGURATION & ENGINE -->
   <script>
@@ -701,11 +763,9 @@
     }
 
     /* ======================================================== */
-    /* APPLICATION STATE                                        */
+    /* APPLICATION STATE & DEDUPLICATION                        */
     /* ======================================================== */
     let rawLocalComps = JSON.parse(localStorage.getItem('sap_companies') || '[]');
-
-    // Startup Deduplication: Immediately flushes any corrupted duplicate cards from local cache
     const seenOnLoad = new Set();
     const cleanLocalComps = [];
     rawLocalComps.forEach(comp => {
@@ -738,7 +798,7 @@
       refreshAllDataViews();
     });
 
-    // Real-Time Listener (Strictly deduplicates docs by both ID and Name)
+    // Real-Time Listener (Deduplicates by ID & Name)
     function initRealtimeFirestoreSync() {
       if (!firestoreDb) return;
 
@@ -759,7 +819,6 @@
           }
         });
 
-        // Sort newest first
         comps.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
         window.AppState.companies = comps;
@@ -901,16 +960,16 @@
     }
 
     /* ======================================================== */
-    /* MASTER AUTHENTICATION                                    */
+    /* VIEW SWITCHING & AUTH                                    */
     /* ======================================================== */
     function switchMainView(target) {
       const customerView = document.getElementById('customerView');
       const masterLoginView = document.getElementById('masterLoginView');
       const masterDashView = document.getElementById('masterDashboardView');
-      const navBadge = document.getElementById('navViewBadge');
       const navBtnCustomer = document.getElementById('navBtnCustomer');
       const navBtnMaster = document.getElementById('navBtnMaster');
       const btnLogout = document.getElementById('btnMasterLogout');
+      const customerNavLinks = document.getElementById('customerNavLinks');
 
       customerView.classList.add('hidden');
       masterLoginView.classList.add('hidden');
@@ -919,22 +978,20 @@
       if (target === 'customer') {
         window.AppState.currentView = 'customer';
         customerView.classList.remove('hidden');
-        navBadge.innerText = 'End-of-Session';
-        navBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30';
+        if (customerNavLinks) customerNavLinks.classList.remove('hidden');
 
-        navBtnCustomer.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-sky-400 bg-sky-950/80 border border-sky-800/50';
-        navBtnMaster.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white';
+        navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition';
+        navBtnMaster.className = 'sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm';
         btnLogout.classList.add('hidden');
         updateCustomerCompanyDisplay();
       } else if (target === 'master') {
-        navBtnCustomer.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white';
-        navBtnMaster.className = 'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-sky-400 bg-sky-950/80 border border-sky-800/50';
+        if (customerNavLinks) customerNavLinks.classList.add('hidden');
+        navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 transition';
+        navBtnMaster.className = 'px-4 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition flex items-center gap-1.5';
 
         if (window.AppState.isMasterAuthenticated) {
           window.AppState.currentView = 'master-dash';
           masterDashView.classList.remove('hidden');
-          navBadge.innerText = 'Master Portal';
-          navBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
           btnLogout.classList.remove('hidden');
           renderAttendeesTable();
           renderCompaniesGrid();
@@ -942,8 +999,6 @@
         } else {
           window.AppState.currentView = 'master-login';
           masterLoginView.classList.remove('hidden');
-          navBadge.innerText = 'Master Login';
-          navBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
           btnLogout.classList.add('hidden');
         }
       }
@@ -1002,8 +1057,8 @@
       tabAttendees.classList.add('hidden');
       tabCompanies.classList.add('hidden');
 
-      const activeClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-primary text-white shadow-md shadow-sky-600/30';
-      const inactiveClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800';
+      const activeClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white';
+      const inactiveClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200';
 
       btnAttendees.className = inactiveClass;
       btnCompanies.className = inactiveClass;
@@ -1049,7 +1104,7 @@
         emptyState.classList.add('hidden');
         filtered.forEach(item => {
           const tr = document.createElement('tr');
-          tr.className = 'hover:bg-slate-800/40 transition group';
+          tr.className = 'hover:bg-slate-50 transition group';
 
           const timeDisplay = item.timestamp ? new Date(item.timestamp).toLocaleString(undefined, {
             month: 'short',
@@ -1059,24 +1114,24 @@
           }) : 'Just now';
 
           tr.innerHTML = `
-            <td class="py-3.5 px-4 font-bold text-white whitespace-nowrap">
+            <td class="py-3.5 px-4 font-bold text-slate-900 whitespace-nowrap">
               <div class="flex items-center gap-2.5">
-                <div class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 flex items-center justify-center font-bold text-xs">
+                <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">
                   ${(item.fullName || 'A').charAt(0).toUpperCase()}
                 </div>
                 <span>${escapeHtml(item.fullName || 'Attendee')}</span>
               </div>
             </td>
-            <td class="py-3.5 px-4 text-sky-300 font-mono text-xs">
+            <td class="py-3.5 px-4 text-blue-600 font-mono text-xs">
               <div class="flex items-center gap-2">
                 <span>${escapeHtml(item.email || '')}</span>
-                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email: ${escapeHtml(item.email || '')}', 'success');" title="Copy email" class="opacity-0 group-hover:opacity-100 p-1 hover:text-white transition">
+                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email: ${escapeHtml(item.email || '')}', 'success');" title="Copy email" class="opacity-0 group-hover:opacity-100 p-1 hover:text-slate-900 transition">
                   <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                 </button>
               </div>
             </td>
             <td class="py-3.5 px-4">
-              <span class="inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+              <span class="inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                 ${escapeHtml(item.companyName || 'General Session')}
               </span>
             </td>
@@ -1085,13 +1140,13 @@
             </td>
             <td class="py-3.5 px-4 text-right">
               <div class="flex items-center justify-end gap-1.5">
-                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email!', 'success');" class="p-1.5 rounded-lg text-slate-400 hover:text-sky-400 hover:bg-slate-800 transition" title="Copy Email">
+                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email!', 'success');" class="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition" title="Copy Email">
                   <i data-lucide="copy" class="w-4 h-4"></i>
                 </button>
-                <button onclick="copyNameAndEmail('${escapeHtml(item.fullName)}', '${escapeHtml(item.email)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-800 transition" title="Copy Name & Email">
+                <button onclick="copyNameAndEmail('${escapeHtml(item.fullName)}', '${escapeHtml(item.email)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50 transition" title="Copy Name & Email">
                   <i data-lucide="clipboard" class="w-4 h-4"></i>
                 </button>
-                <button onclick="promptDeleteAttendee('${item.id}', '${escapeHtml(item.fullName)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-950/40 transition" title="Delete record">
+                <button onclick="promptDeleteAttendee('${item.id}', '${escapeHtml(item.fullName)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition" title="Delete record">
                   <i data-lucide="trash-2" class="w-4 h-4"></i>
                 </button>
               </div>
@@ -1185,43 +1240,43 @@
         const qrContainerId = `qr_card_${comp.id}`;
 
         const card = document.createElement('div');
-        card.className = 'sap-glass rounded-2xl p-5 border border-sky-500/20 flex flex-col justify-between space-y-4 hover:border-sky-500/40 transition relative';
+        card.className = 'sap-card-white rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-blue-300 transition relative text-left';
 
         card.innerHTML = `
           <div>
             <div class="flex items-start justify-between gap-2">
               <div>
-                <h4 class="font-extrabold text-white text-base leading-snug">${escapeHtml(comp.name)}</h4>
-                <p class="text-[11px] text-sky-400 font-bold uppercase tracking-wider mt-0.5">End-of-Session QR</p>
+                <h4 class="font-extrabold text-slate-900 text-base leading-snug">${escapeHtml(comp.name)}</h4>
+                <p class="text-[11px] text-blue-600 font-bold uppercase tracking-wider mt-0.5">End-of-Session QR</p>
               </div>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30 whitespace-nowrap">
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-600 font-bold border border-blue-100 whitespace-nowrap">
                 ${count} ${count === 1 ? 'Attendee' : 'Attendees'}
               </span>
             </div>
 
-            <div class="mt-4 p-3 bg-white rounded-xl flex items-center justify-center cursor-pointer shadow-md hover:scale-[1.02] transition" onclick="openPresentationMode('${comp.id}')" title="Click to Present on Projector Screen">
+            <div class="mt-4 p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center cursor-pointer shadow-sm hover:scale-[1.02] transition" onclick="openPresentationMode('${comp.id}')" title="Click to Present on Projector Screen">
               <div id="${qrContainerId}" class="w-[140px] h-[140px] flex items-center justify-center"></div>
             </div>
           </div>
 
-          <div class="space-y-2 pt-2 border-t border-slate-800">
+          <div class="space-y-2 pt-2 border-t border-slate-100">
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="copyCompanyLink('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center justify-center gap-1.5 border border-slate-700">
-                <i data-lucide="link" class="w-3.5 h-3.5 text-sky-400"></i>
+              <button onclick="copyCompanyLink('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center justify-center gap-1.5 border border-slate-200">
+                <i data-lucide="link" class="w-3.5 h-3.5 text-blue-600"></i>
                 <span>Copy Link</span>
               </button>
-              <button onclick="openPresentationMode('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold sap-btn-primary text-white transition flex items-center justify-center gap-1.5 shadow-sm">
+              <button onclick="openPresentationMode('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold sap-btn-dark text-white transition flex items-center justify-center gap-1.5 shadow-sm">
                 <i data-lucide="presentation" class="w-3.5 h-3.5"></i>
                 <span>Present</span>
               </button>
             </div>
 
             <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-              <button onclick="openCustomerViewForCompany('${comp.id}')" class="hover:text-sky-300 underline flex items-center gap-1">
+              <button onclick="openCustomerViewForCompany('${comp.id}')" class="hover:text-blue-600 underline flex items-center gap-1">
                 <i data-lucide="external-link" class="w-3 h-3"></i>
                 Open Customer Page
               </button>
-              <button onclick="promptDeleteCompany('${comp.id}', '${escapeHtml(comp.name)}')" class="text-rose-400 hover:text-rose-300 hover:underline">
+              <button onclick="promptDeleteCompany('${comp.id}', '${escapeHtml(comp.name)}')" class="text-rose-500 hover:text-rose-700 hover:underline">
                 Remove
               </button>
             </div>
@@ -1238,7 +1293,7 @@
               text: checkinUrl,
               width: 140,
               height: 140,
-              colorDark: "#030814",
+              colorDark: "#0f172a",
               colorLight: "#ffffff",
               correctLevel: QRCode.CorrectLevel.M
             });
@@ -1268,7 +1323,6 @@
       switchMainView('customer');
     }
 
-    // Single-Source Company Creation (No double-unshifting)
     async function handleCreateCompany(e) {
       e.preventDefault();
       const input = document.getElementById('newCompanyNameInput');
@@ -1337,7 +1391,7 @@
         text: url,
         width: 250,
         height: 250,
-        colorDark: "#030814",
+        colorDark: "#0f172a",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
       });
@@ -1407,7 +1461,7 @@
         "This response will be removed from your records.",
         async () => {
           if (firestoreDb) {
-            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
+            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e {}
           }
           window.AppState.attendees = window.AppState.attendees.filter(a => a.id !== id);
           localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
@@ -1478,19 +1532,19 @@
       if (!container) return;
 
       const toast = document.createElement('div');
-      let borderStyle = "border-sky-500/50 bg-slate-900/95 text-sky-200";
+      let borderStyle = "border-slate-200 bg-white text-slate-800 shadow-xl";
       let icon = "info";
 
       if (type === "success") {
-        borderStyle = "border-emerald-500/50 bg-slate-900/95 text-emerald-200";
+        borderStyle = "border-emerald-200 bg-white text-emerald-800 shadow-xl";
         icon = "check-circle-2";
       } else if (type === "error") {
-        borderStyle = "border-rose-500/50 bg-slate-900/95 text-rose-200";
+        borderStyle = "border-rose-200 bg-white text-rose-800 shadow-xl";
         icon = "alert-circle";
       }
 
-      toast.className = `p-3.5 rounded-2xl border shadow-2xl backdrop-blur-md flex items-center gap-2.5 text-xs font-bold transform transition-all duration-300 pointer-events-auto opacity-0 translate-y-2 ${borderStyle}`;
-      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4 shrink-0"></i><span>${escapeHtml(message)}</span>`;
+      toast.className = `p-3.5 rounded-2xl border flex items-center gap-2.5 text-xs font-bold transform transition-all duration-300 pointer-events-auto opacity-0 translate-y-2 ${borderStyle}`;
+      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4 shrink-0 text-blue-600"></i><span>${escapeHtml(message)}</span>`;
 
       container.appendChild(toast);
       lucide.createIcons();
