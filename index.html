@@ -66,10 +66,10 @@
       outline: none;
     }
     .glow-violet {
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.16) 0%, rgba(216, 180, 254, 0.05) 50%, transparent 70%);
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(216, 180, 254, 0.06) 50%, transparent 70%);
     }
     .glow-blue {
-      background: radial-gradient(circle, rgba(0, 112, 242, 0.14) 0%, rgba(186, 230, 253, 0.04) 50%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 112, 242, 0.18) 0%, rgba(186, 230, 253, 0.05) 50%, transparent 70%);
     }
     @keyframes float3DDiamond {
       0%, 100% {
@@ -83,11 +83,11 @@
       animation: float3DDiamond 5.5s ease-in-out infinite;
     }
     @keyframes pulseGlow {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 0.85; transform: scale(1.06); }
+      0%, 100% { opacity: 0.65; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.08); }
     }
     .animate-aura-glow {
-      animation: pulseGlow 5s ease-in-out infinite;
+      animation: pulseGlow 4.5s ease-in-out infinite;
     }
   </style>
 </head>
@@ -151,6 +151,7 @@
             <span>SAP End-of-Session Check-In</span>
           </div>
 
+          <!-- Bold 3-Line Headline with Colored Middle Font -->
           <h1 class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]">
             Your Presence.<br>
             <span class="text-[#0070F2]">One Scan.</span><br>
@@ -235,78 +236,76 @@
 
         </div>
 
-        <!-- Right Column: Animated 3D Faceted Crystal Diamond -->
+        <!-- Right Column: Animated 3D Saturated Diamond -->
         <div class="lg:col-span-5 flex items-center justify-center relative py-8">
           <div class="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center animate-diamond-float">
             
-            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/25 via-blue-600/20 to-cyan-400/20 blur-3xl pointer-events-none animate-aura-glow"></div>
+            <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-purple-600/40 via-blue-600/35 to-cyan-400/30 blur-3xl pointer-events-none animate-aura-glow"></div>
 
-            <div class="absolute top-8 right-6 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee]"></div>
-            <div class="absolute bottom-12 left-4 w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#67e8f9]"></div>
-            <div class="absolute top-1/2 -right-2 w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_#60a5fa]"></div>
+            <div class="absolute top-6 right-6 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_14px_#22d3ee]"></div>
+            <div class="absolute bottom-10 left-4 w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#67e8f9]"></div>
 
-            <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_28px_40px_rgba(30,27,75,0.25)]" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_28px_45px_rgba(20,15,65,0.4)]" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="facetTopLeft1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#38bdf8" />
-                  <stop offset="50%" stop-color="#2563eb" />
-                  <stop offset="100%" stop-color="#1e1b4b" />
+                <linearGradient id="h_gem_tl" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#38bdf8"/>
+                  <stop offset="100%" stop-color="#1d4ed8"/>
                 </linearGradient>
-                <linearGradient id="facetTopTable1" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
-                  <stop offset="40%" stop-color="#c084fc" />
-                  <stop offset="100%" stop-color="#7c3aed" />
+                <linearGradient id="h_gem_top" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="35%" stop-color="#d8b4fe"/>
+                  <stop offset="100%" stop-color="#7e22ce"/>
                 </linearGradient>
-                <linearGradient id="facetTopRight1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#f472b6" />
-                  <stop offset="60%" stop-color="#a855f7" />
-                  <stop offset="100%" stop-color="#581c87" />
+                <linearGradient id="h_gem_tr" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#f472b6"/>
+                  <stop offset="60%" stop-color="#c026d3"/>
+                  <stop offset="100%" stop-color="#581c87"/>
                 </linearGradient>
-                <linearGradient id="facetCenterKite1" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stop-color="#9333ea" />
-                  <stop offset="50%" stop-color="#4f46e5" />
-                  <stop offset="100%" stop-color="#1e1b4b" />
+                <linearGradient id="h_gem_center" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#a855f7"/>
+                  <stop offset="50%" stop-color="#4f46e5"/>
+                  <stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="facetBottomLeft1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0284c7" />
-                  <stop offset="50%" stop-color="#1d4ed8" />
-                  <stop offset="100%" stop-color="#0f172a" />
+                <linearGradient id="h_gem_bl" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#0284c7"/>
+                  <stop offset="50%" stop-color="#1e40af"/>
+                  <stop offset="100%" stop-color="#0f172a"/>
                 </linearGradient>
-                <linearGradient id="facetBottomMidLeft1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#2563eb" />
-                  <stop offset="100%" stop-color="#1e1b4b" />
+                <linearGradient id="h_gem_bml" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2563eb"/>
+                  <stop offset="100%" stop-color="#172554"/>
                 </linearGradient>
-                <linearGradient id="facetBottomRight1" x1="100%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#d946ef" />
-                  <stop offset="50%" stop-color="#7c3aed" />
-                  <stop offset="100%" stop-color="#1e1b4b" />
+                <linearGradient id="h_gem_bmr" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#9333ea"/>
+                  <stop offset="100%" stop-color="#312e81"/>
                 </linearGradient>
-                <linearGradient id="facetBottomMidRight1" x1="100%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#a855f7" />
-                  <stop offset="100%" stop-color="#312e81" />
+                <linearGradient id="h_gem_br" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#d946ef"/>
+                  <stop offset="60%" stop-color="#7e22ce"/>
+                  <stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
               </defs>
 
-              <polygon points="40,120 170,295 105,175" fill="url(#facetBottomLeft1)" />
-              <polygon points="105,175 170,295 170,175" fill="url(#facetBottomMidLeft1)" />
-              <polygon points="170,175 170,295 235,175" fill="url(#facetBottomMidRight1)" />
-              <polygon points="300,120 170,295 235,175" fill="url(#facetBottomRight1)" />
+              <polygon points="40,120 170,295 105,175" fill="url(#h_gem_bl)"/>
+              <polygon points="105,175 170,295 170,175" fill="url(#h_gem_bml)"/>
+              <polygon points="170,175 170,295 235,175" fill="url(#h_gem_bmr)"/>
+              <polygon points="300,120 170,295 235,175" fill="url(#h_gem_br)"/>
 
-              <polygon points="105,120 235,120 170,175" fill="url(#facetCenterKite1)" />
-              <polygon points="40,120 105,120 105,175" fill="url(#facetTopLeft1)" />
-              <polygon points="300,120 235,120 235,175" fill="url(#facetTopRight1)" />
+              <polygon points="105,120 235,120 170,175" fill="url(#h_gem_center)"/>
+              <polygon points="40,120 105,120 105,175" fill="url(#h_gem_tl)"/>
+              <polygon points="300,120 235,120 235,175" fill="url(#h_gem_tr)"/>
 
-              <polygon points="85,60 40,120 105,120" fill="#38bdf8" opacity="0.88" />
-              <polygon points="85,60 105,120 170,60" fill="url(#facetTopLeft1)" />
-              <polygon points="170,60 105,120 235,120" fill="url(#facetTopTable1)" />
-              <polygon points="170,60 235,120 255,60" fill="url(#facetTopRight1)" />
-              <polygon points="255,60 235,120 300,120" fill="#e879f9" opacity="0.9" />
+              <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
+              <polygon points="85,60 105,120 170,60" fill="url(#h_gem_tl)"/>
+              <polygon points="170,60 105,120 235,120" fill="url(#h_gem_top)"/>
+              <polygon points="170,60 235,120 255,60" fill="url(#h_gem_tr)"/>
+              <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
-              <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2" stroke-opacity="0.9" />
-              <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.3" stroke-opacity="0.65" />
-              <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.35" />
-              <line x1="40" y1="120" x2="170" y2="295" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.75" />
-              <line x1="300" y1="120" x2="170" y2="295" stroke="#f472b6" stroke-width="1.6" stroke-opacity="0.75" />
+              <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
+              <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.7"/>
+              <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
+              <line x1="40" y1="120" x2="170" y2="295" stroke="#38bdf8" stroke-width="1.8" stroke-opacity="0.8"/>
+              <line x1="300" y1="120" x2="170" y2="295" stroke="#f472b6" stroke-width="1.8" stroke-opacity="0.8"/>
             </svg>
 
           </div>
@@ -316,24 +315,46 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 2: MASTER USER LOGIN                                -->
+    <!-- VIEW 2: MASTER USER LOGIN (ENRICHED EXECUTIVE STYLING)   -->
     <!-- ======================================================== -->
-    <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-16 px-4">
-      <div class="sap-card-white rounded-3xl p-6 sm:p-8 relative text-left">
-        <div class="text-center mb-6">
-          <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
-            alt="SAP Logo" 
-            class="h-8 w-auto object-contain mx-auto mb-3"
-          >
-          <h2 class="text-2xl font-black text-slate-900">Host Master Login</h2>
-          <p class="text-xs text-slate-500 mt-1">Sign in to manage company QR codes and attendee data.</p>
+    <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-14 px-4">
+      <div class="sap-card-white rounded-3xl p-7 sm:p-9 relative text-left shadow-2xl border border-slate-200">
+        
+        <!-- Header with Mini 3D Diamond & Brand -->
+        <div class="text-center mb-6 relative">
+          <div class="w-16 h-16 mx-auto mb-2 relative flex items-center justify-center animate-diamond-float">
+            <div class="absolute inset-0 rounded-full bg-purple-500/25 blur-lg"></div>
+            <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
+              <polygon points="40,120 170,295 105,175" fill="#0284c7"/>
+              <polygon points="105,175 170,295 170,175" fill="#1d4ed8"/>
+              <polygon points="170,175 170,295 235,175" fill="#7e22ce"/>
+              <polygon points="300,120 170,295 235,175" fill="#c026d3"/>
+              <polygon points="105,120 235,120 170,175" fill="#6d28d9"/>
+              <polygon points="40,120 105,120 105,175" fill="#0369a1"/>
+              <polygon points="300,120 235,120 235,175" fill="#a21caf"/>
+              <polygon points="85,60 40,120 105,120" fill="#38bdf8"/>
+              <polygon points="85,60 105,120 170,60" fill="#2563eb"/>
+              <polygon points="170,60 105,120 235,120" fill="#e9d5ff"/>
+              <polygon points="170,60 235,120 255,60" fill="#d946ef"/>
+              <polygon points="255,60 235,120 300,120" fill="#f43f5e"/>
+              <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="3"/>
+            </svg>
+          </div>
+
+          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-[#0070F2] text-[10px] font-black uppercase tracking-widest mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#0070F2]"></span>
+            <span>Enterprise Host Portal</span>
+          </div>
+
+          <h2 class="text-2xl font-black text-slate-900 tracking-tight">Host Master Login</h2>
+          <p class="text-xs text-slate-500 mt-1">Unlock session QR presenter mode and attendee controls.</p>
         </div>
 
         <form id="masterLoginForm" onsubmit="handleMasterLogin(event)" class="space-y-4">
           <div>
-            <label for="masterUsernameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Master Username
+            <label for="masterUsernameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+              <i data-lucide="shield" class="w-3.5 h-3.5 text-[#0070F2]"></i>
+              <span>Username</span>
             </label>
             <input 
               type="text" 
@@ -346,8 +367,9 @@
           </div>
 
           <div>
-            <label for="masterPasswordInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Universal Password
+            <label for="masterPasswordInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+              <i data-lucide="key-round" class="w-3.5 h-3.5 text-[#0070F2]"></i>
+              <span>Universal Password</span>
             </label>
             <div class="relative">
               <input 
@@ -356,7 +378,7 @@
                 required 
                 value=""
                 autocomplete="current-password"
-                placeholder=""
+                placeholder="Enter password..."
                 class="w-full sap-input rounded-xl px-4 py-3 text-sm text-slate-900 outline-none pr-10"
               >
               <button type="button" onclick="togglePasswordVisibility('masterPasswordInput')" class="absolute right-3 top-3.5 text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -377,15 +399,26 @@
             <span>Unlock Master Dashboard</span>
           </button>
         </form>
+
+        <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+          <span class="flex items-center gap-1">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-500"></i>
+            Firebase Firestore Connected
+          </span>
+          <button onclick="switchMainView('customer')" class="hover:text-blue-600 font-semibold transition">
+            ← Back to Check-In
+          </button>
+        </div>
+
       </div>
     </section>
 
     <!-- ======================================================== -->
-    <!-- VIEW 3: MASTER DASHBOARD (WITH 3D DIAMOND INTEGRATED)    -->
+    <!-- VIEW 3: MASTER DASHBOARD                                 -->
     <!-- ======================================================== -->
     <section id="masterDashboardView" class="hidden w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6">
       
-      <!-- Executive Master Banner featuring the 3D Diamond -->
+      <!-- Executive Master Banner featuring the Rich Saturated 3D Diamond -->
       <div class="sap-card-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden text-left">
         <div class="space-y-2 z-10">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[10px] font-extrabold uppercase tracking-widest">
@@ -400,29 +433,29 @@
           </p>
         </div>
 
-        <!-- 3D Diamond Embedded in Master Portal Header -->
+        <!-- 3D Diamond in Master Portal Header -->
         <div class="w-32 h-32 sm:w-40 sm:h-40 shrink-0 relative flex items-center justify-center animate-diamond-float">
-          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/25 via-blue-600/20 to-cyan-400/20 blur-2xl pointer-events-none"></div>
-          <div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></div>
+          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/35 via-blue-600/30 to-cyan-400/30 blur-2xl pointer-events-none"></div>
+          <div class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
           
-          <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_16px_25px_rgba(30,27,75,0.22)]" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="40,120 170,295 105,175" fill="url(#facetBottomLeft1)" />
-            <polygon points="105,175 170,295 170,175" fill="url(#facetBottomMidLeft1)" />
-            <polygon points="170,175 170,295 235,175" fill="url(#facetBottomMidRight1)" />
-            <polygon points="300,120 170,295 235,175" fill="url(#facetBottomRight1)" />
-            <polygon points="105,120 235,120 170,175" fill="url(#facetCenterKite1)" />
-            <polygon points="40,120 105,120 105,175" fill="url(#facetTopLeft1)" />
-            <polygon points="300,120 235,120 235,175" fill="url(#facetTopRight1)" />
-            <polygon points="85,60 40,120 105,120" fill="#38bdf8" opacity="0.88" />
-            <polygon points="85,60 105,120 170,60" fill="url(#facetTopLeft1)" />
-            <polygon points="170,60 105,120 235,120" fill="url(#facetTopTable1)" />
-            <polygon points="170,60 235,120 255,60" fill="url(#facetTopRight1)" />
-            <polygon points="255,60 235,120 300,120" fill="#e879f9" opacity="0.9" />
-            <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2" stroke-opacity="0.9" />
-            <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.3" stroke-opacity="0.65" />
-            <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.35" />
-            <line x1="40" y1="120" x2="170" y2="295" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.75" />
-            <line x1="300" y1="120" x2="170" y2="295" stroke="#f472b6" stroke-width="1.6" stroke-opacity="0.75" />
+          <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_18px_30px_rgba(20,15,65,0.35)]" fill="none">
+            <polygon points="40,120 170,295 105,175" fill="url(#h_gem_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#h_gem_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#h_gem_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#h_gem_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#h_gem_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#h_gem_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#h_gem_tr)"/>
+            <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#h_gem_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#h_gem_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#h_gem_tr)"/>
+            <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
+            <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
+            <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.7"/>
+            <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
+            <line x1="40" y1="120" x2="170" y2="295" stroke="#38bdf8" stroke-width="1.8" stroke-opacity="0.8"/>
+            <line x1="300" y1="120" x2="170" y2="295" stroke="#f472b6" stroke-width="1.8" stroke-opacity="0.8"/>
           </svg>
         </div>
       </div>
@@ -642,20 +675,18 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- MODAL 2: REDESIGNED LIGHT PRESENTATION MODE (WITH DIAMOND)-->
+  <!-- MODAL 2: LIGHT PRESENTATION MODE (MINI DIAMOND ON QR)    -->
   <!-- ======================================================== -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-white/95 backdrop-blur-2xl overflow-y-auto hidden">
     
-    <!-- Ambient mesh glows matching reference aesthetic -->
     <div class="fixed -top-12 -right-12 w-[500px] h-[500px] glow-violet pointer-events-none"></div>
     <div class="fixed -bottom-12 -left-12 w-[500px] h-[500px] glow-blue pointer-events-none"></div>
 
-    <!-- Close Button -->
     <button onclick="closeModal('presentationModal')" class="absolute top-6 right-6 text-slate-600 hover:text-slate-900 p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 transition border border-slate-200 z-50 cursor-pointer shadow-sm">
       <i data-lucide="x" class="w-6 h-6"></i>
     </button>
 
-    <div class="w-full max-w-xl text-center space-y-5 my-auto relative z-10 py-6">
+    <div class="w-full max-w-xl text-center space-y-4 my-auto relative z-10 py-6">
       
       <!-- SAP Official Logo -->
       <div class="flex justify-center">
@@ -666,36 +697,9 @@
         >
       </div>
 
-      <!-- 3D Faceted Diamond Floating Directly on Top of the QR Code -->
-      <div class="relative w-36 h-36 mx-auto flex items-center justify-center animate-diamond-float">
-        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/30 via-blue-600/25 to-cyan-400/25 blur-2xl pointer-events-none animate-aura-glow"></div>
-        <div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
-        <div class="absolute bottom-2 left-2 w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_#67e8f9]"></div>
-
-        <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_20px_30px_rgba(30,27,75,0.22)]" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="40,120 170,295 105,175" fill="url(#facetBottomLeft1)" />
-          <polygon points="105,175 170,295 170,175" fill="url(#facetBottomMidLeft1)" />
-          <polygon points="170,175 170,295 235,175" fill="url(#facetBottomMidRight1)" />
-          <polygon points="300,120 170,295 235,175" fill="url(#facetBottomRight1)" />
-          <polygon points="105,120 235,120 170,175" fill="url(#facetCenterKite1)" />
-          <polygon points="40,120 105,120 105,175" fill="url(#facetTopLeft1)" />
-          <polygon points="300,120 235,120 235,175" fill="url(#facetTopRight1)" />
-          <polygon points="85,60 40,120 105,120" fill="#38bdf8" opacity="0.88" />
-          <polygon points="85,60 105,120 170,60" fill="url(#facetTopLeft1)" />
-          <polygon points="170,60 105,120 235,120" fill="url(#facetTopTable1)" />
-          <polygon points="170,60 235,120 255,60" fill="url(#facetTopRight1)" />
-          <polygon points="255,60 235,120 300,120" fill="#e879f9" opacity="0.9" />
-          <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2" stroke-opacity="0.9" />
-          <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.3" stroke-opacity="0.65" />
-          <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.35" />
-          <line x1="40" y1="120" x2="170" y2="295" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.75" />
-          <line x1="300" y1="120" x2="170" y2="295" stroke="#f472b6" stroke-width="1.6" stroke-opacity="0.75" />
-        </svg>
-      </div>
-
-      <!-- Company Title -->
+      <!-- Company Title & Subtitle -->
       <div>
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest mb-2">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest mb-1.5">
           <span>End-of-Session Check-In</span>
         </div>
         <h2 id="presentCompanyTitle" class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
@@ -704,13 +708,38 @@
         <p class="text-sm text-slate-500 mt-1">Please scan the QR code to enter your Name and Business Email.</p>
       </div>
 
-      <!-- QR Code Card Container -->
-      <div class="inline-block p-6 sm:p-7 bg-white rounded-3xl shadow-xl border-2 border-slate-100 my-1">
-        <div id="presentationQrDiv" class="flex items-center justify-center"></div>
+      <!-- QR Code Card Container with MINI DIAMOND perching directly on top -->
+      <div class="relative inline-block mt-8">
+        
+        <!-- MINI 3D DIAMOND Centered Directly on Top of the QR Card Frame -->
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-16 h-16 z-20 pointer-events-none animate-diamond-float flex items-center justify-center">
+          <div class="absolute inset-0 rounded-full bg-purple-500/35 blur-md"></div>
+          <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
+            <polygon points="40,120 170,295 105,175" fill="#0284c7"/>
+            <polygon points="105,175 170,295 170,175" fill="#1d4ed8"/>
+            <polygon points="170,175 170,295 235,175" fill="#7e22ce"/>
+            <polygon points="300,120 170,295 235,175" fill="#c026d3"/>
+            <polygon points="105,120 235,120 170,175" fill="#6d28d9"/>
+            <polygon points="40,120 105,120 105,175" fill="#0369a1"/>
+            <polygon points="300,120 235,120 235,175" fill="#a21caf"/>
+            <polygon points="85,60 40,120 105,120" fill="#38bdf8"/>
+            <polygon points="85,60 105,120 170,60" fill="#2563eb"/>
+            <polygon points="170,60 105,120 235,120" fill="#e9d5ff"/>
+            <polygon points="170,60 235,120 255,60" fill="#d946ef"/>
+            <polygon points="255,60 235,120 300,120" fill="#f43f5e"/>
+            <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="3"/>
+          </svg>
+        </div>
+
+        <!-- The Crisp White QR Frame -->
+        <div class="p-6 sm:p-7 bg-white rounded-3xl shadow-xl border-2 border-slate-100">
+          <div id="presentationQrDiv" class="flex items-center justify-center"></div>
+        </div>
+
       </div>
 
       <!-- Actions -->
-      <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
         <button id="btnDownloadPresentQr" class="px-5 py-2.5 rounded-xl text-xs font-bold sap-btn-dark text-white flex items-center gap-2 cursor-pointer shadow-sm">
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>Save QR as PNG</span>
@@ -937,7 +966,7 @@
         name: compParam || 'SAP Session'
       };
 
-      // 1. Local Memory Deduplication Check
+      // 1. Local Memory Check
       const alreadySubmittedLocally = window.AppState.attendees.some(att => 
         (att.email || '').trim().toLowerCase() === email && 
         (att.companyId === activeComp.id || (att.companyName || '').toLowerCase() === (activeComp.name || '').toLowerCase())
@@ -964,7 +993,7 @@
         timestamp: Date.now()
       };
 
-      // 3. Firestore Verification Check
+      // 3. Firestore Database Uniqueness Check
       if (firestoreDb) {
         try {
           const docRef = firestoreDb.collection('attendees').doc(deterministicDocId);
@@ -1508,7 +1537,7 @@
         "This response will be removed from your records.",
         async () => {
           if (firestoreDb) {
-            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
+            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e {}
           }
           window.AppState.attendees = window.AppState.attendees.filter(a => a.id !== id);
           localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
