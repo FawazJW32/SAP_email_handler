@@ -158,7 +158,6 @@
             Connected.
           </h1>
 
-          <!-- Clean Paragraph -->
           <p class="text-base sm:text-lg text-slate-600 max-w-lg leading-relaxed">
             Please register your attendance for today's session with your name and business email.
           </p>
@@ -237,7 +236,7 @@
 
         </div>
 
-        <!-- Right Column: Saturated 3D Diamond with Local Isolated Gradients -->
+        <!-- Right Column: Saturated 3D Diamond -->
         <div class="lg:col-span-5 flex items-center justify-center relative py-8">
           <div class="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center animate-diamond-float">
             
@@ -301,12 +300,11 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 2: MASTER USER LOGIN (ENRICHED EXECUTIVE STYLING)   -->
+    <!-- VIEW 2: MASTER USER LOGIN                                -->
     <!-- ======================================================== -->
     <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-12 px-4">
       <div class="sap-card-white rounded-3xl p-7 sm:p-9 relative text-left shadow-2xl border border-slate-200">
         
-        <!-- Header with Mini 3D Diamond & Brand -->
         <div class="text-center mb-6 relative">
           <div class="w-16 h-16 mx-auto mb-2 relative flex items-center justify-center animate-diamond-float">
             <div class="absolute inset-0 rounded-full bg-purple-500/25 blur-lg"></div>
@@ -397,7 +395,7 @@
     <!-- ======================================================== -->
     <section id="masterDashboardView" class="hidden w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6">
       
-      <!-- Executive Master Banner with Saturated Diamond -->
+      <!-- Executive Master Banner -->
       <div class="sap-card-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden text-left">
         <div class="space-y-2 z-10">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[10px] font-extrabold uppercase tracking-widest">
@@ -412,7 +410,7 @@
           </p>
         </div>
 
-        <!-- 3D Diamond with its Own Local Gradients -->
+        <!-- 3D Diamond in Master Portal Header -->
         <div class="w-32 h-32 sm:w-40 sm:h-40 shrink-0 relative flex items-center justify-center animate-diamond-float">
           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/35 via-blue-600/30 to-cyan-400/30 blur-2xl pointer-events-none"></div>
           <div class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
@@ -681,9 +679,9 @@
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MODAL 2: PRESENTATION MODE (MINI DIAMOND ON TOP OF QR)   -->
-  <!-- ======================================================== -->
+  <!-- ========================================================================= -->
+  <!-- MODAL 2: PRESENTATION MODE (CLEAN VERTICAL FLOW - NO OVERLAPPING WORDS)   -->
+  <!-- ========================================================================= -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-white/95 backdrop-blur-2xl overflow-y-auto hidden">
     
     <div class="fixed -top-12 -right-12 w-[500px] h-[500px] glow-violet pointer-events-none"></div>
@@ -704,22 +702,22 @@
         >
       </div>
 
-      <!-- Company Title -->
-      <div>
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest mb-1.5">
+      <!-- Company Title & Subtitle -->
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest">
           <span>End-of-Session Check-In</span>
         </div>
         <h2 id="presentCompanyTitle" class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
           Company Name
         </h2>
-        <p class="text-sm text-slate-500 mt-1">Please scan the QR code to enter your Name and Business Email.</p>
+        <p class="text-sm text-slate-500">Please scan the QR code to enter your Name and Business Email.</p>
       </div>
 
-      <!-- QR Code Card Container with MINI DIAMOND perching directly on top of the QR -->
-      <div class="relative inline-block mt-8">
+      <!-- Dedicated Clean Container: Floating Mini Diamond perching on QR card without touching any text -->
+      <div class="flex flex-col items-center pt-3">
         
-        <!-- MINI 3D DIAMOND Centered Directly on Top of the QR Code Frame -->
-        <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-16 h-16 z-20 pointer-events-none animate-diamond-float flex items-center justify-center">
+        <!-- MINI 3D DIAMOND sitting with ample natural clearance above QR frame -->
+        <div class="w-16 h-16 -mb-6 z-20 pointer-events-none animate-diamond-float flex items-center justify-center relative">
           <div class="absolute inset-0 rounded-full bg-purple-500/35 blur-md"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
@@ -772,7 +770,7 @@
         </div>
 
         <!-- Crisp White QR Frame -->
-        <div class="p-6 sm:p-7 bg-white rounded-3xl shadow-xl border-2 border-slate-100">
+        <div class="p-6 sm:p-7 bg-white rounded-3xl shadow-xl border-2 border-slate-100 relative z-10">
           <div id="presentationQrDiv" class="flex items-center justify-center"></div>
         </div>
 
@@ -832,7 +830,7 @@
       firebase.initializeApp(firebaseConfig);
       firestoreDb = firebase.firestore();
     } catch (err) {
-      console.warn("Firebase init note:", err);
+      console.warn("Firebase note:", err);
     }
 
     function safeLucide() {
@@ -999,7 +997,6 @@
         name: compParam || 'SAP Session'
       };
 
-      // Check if email already registered locally
       const alreadySubmittedLocally = window.AppState.attendees.some(att => 
         (att.email || '').trim().toLowerCase() === email && 
         (att.companyId === activeComp.id || (att.companyName || '').toLowerCase() === (activeComp.name || '').toLowerCase())
@@ -1025,7 +1022,6 @@
         timestamp: Date.now()
       };
 
-      // Check Firestore to prevent cross-device spamming of identical email
       if (firestoreDb) {
         try {
           const docRef = firestoreDb.collection('attendees').doc(deterministicDocId);
@@ -1040,7 +1036,7 @@
 
           await docRef.set(record);
         } catch (err) {
-          console.error("Firestore push error:", err);
+          console.error("Firestore error:", err);
         }
       }
 
@@ -1573,7 +1569,7 @@
         "This response will be removed from your records.",
         async () => {
           if (firestoreDb) {
-            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
+            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e {}
           }
           window.AppState.attendees = window.AppState.attendees.filter(a => a.id !== id);
           localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
