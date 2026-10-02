@@ -26,7 +26,7 @@
       overflow-x: hidden;
     }
     .sap-pill-nav {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(226, 232, 240, 0.9);
@@ -76,7 +76,7 @@
         transform: translateY(0px) rotate(0deg) scale(1);
       }
       50% {
-        transform: translateY(-12px) rotate(1.5deg) scale(1.02);
+        transform: translateY(-10px) rotate(1.5deg) scale(1.02);
       }
     }
     .animate-diamond-float {
@@ -158,6 +158,7 @@
             Connected.
           </h1>
 
+          <!-- Clean Paragraph -->
           <p class="text-base sm:text-lg text-slate-600 max-w-lg leading-relaxed">
             Please register your attendance for today's session with your name and business email.
           </p>
@@ -236,7 +237,7 @@
 
         </div>
 
-        <!-- Right Column: Saturated 3D Diamond -->
+        <!-- Right Column: Saturated 3D Diamond with Dedicated Local Gradients -->
         <div class="lg:col-span-5 flex items-center justify-center relative py-8">
           <div class="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center animate-diamond-float">
             
@@ -247,43 +248,43 @@
 
             <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_28px_45px_rgba(20,15,65,0.4)]" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="g1_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="d1_bl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
                 </linearGradient>
-                <linearGradient id="g1_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="d1_bml" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
                 </linearGradient>
-                <linearGradient id="g1_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="d1_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
                 </linearGradient>
-                <linearGradient id="g1_br" x1="100%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="d1_br" x1="100%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="g1_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="d1_center" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="g1_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="d1_tl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
                 </linearGradient>
-                <linearGradient id="g1_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="d1_tr" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
                 </linearGradient>
-                <linearGradient id="g1_top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="d1_top" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
                 </linearGradient>
               </defs>
 
-              <polygon points="40,120 170,295 105,175" fill="url(#g1_bl)"/>
-              <polygon points="105,175 170,295 170,175" fill="url(#g1_bml)"/>
-              <polygon points="170,175 170,295 235,175" fill="url(#g1_bmr)"/>
-              <polygon points="300,120 170,295 235,175" fill="url(#g1_br)"/>
-              <polygon points="105,120 235,120 170,175" fill="url(#g1_center)"/>
-              <polygon points="40,120 105,120 105,175" fill="url(#g1_tl)"/>
-              <polygon points="300,120 235,120 235,175" fill="url(#g1_tr)"/>
+              <polygon points="40,120 170,295 105,175" fill="url(#d1_bl)"/>
+              <polygon points="105,175 170,295 170,175" fill="url(#d1_bml)"/>
+              <polygon points="170,175 170,295 235,175" fill="url(#d1_bmr)"/>
+              <polygon points="300,120 170,295 235,175" fill="url(#d1_br)"/>
+              <polygon points="105,120 235,120 170,175" fill="url(#d1_center)"/>
+              <polygon points="40,120 105,120 105,175" fill="url(#d1_tl)"/>
+              <polygon points="300,120 235,120 235,175" fill="url(#d1_tr)"/>
               <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-              <polygon points="85,60 105,120 170,60" fill="url(#g1_tl)"/>
-              <polygon points="170,60 105,120 235,120" fill="url(#g1_top)"/>
-              <polygon points="170,60 235,120 255,60" fill="url(#g1_tr)"/>
+              <polygon points="85,60 105,120 170,60" fill="url(#d1_tl)"/>
+              <polygon points="170,60 105,120 235,120" fill="url(#d1_top)"/>
+              <polygon points="170,60 235,120 255,60" fill="url(#d1_tr)"/>
               <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
               <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -309,11 +310,16 @@
           <div class="w-16 h-16 mx-auto mb-2 relative flex items-center justify-center animate-diamond-float">
             <div class="absolute inset-0 rounded-full bg-purple-500/25 blur-lg"></div>
             <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
+              <defs>
+                <linearGradient id="d2_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#4f46e5"/>
+                </linearGradient>
+              </defs>
               <polygon points="40,120 170,295 105,175" fill="#0284c7"/>
               <polygon points="105,175 170,295 170,175" fill="#1d4ed8"/>
               <polygon points="170,175 170,295 235,175" fill="#7e22ce"/>
               <polygon points="300,120 170,295 235,175" fill="#c026d3"/>
-              <polygon points="105,120 235,120 170,175" fill="#6d28d9"/>
+              <polygon points="105,120 235,120 170,175" fill="url(#d2_center)"/>
               <polygon points="40,120 105,120 105,175" fill="#0369a1"/>
               <polygon points="300,120 235,120 235,175" fill="#a21caf"/>
               <polygon points="85,60 40,120 105,120" fill="#38bdf8"/>
@@ -410,50 +416,50 @@
           </p>
         </div>
 
-        <!-- 3D Diamond in Master Portal Header -->
+        <!-- Fully Saturated 3D Diamond with Dedicated Local Defs -->
         <div class="w-32 h-32 sm:w-40 sm:h-40 shrink-0 relative flex items-center justify-center animate-diamond-float">
           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/35 via-blue-600/30 to-cyan-400/30 blur-2xl pointer-events-none"></div>
           <div class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_18px_30px_rgba(20,15,65,0.35)]" fill="none">
             <defs>
-              <linearGradient id="g3_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="d3_bl" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
               </linearGradient>
-              <linearGradient id="g3_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d3_bml" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
               </linearGradient>
-              <linearGradient id="g3_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d3_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
               </linearGradient>
-              <linearGradient id="g3_br" x1="100%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d3_br" x1="100%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
               </linearGradient>
-              <linearGradient id="g3_center" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d3_center" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
               </linearGradient>
-              <linearGradient id="g3_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="d3_tl" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
               </linearGradient>
-              <linearGradient id="g3_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="d3_tr" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
               </linearGradient>
-              <linearGradient id="g3_top" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d3_top" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
               </linearGradient>
             </defs>
 
-            <polygon points="40,120 170,295 105,175" fill="url(#g3_bl)"/>
-            <polygon points="105,175 170,295 170,175" fill="url(#g3_bml)"/>
-            <polygon points="170,175 170,295 235,175" fill="url(#g3_bmr)"/>
-            <polygon points="300,120 170,295 235,175" fill="url(#g3_br)"/>
-            <polygon points="105,120 235,120 170,175" fill="url(#g3_center)"/>
-            <polygon points="40,120 105,120 105,175" fill="url(#g3_tl)"/>
-            <polygon points="300,120 235,120 235,175" fill="url(#g3_tr)"/>
+            <polygon points="40,120 170,295 105,175" fill="url(#d3_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#d3_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#d3_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#d3_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#d3_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#d3_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#d3_tr)"/>
             <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-            <polygon points="85,60 105,120 170,60" fill="url(#g3_tl)"/>
-            <polygon points="170,60 105,120 235,120" fill="url(#g3_top)"/>
-            <polygon points="170,60 235,120 255,60" fill="url(#g3_tr)"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#d3_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#d3_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#d3_tr)"/>
             <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
             <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -703,62 +709,62 @@
       </div>
 
       <!-- Company Title & Subtitle -->
-      <div class="space-y-1.5">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest">
+      <div class="space-y-1 mb-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest mb-1">
           <span>End-of-Session Check-In</span>
         </div>
         <h2 id="presentCompanyTitle" class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
           Company Name
         </h2>
-        <p class="text-sm text-slate-500">Please scan the QR code to enter your Name and Business Email.</p>
+        <p class="text-xs sm:text-sm text-slate-500">Please scan the QR code to enter your Name and Business Email.</p>
       </div>
 
-      <!-- Dedicated Clean Container: Floating Mini Diamond perching on QR card without touching any text -->
-      <div class="flex flex-col items-center pt-3">
+      <!-- Dedicated Clean Flow: Mini Diamond Floating Directly Above White QR Frame Without Overlapping -->
+      <div class="flex flex-col items-center justify-center">
         
-        <!-- MINI 3D DIAMOND sitting with ample natural clearance above QR frame -->
-        <div class="w-16 h-16 -mb-6 z-20 pointer-events-none animate-diamond-float flex items-center justify-center relative">
-          <div class="absolute inset-0 rounded-full bg-purple-500/35 blur-md"></div>
+        <!-- MINI 3D DIAMOND sitting in its own line height with clearance -->
+        <div class="w-14 h-14 relative flex items-center justify-center animate-diamond-float mb-2">
+          <div class="absolute inset-0 rounded-full bg-purple-500/35 blur-md pointer-events-none"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
             <defs>
-              <linearGradient id="g4_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="d4_bl" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
               </linearGradient>
-              <linearGradient id="g4_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d4_bml" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
               </linearGradient>
-              <linearGradient id="g4_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d4_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
               </linearGradient>
-              <linearGradient id="g4_br" x1="100%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d4_br" x1="100%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
               </linearGradient>
-              <linearGradient id="g4_center" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d4_center" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
               </linearGradient>
-              <linearGradient id="g4_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="d4_tl" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
               </linearGradient>
-              <linearGradient id="g4_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="d4_tr" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
               </linearGradient>
-              <linearGradient id="g4_top" x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="d4_top" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
               </linearGradient>
             </defs>
 
-            <polygon points="40,120 170,295 105,175" fill="url(#g4_bl)"/>
-            <polygon points="105,175 170,295 170,175" fill="url(#g4_bml)"/>
-            <polygon points="170,175 170,295 235,175" fill="url(#g4_bmr)"/>
-            <polygon points="300,120 170,295 235,175" fill="url(#g4_br)"/>
-            <polygon points="105,120 235,120 170,175" fill="url(#g4_center)"/>
-            <polygon points="40,120 105,120 105,175" fill="url(#g4_tl)"/>
-            <polygon points="300,120 235,120 235,175" fill="url(#g4_tr)"/>
+            <polygon points="40,120 170,295 105,175" fill="url(#d4_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#d4_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#d4_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#d4_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#d4_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#d4_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#d4_tr)"/>
             <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-            <polygon points="85,60 105,120 170,60" fill="url(#g4_tl)"/>
-            <polygon points="170,60 105,120 235,120" fill="url(#g4_top)"/>
-            <polygon points="170,60 235,120 255,60" fill="url(#g4_tr)"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#d4_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#d4_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#d4_tr)"/>
             <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
             <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -770,7 +776,7 @@
         </div>
 
         <!-- Crisp White QR Frame -->
-        <div class="p-6 sm:p-7 bg-white rounded-3xl shadow-xl border-2 border-slate-100 relative z-10">
+        <div class="p-6 sm:p-7 bg-white rounded-3xl shadow-xl border-2 border-slate-100">
           <div id="presentationQrDiv" class="flex items-center justify-center"></div>
         </div>
 
@@ -927,7 +933,7 @@
       const compParam = getQueryParam('company') || getQueryParam('session');
       if (compParam) {
         const existing = window.AppState.companies.find(c => 
-          (c.name || '').toLowerCase() === compParam.toLowerCase() || c.id === compParam
+          (c && c.name ? c.name : '').toLowerCase() === compParam.toLowerCase() || (c && c.id === compParam)
         );
         window.AppState.activeCompanyId = existing ? existing.id : compParam;
       } else if (window.AppState.companies.length > 0) {
@@ -937,11 +943,11 @@
     }
 
     function refreshAllDataViews() {
-      updateCustomerCompanyDisplay();
-      updateCompanyFilterDropdown();
-      renderAttendeesTable();
-      renderCompaniesGrid();
-      updateMetrics();
+      try { updateCustomerCompanyDisplay(); } catch (e) {}
+      try { updateCompanyFilterDropdown(); } catch (e) {}
+      try { renderAttendeesTable(); } catch (e) {}
+      try { renderCompaniesGrid(); } catch (e) {}
+      try { updateMetrics(); } catch (e) {}
       safeLucide();
     }
 
@@ -949,8 +955,8 @@
       const label = document.getElementById('customerCompanyNameDisplay');
       const compParam = getQueryParam('company') || getQueryParam('session');
       const activeComp = window.AppState.companies.find(c => 
-        c.id === window.AppState.activeCompanyId || 
-        (compParam && (c.name || '').toLowerCase() === compParam.toLowerCase())
+        (c && c.id === window.AppState.activeCompanyId) || 
+        (compParam && c && (c.name || '').toLowerCase() === compParam.toLowerCase())
       );
       if (label) {
         label.innerText = activeComp ? (activeComp.name || "SAP Session") : (compParam || "SAP Session");
@@ -962,7 +968,8 @@
       if (!filterSelect) return;
       const currentVal = filterSelect.value;
       filterSelect.innerHTML = '<option value="ALL">All Companies</option>';
-      window.AppState.companies.forEach(comp => {
+      (window.AppState.companies || []).forEach(comp => {
+        if (!comp) return;
         const opt = document.createElement('option');
         opt.value = comp.id;
         opt.textContent = comp.name || comp.id;
@@ -989,16 +996,16 @@
       }
 
       const compParam = getQueryParam('company') || getQueryParam('session');
-      const activeComp = window.AppState.companies.find(c => 
-        c.id === window.AppState.activeCompanyId || 
-        (compParam && (c.name || '').toLowerCase() === compParam.toLowerCase())
+      const activeComp = (window.AppState.companies || []).find(c => 
+        (c && c.id === window.AppState.activeCompanyId) || 
+        (compParam && c && (c.name || '').toLowerCase() === compParam.toLowerCase())
       ) || {
         id: 'comp_' + (compParam || 'general').toLowerCase().replace(/[^a-z0-9]/g, '_'),
         name: compParam || 'SAP Session'
       };
 
-      const alreadySubmittedLocally = window.AppState.attendees.some(att => 
-        (att.email || '').trim().toLowerCase() === email && 
+      const alreadySubmittedLocally = (window.AppState.attendees || []).some(att => 
+        att && (att.email || '').trim().toLowerCase() === email && 
         (att.companyId === activeComp.id || (att.companyName || '').toLowerCase() === (activeComp.name || '').toLowerCase())
       );
 
@@ -1036,7 +1043,7 @@
 
           await docRef.set(record);
         } catch (err) {
-          console.error("Firestore error:", err);
+          console.error("Firestore push error:", err);
         }
       }
 
@@ -1065,12 +1072,12 @@
     }
 
     /* ======================================================== */
-    /* MASTER PORTAL ROUTING (GUARANTEED EXECUTION)             */
+    /* MASTER PORTAL ROUTING (FAIL-SAFE ERROR GUARDS)           */
     /* ======================================================== */
     function switchMainView(target) {
-      closeModal('presentationModal');
-      closeModal('createCompanyModal');
-      closeModal('deleteConfirmModal');
+      try { closeModal('presentationModal'); } catch (e) {}
+      try { closeModal('createCompanyModal'); } catch (e) {}
+      try { closeModal('deleteConfirmModal'); } catch (e) {}
 
       const customerView = document.getElementById('customerView');
       const masterLoginView = document.getElementById('masterLoginView');
@@ -1093,7 +1100,7 @@
         if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#0070F2] bg-blue-50 border border-blue-200 transition cursor-pointer';
         if (navBtnMaster) navBtnMaster.className = 'sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer';
         if (btnLogout) btnLogout.classList.add('hidden');
-        updateCustomerCompanyDisplay();
+        try { updateCustomerCompanyDisplay(); } catch (e) {}
       } else if (target === 'master') {
         if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 transition cursor-pointer';
         if (navBtnMaster) navBtnMaster.className = 'px-4 py-1.5 rounded-xl text-xs font-bold text-[#0070F2] bg-blue-50 border border-blue-200 transition flex items-center gap-1.5 cursor-pointer';
@@ -1102,10 +1109,10 @@
           window.AppState.currentView = 'master-dash';
           masterDashView.classList.remove('hidden');
           if (btnLogout) btnLogout.classList.remove('hidden');
-          switchMasterTab(window.AppState.currentMasterTab || 'attendees');
-          renderAttendeesTable();
-          renderCompaniesGrid();
-          updateMetrics();
+          try { switchMasterTab(window.AppState.currentMasterTab || 'attendees'); } catch (e) {}
+          try { renderAttendeesTable(); } catch (e) {}
+          try { renderCompaniesGrid(); } catch (e) {}
+          try { updateMetrics(); } catch (e) {}
         } else {
           window.AppState.currentView = 'master-login';
           masterLoginView.classList.remove('hidden');
@@ -1165,11 +1172,11 @@
       if (tab === 'attendees') {
         tabAttendees.classList.remove('hidden');
         if (btnAttendees) btnAttendees.className = activeClass;
-        renderAttendeesTable();
+        try { renderAttendeesTable(); } catch (e) {}
       } else if (tab === 'companies') {
         tabCompanies.classList.remove('hidden');
         if (btnCompanies) btnCompanies.className = activeClass;
-        renderCompaniesGrid();
+        try { renderCompaniesGrid(); } catch (e) {}
       }
       safeLucide();
     }
@@ -1181,7 +1188,8 @@
       const searchTerm = (document.getElementById('searchAttendeeInput')?.value || '').toLowerCase();
       const filterComp = document.getElementById('filterCompanySelect')?.value || 'ALL';
 
-      return window.AppState.attendees.filter(att => {
+      return (window.AppState.attendees || []).filter(att => {
+        if (!att) return false;
         const matchesSearch = (att.fullName || '').toLowerCase().includes(searchTerm) || 
                               (att.email || '').toLowerCase().includes(searchTerm);
         const matchesCompany = filterComp === 'ALL' || att.companyId === filterComp;
@@ -1202,6 +1210,7 @@
       } else {
         if (emptyState) emptyState.classList.add('hidden');
         filtered.forEach(item => {
+          if (!item) return;
           const tr = document.createElement('tr');
           tr.className = 'hover:bg-slate-50 transition group';
 
@@ -1290,14 +1299,14 @@
     }
 
     function exportAttendeesCSV() {
-      const list = window.AppState.attendees;
+      const list = window.AppState.attendees || [];
       if (list.length === 0) {
         showToast("No attendee records to export.", "error");
         return;
       }
 
       const headers = ["Full Name", "Email Address", "Company", "Check-In Timestamp"];
-      const rows = list.map(item => [
+      const rows = list.filter(Boolean).map(item => [
         `"${(item.fullName || '').replace(/"/g, '""')}"`,
         `"${(item.email || '').replace(/"/g, '""')}"`,
         `"${(item.companyName || '').replace(/"/g, '""')}"`,
@@ -1324,7 +1333,7 @@
       if (!grid) return;
 
       grid.innerHTML = '';
-      const list = window.AppState.companies;
+      const list = window.AppState.companies || [];
 
       if (list.length === 0) {
         if (emptyState) emptyState.classList.remove('hidden');
@@ -1334,8 +1343,9 @@
       }
 
       list.forEach(comp => {
-        const cName = comp && comp.name ? comp.name : 'Session';
-        const count = window.AppState.attendees.filter(a => a.companyId === comp.id || (a.companyName && a.companyName.toLowerCase() === cName.toLowerCase())).length;
+        if (!comp) return;
+        const cName = comp.name || 'Session';
+        const count = (window.AppState.attendees || []).filter(a => a && (a.companyId === comp.id || ((a.companyName || '').toLowerCase() === cName.toLowerCase()))).length;
         const checkinUrl = getCompanyCheckInUrl(comp.id);
         const qrContainerId = `qr_card_${comp.id}`;
 
@@ -1407,7 +1417,7 @@
     }
 
     function getCompanyCheckInUrl(companyId) {
-      const comp = window.AppState.companies.find(c => c.id === companyId);
+      const comp = (window.AppState.companies || []).find(c => c && c.id === companyId);
       const cleanName = comp && comp.name ? comp.name : companyId;
       const url = new URL(window.location.origin + window.location.pathname);
       url.searchParams.set('company', cleanName);
@@ -1432,7 +1442,7 @@
 
       if (!name) return;
 
-      const existing = window.AppState.companies.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
+      const existing = (window.AppState.companies || []).find(c => c && (c.name || '').toLowerCase() === name.toLowerCase());
       if (existing) {
         showToast(`Company "${name}" already exists!`, "error");
         input.value = '';
@@ -1465,7 +1475,7 @@
     }
 
     function saveCompanyLocally(newComp) {
-      if (!window.AppState.companies.some(c => c.id === newComp.id || (c.name || '').toLowerCase() === (newComp.name || '').toLowerCase())) {
+      if (!(window.AppState.companies || []).some(c => c && (c.id === newComp.id || (c.name || '').toLowerCase() === (newComp.name || '').toLowerCase()))) {
         window.AppState.companies.unshift(newComp);
         localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
         refreshAllDataViews();
@@ -1473,7 +1483,7 @@
     }
 
     function openPresentationMode(companyId) {
-      const comp = window.AppState.companies.find(c => c.id === companyId);
+      const comp = (window.AppState.companies || []).find(c => c && c.id === companyId);
       if (!comp) return;
 
       const titleEl = document.getElementById('presentCompanyTitle');
@@ -1525,8 +1535,8 @@
     }
 
     function updateMetrics() {
-      const atts = window.AppState.attendees;
-      const comps = window.AppState.companies;
+      const atts = window.AppState.attendees || [];
+      const comps = window.AppState.companies || [];
 
       const totalAttEl = document.getElementById('statTotalAttendees');
       const totalCompEl = document.getElementById('statTotalCompanies');
@@ -1537,10 +1547,10 @@
       if (totalCompEl) totalCompEl.innerText = comps.length;
 
       const today = new Date().toDateString();
-      const todayCount = atts.filter(a => a.timestamp && new Date(a.timestamp).toDateString() === today).length;
+      const todayCount = atts.filter(a => a && a.timestamp && new Date(a.timestamp).toDateString() === today).length;
       if (todayAttEl) todayAttEl.innerText = todayCount;
 
-      const uniqueEmails = new Set(atts.map(a => (a.email || '').toLowerCase().trim()).filter(Boolean));
+      const uniqueEmails = new Set(atts.map(a => (a && a.email ? a.email : '').toLowerCase().trim()).filter(Boolean));
       if (uniqueMailEl) uniqueMailEl.innerText = uniqueEmails.size;
     }
 
@@ -1552,7 +1562,7 @@
           if (firestoreDb) {
             try { await firestoreDb.collection('companies').doc(id).delete(); } catch (e) {}
           }
-          window.AppState.companies = window.AppState.companies.filter(c => c.id !== id);
+          window.AppState.companies = (window.AppState.companies || []).filter(c => c && c.id !== id);
           localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
           if (window.AppState.activeCompanyId === id) {
             window.AppState.activeCompanyId = window.AppState.companies[0]?.id || null;
@@ -1569,9 +1579,9 @@
         "This response will be removed from your records.",
         async () => {
           if (firestoreDb) {
-            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e {}
+            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
           }
-          window.AppState.attendees = window.AppState.attendees.filter(a => a.id !== id);
+          window.AppState.attendees = (window.AppState.attendees || []).filter(a => a && a.id !== id);
           localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
           refreshAllDataViews();
           showToast(`Attendee record removed.`, "info");
