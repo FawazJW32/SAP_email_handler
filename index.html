@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full scroll-smooth">
+<html lang="en" class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,10 +32,10 @@
       -webkit-text-fill-color: transparent;
     }
     .sap-pill-nav {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(226, 232, 240, 0.85);
+      border: 1px solid rgba(226, 232, 240, 0.9);
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
     }
     .sap-card-white {
@@ -72,17 +72,17 @@
       outline: none;
     }
     .glow-violet {
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, rgba(216, 180, 254, 0.06) 50%, transparent 70%);
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.16) 0%, rgba(216, 180, 254, 0.05) 50%, transparent 70%);
     }
     .glow-blue {
-      background: radial-gradient(circle, rgba(0, 112, 242, 0.14) 0%, rgba(186, 230, 253, 0.05) 50%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 112, 242, 0.12) 0%, rgba(186, 230, 253, 0.04) 50%, transparent 70%);
     }
-    @keyframes floatGem {
+    @keyframes floatDiamond {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(2deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
     }
-    .animate-gem {
-      animation: floatGem 6s ease-in-out infinite;
+    .animate-diamond {
+      animation: floatDiamond 5.5s ease-in-out infinite;
     }
   </style>
 </head>
@@ -95,7 +95,7 @@
   <!-- Toast Notification System -->
   <div id="toastRoot" class="fixed top-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm pointer-events-none"></div>
 
-  <!-- Floating Nav Header -->
+  <!-- FLOATING NAVIGATION -->
   <header class="sticky top-4 z-40 px-4 sm:px-8 max-w-7xl mx-auto w-full">
     <div class="sap-pill-nav rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
       
@@ -106,52 +106,44 @@
           alt="SAP Logo" 
           class="h-6 sm:h-7 w-auto object-contain block"
         >
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 hidden md:inline border-l border-slate-200 pl-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 hidden sm:inline border-l border-slate-200 pl-3">
           Session Check-In
         </span>
       </div>
 
-      <!-- Center Navigation Links -->
-      <nav id="customerNavLinks" class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
-        <a href="#checkin-hero" class="hover:text-blue-600 transition">Check-In</a>
-        <a href="#how-it-works" class="hover:text-blue-600 transition">How It Works</a>
-        <a href="#session-resources" class="hover:text-blue-600 transition">Session Overview</a>
-      </nav>
-
-      <!-- View Switcher -->
+      <!-- View Switcher Buttons -->
       <div class="flex items-center gap-2">
-        <button id="navBtnCustomer" onclick="switchMainView('customer')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition">
+        <button id="navBtnCustomer" onclick="switchMainView('customer')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition cursor-pointer">
           Attendee Page
         </button>
-        <button id="navBtnMaster" onclick="switchMainView('master')" class="sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm">
+        <button id="navBtnMaster" onclick="switchMainView('master')" class="sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
           <span>Master Portal</span>
           <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </button>
-        <button id="btnMasterLogout" onclick="handleMasterLogout()" class="hidden px-3 py-1.5 rounded-xl text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 hover:bg-rose-100 transition" title="Lock Portal">
+        <button id="btnMasterLogout" onclick="handleMasterLogout()" class="hidden px-3 py-1.5 rounded-xl text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 hover:bg-rose-100 transition cursor-pointer" title="Lock Portal">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Logout</span>
         </button>
       </div>
 
     </div>
   </header>
 
-  <!-- Main Container -->
+  <!-- MAIN CONTAINER -->
   <main class="relative z-10 flex-1 w-full mx-auto flex flex-col justify-center">
 
     <!-- ======================================================== -->
-    <!-- VIEW 1: ATTENDEE CHECK-IN VIEW                           -->
+    <!-- VIEW 1: ATTENDEE CHECK-IN EXPERIENCE                     -->
     <!-- ======================================================== -->
     <div id="customerView" class="w-full">
-      
-      <!-- HERO & FORM SECTION -->
-      <section id="checkin-hero" class="max-w-7xl mx-auto px-4 sm:px-8 pt-10 sm:pt-16 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <section class="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         
-        <!-- Left Column: Copy -->
+        <!-- Left Column: Copy & Form -->
         <div class="lg:col-span-7 space-y-6 text-left">
           
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[11px] font-extrabold uppercase tracking-widest">
             <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-            <span>SAP Customer Session Registration</span>
+            <span>SAP End-of-Session Check-In</span>
           </div>
 
           <h1 class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.08]">
@@ -161,10 +153,10 @@
           </h1>
 
           <p class="text-base sm:text-lg text-slate-600 max-w-lg leading-relaxed">
-            Please register your attendance for today's session with your name and business email to receive the presented materials and follow-up resources.
+            Please register your attendance for today's session with your name and business email.
           </p>
 
-          <!-- Current Session Badge -->
+          <!-- Current Company Session Badge -->
           <div class="flex items-center gap-3 pt-1">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 shadow-sm">
               <i data-lucide="building-2" class="w-4 h-4 text-blue-600"></i>
@@ -173,39 +165,8 @@
             </div>
           </div>
 
-        </div>
-
-        <!-- Right Column: Check-In Form Card with Faceted Gem Graphic -->
-        <div class="lg:col-span-5 relative">
-          
-          <div class="absolute -top-12 -right-8 w-28 h-28 hidden sm:block animate-gem pointer-events-none z-20">
-            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-2xl">
-              <polygon points="50,5 92,30 50,95 8,30" fill="url(#gemGrad1)" />
-              <polygon points="50,5 50,95 8,30" fill="url(#gemGrad2)" opacity="0.85" />
-              <polygon points="50,5 92,30 50,42" fill="#c084fc" opacity="0.9" />
-              <polygon points="50,5 8,30 50,42" fill="#9333ea" opacity="0.75" />
-              <polygon points="8,30 50,42 50,95" fill="#6366f1" opacity="0.95" />
-              <polygon points="92,30 50,42 50,95" fill="#3b82f6" opacity="0.8" />
-              <defs>
-                <linearGradient id="gemGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#a855f7" />
-                  <stop offset="50%" stop-color="#6366f1" />
-                  <stop offset="100%" stop-color="#3b82f6" />
-                </linearGradient>
-                <linearGradient id="gemGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#7c3aed" />
-                  <stop offset="100%" stop-color="#1e1b4b" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-
-          <div class="sap-card-white rounded-3xl p-6 sm:p-8 relative z-10 text-left">
-            <div class="mb-5">
-              <h2 class="text-xl font-extrabold text-slate-900">Check-In Form</h2>
-              <p class="text-xs text-slate-500 mt-0.5">Please provide your details below.</p>
-            </div>
-
+          <!-- Check-In Card -->
+          <div class="sap-card-white rounded-3xl p-6 sm:p-7 max-w-lg text-left">
             <form id="customerCheckInForm" onsubmit="handleCustomerCheckIn(event)" class="space-y-4">
               <div>
                 <label for="customerFullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
@@ -266,128 +227,110 @@
                 </button>
               </div>
             </div>
-
           </div>
 
+        </div>
+
+        <!-- Right Column: Specific 3D Faceted Crystal Diamond from Reference Screenshot -->
+        <div class="lg:col-span-5 flex items-center justify-center relative py-6">
+          <div class="relative w-72 h-72 sm:w-88 sm:h-88 flex items-center justify-center animate-diamond">
+            
+            <!-- Soft Purple Ambient Glow Behind Diamond -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-500/20 via-blue-500/20 to-cyan-400/20 blur-3xl pointer-events-none"></div>
+
+            <!-- Cyan Reflection Particle (Top-Right) -->
+            <div class="absolute top-10 right-4 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
+            
+            <!-- Cyan Reflection Particle (Bottom-Left) -->
+            <div class="absolute bottom-12 left-4 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
+
+            <!-- The Faceted 3D Crystal Gemstone SVG -->
+            <svg viewBox="0 0 320 320" class="w-full h-full drop-shadow-[0_25px_35px_rgba(30,27,75,0.28)]" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Upper Table Highlights -->
+                <linearGradient id="facetTopLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="50%" stop-color="#2563eb" />
+                  <stop offset="100%" stop-color="#1e1b4b" />
+                </linearGradient>
+                <linearGradient id="facetTopMid" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                  <stop offset="40%" stop-color="#c084fc" />
+                  <stop offset="100%" stop-color="#7c3aed" />
+                </linearGradient>
+                <linearGradient id="facetTopRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f472b6" />
+                  <stop offset="60%" stop-color="#a855f7" />
+                  <stop offset="100%" stop-color="#581c87" />
+                </linearGradient>
+                <!-- Central Facet -->
+                <linearGradient id="facetCenterTriangle" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#9333ea" />
+                  <stop offset="50%" stop-color="#4f46e5" />
+                  <stop offset="100%" stop-color="#1e1b4b" />
+                </linearGradient>
+                <!-- Lower Blue Facets -->
+                <linearGradient id="facetBottomLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7" />
+                  <stop offset="50%" stop-color="#1d4ed8" />
+                  <stop offset="100%" stop-color="#0f172a" />
+                </linearGradient>
+                <linearGradient id="facetBottomMidLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2563eb" />
+                  <stop offset="100%" stop-color="#1e1b4b" />
+                </linearGradient>
+                <!-- Lower Violet Facets -->
+                <linearGradient id="facetBottomRight" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#d946ef" />
+                  <stop offset="50%" stop-color="#7c3aed" />
+                  <stop offset="100%" stop-color="#1e1b4b" />
+                </linearGradient>
+                <linearGradient id="facetBottomMidRight" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#a855f7" />
+                  <stop offset="100%" stop-color="#312e81" />
+                </linearGradient>
+              </defs>
+
+              <!-- Facet 1: Lower Left Base -->
+              <polygon points="40,110 160,280 100,165" fill="url(#facetBottomLeft)" />
+              <!-- Facet 2: Center-Left Pavilion -->
+              <polygon points="100,165 160,280 160,165" fill="url(#facetBottomMidLeft)" />
+              <!-- Facet 3: Center-Right Pavilion -->
+              <polygon points="160,165 160,280 220,165" fill="url(#facetBottomMidRight)" />
+              <!-- Facet 4: Lower Right Base -->
+              <polygon points="280,110 160,280 220,165" fill="url(#facetBottomRight)" />
+
+              <!-- Facet 5: Central Inverted Triangle -->
+              <polygon points="100,110 220,110 160,165" fill="url(#facetCenterTriangle)" />
+
+              <!-- Facet 6: Left Middle Triangle -->
+              <polygon points="40,110 100,110 100,165" fill="url(#facetTopLeft)" />
+              <!-- Facet 7: Right Middle Triangle -->
+              <polygon points="280,110 220,110 220,165" fill="url(#facetTopRight)" />
+
+              <!-- Facet 8: Crown Top Left -->
+              <polygon points="80,50 40,110 100,110" fill="#38bdf8" opacity="0.85" />
+              <!-- Facet 9: Crown Top Center-Left -->
+              <polygon points="80,50 100,110 160,50" fill="url(#facetTopLeft)" />
+              <!-- Facet 10: Crown Top Table (Bright Specular White-Lilac) -->
+              <polygon points="160,50 100,110 220,110" fill="url(#facetTopMid)" />
+              <!-- Facet 11: Crown Top Center-Right -->
+              <polygon points="160,50 220,110 240,50" fill="url(#facetTopRight)" />
+              <!-- Facet 12: Crown Top Right -->
+              <polygon points="240,50 220,110 280,110" fill="#e879f9" opacity="0.9" />
+
+              <!-- Crisp Specular Reflection Lines -->
+              <line x1="80" y1="50" x2="240" y2="50" stroke="#ffffff" stroke-width="1.8" stroke-opacity="0.85" />
+              <line x1="40" y1="110" x2="280" y2="110" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.6" />
+              <line x1="160" y1="50" x2="160" y2="280" stroke="#ffffff" stroke-width="1" stroke-opacity="0.3" />
+              <line x1="40" y1="110" x2="160" y2="280" stroke="#38bdf8" stroke-width="1.4" stroke-opacity="0.75" />
+              <line x1="280" y1="110" x2="160" y2="280" stroke="#f472b6" stroke-width="1.4" stroke-opacity="0.75" />
+            </svg>
+
+          </div>
         </div>
 
       </section>
-
-      <!-- HOW IT WORKS SECTION -->
-      <section id="how-it-works" class="py-16 bg-slate-50/70 border-t border-b border-slate-200/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-10">
-          
-          <div class="space-y-3 max-w-xl mx-auto">
-            <span class="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-blue-100/70 text-blue-700">
-              How It Works
-            </span>
-            <p class="text-xs sm:text-sm text-slate-500">
-              A quick check-in process to capture customer attendance and facilitate post-session follow-ups.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
-                <i data-lucide="qr-code" class="w-5 h-5"></i>
-              </div>
-              <h4 class="font-black text-sm text-slate-900">1. Scan QR</h4>
-              <p class="text-[11px] text-slate-500 leading-relaxed">Attendees scan the presenter's company-specific QR code.</p>
-            </div>
-
-            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mx-auto">
-                <i data-lucide="edit-3" class="w-5 h-5"></i>
-              </div>
-              <h4 class="font-black text-sm text-slate-900">2. Enter Details</h4>
-              <p class="text-[11px] text-slate-500 leading-relaxed">Submit only Full Name and Business Email.</p>
-            </div>
-
-            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto">
-                <i data-lucide="zap" class="w-5 h-5"></i>
-              </div>
-              <h4 class="font-black text-sm text-slate-900">3. Live Sync</h4>
-              <p class="text-[11px] text-slate-500 leading-relaxed">Responses sync directly into the host portal in real time.</p>
-            </div>
-
-            <div class="sap-card-white p-5 rounded-2xl text-center space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
-                <i data-lucide="mail-check" class="w-5 h-5"></i>
-              </div>
-              <h4 class="font-black text-sm text-slate-900">4. Follow-Up</h4>
-              <p class="text-[11px] text-slate-500 leading-relaxed">Presenters copy all attendee emails for BCC outreach with one click.</p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SESSION RESOURCES SECTION -->
-      <section id="session-resources" class="py-16 max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-10">
-        <div class="space-y-2">
-          <span class="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-blue-100/70 text-blue-700">
-            Session Overview
-          </span>
-          <h2 class="text-3xl font-black text-slate-900">What you receive</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <div class="sap-card-white p-8 rounded-3xl space-y-4">
-            <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-800">
-              <i data-lucide="file-text" class="w-7 h-7"></i>
-            </div>
-            <h4 class="font-extrabold text-base text-slate-900">Presentation Materials</h4>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              Receive the slide decks, solution architecture diagrams, and session notes presented today.
-            </p>
-          </div>
-
-          <div class="sap-card-white p-8 rounded-3xl space-y-4 border-2 border-blue-100 relative">
-            <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mx-auto text-blue-600">
-              <i data-lucide="share-2" class="w-7 h-7"></i>
-            </div>
-            <h4 class="font-extrabold text-base text-slate-900">Direct Collaboration</h4>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              Stay in touch with your SAP solution team for technical discovery and follow-up discussions.
-            </p>
-          </div>
-
-          <div class="sap-card-white p-8 rounded-3xl space-y-4">
-            <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-800">
-              <i data-lucide="layers" class="w-7 h-7"></i>
-            </div>
-            <h4 class="font-extrabold text-base text-slate-900">Post-Session Assets</h4>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              Access product roadmaps, documentation guides, and upcoming enablement workshops.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOOTER -->
-      <footer class="bg-slate-950 text-white py-14 px-4 sm:px-8 border-t border-slate-900 text-center space-y-6">
-        <div class="max-w-4xl mx-auto space-y-4">
-          <div class="flex justify-center mb-2">
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
-              alt="SAP Logo" 
-              class="h-7 w-auto object-contain brightness-0 invert"
-            >
-          </div>
-          <h3 class="text-xl sm:text-2xl font-black tracking-tight text-white">
-            SAP Customer Check-In Platform
-          </h3>
-          <p class="text-xs text-slate-400 max-w-md mx-auto">
-            Streamlined attendee check-in and data capture for enterprise enablement sessions and workshops.
-          </p>
-          <div class="pt-6 border-t border-slate-900 text-[11px] text-slate-500 space-y-1">
-            <p>SAP Customer Enablement & Workshop Sessions</p>
-            <p>© 2026 SAP SE. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-
     </div>
 
     <!-- ======================================================== -->
@@ -506,17 +449,17 @@
       <!-- Navigation Tabs & Actions -->
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
         <div class="flex items-center gap-2">
-          <button id="tabBtnAttendees" onclick="switchMasterTab('attendees')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white">
+          <button id="tabBtnAttendees" onclick="switchMasterTab('attendees')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white cursor-pointer">
             <i data-lucide="users" class="w-4 h-4"></i>
             <span>Attendee Responses</span>
           </button>
-          <button id="tabBtnCompanies" onclick="switchMasterTab('companies')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200">
+          <button id="tabBtnCompanies" onclick="switchMasterTab('companies')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 cursor-pointer">
             <i data-lucide="qr-code" class="w-4 h-4"></i>
             <span>Companies & End QR Codes</span>
           </button>
         </div>
 
-        <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm">
+        <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span>Create Company QR</span>
         </button>
@@ -547,7 +490,7 @@
             </div>
           </div>
 
-          <!-- Bulk Email Suite -->
+          <!-- Bulk Email Actions -->
           <div class="flex items-center gap-2 shrink-0">
             <button 
               onclick="copyAllFilteredEmails()" 
@@ -569,7 +512,7 @@
 
             <button 
               onclick="exportAttendeesCSV()" 
-              class="p-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition" 
+              class="p-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition cursor-pointer" 
               title="Export CSV spreadsheet"
             >
               <i data-lucide="download" class="w-4 h-4"></i>
@@ -610,7 +553,7 @@
             <h3 class="text-base font-bold text-slate-900">End-of-Session QR Codes</h3>
             <p class="text-xs text-slate-500">Display full-screen on the projector at the end of your session or copy the QR link.</p>
           </div>
-          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm">
+          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Add Company</span>
           </button>
@@ -624,7 +567,7 @@
           </div>
           <h4 class="text-base font-bold text-slate-900">No Companies Created</h4>
           <p class="text-xs text-slate-500 max-w-sm mx-auto">Create a company name to generate the end-of-session QR code.</p>
-          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white inline-flex items-center gap-1.5">
+          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white inline-flex items-center gap-1.5 cursor-pointer">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Create Company QR</span>
           </button>
@@ -643,7 +586,7 @@
           <i data-lucide="building" class="w-4 h-4 text-blue-600"></i>
           <span>Create Company QR</span>
         </h3>
-        <button onclick="closeModal('createCompanyModal')" class="text-slate-400 hover:text-slate-700 p-1">
+        <button onclick="closeModal('createCompanyModal')" class="text-slate-400 hover:text-slate-700 p-1 cursor-pointer">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -662,10 +605,10 @@
         </div>
 
         <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
-          <button type="button" onclick="closeModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 transition">
+          <button type="button" onclick="closeModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 transition cursor-pointer">
             Cancel
           </button>
-          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm">
+          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
             <i data-lucide="check" class="w-3.5 h-3.5"></i>
             <span>Create & Show QR</span>
           </button>
@@ -676,7 +619,7 @@
 
   <!-- MODAL 2: FULL-SCREEN PRESENTATION MODE -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl hidden">
-    <button onclick="closeModal('presentationModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2.5 rounded-xl bg-slate-900 border border-slate-800 z-50">
+    <button onclick="closeModal('presentationModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white p-2.5 rounded-xl bg-slate-900 border border-slate-800 z-50 cursor-pointer">
       <i data-lucide="x" class="w-6 h-6"></i>
     </button>
 
@@ -706,11 +649,11 @@
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-3">
-        <button id="btnDownloadPresentQr" class="px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-blue text-white flex items-center gap-2">
+        <button id="btnDownloadPresentQr" class="px-4 py-2.5 rounded-xl text-xs font-bold sap-btn-blue text-white flex items-center gap-2 cursor-pointer">
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>Save QR as PNG</span>
         </button>
-        <button id="btnCopyPresentUrl" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-2">
+        <button id="btnCopyPresentUrl" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-2 cursor-pointer">
           <i data-lucide="copy" class="w-4 h-4"></i>
           <span>Copy Check-In Link</span>
         </button>
@@ -731,17 +674,17 @@
         <p id="deleteConfirmDesc" class="text-xs text-slate-500 mt-1">This action cannot be reversed.</p>
       </div>
       <div class="flex items-center justify-center gap-2 pt-2">
-        <button id="btnCancelDelete" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+        <button id="btnCancelDelete" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">
           Cancel
         </button>
-        <button id="btnProceedDelete" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition">
+        <button id="btnProceedDelete" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition cursor-pointer">
           Delete
         </button>
       </div>
     </div>
   </div>
 
-  <!-- FIREBASE CONFIGURATION & ENGINE -->
+  <!-- FIREBASE CONFIGURATION & APPLICATION ENGINE -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyAlFaHbpYc8MpUmPuAiaMgegVCGQqbXtGI",
@@ -757,19 +700,29 @@
     try {
       firebase.initializeApp(firebaseConfig);
       firestoreDb = firebase.firestore();
-      console.log("Firebase connected successfully to sap-email-handler.");
+      console.log("Firebase connected successfully.");
     } catch (err) {
-      console.error("Firebase initialization failed:", err);
+      console.error("Firebase init failed:", err);
+    }
+
+    function safeLucide() {
+      try {
+        if (window.lucide && typeof lucide.createIcons === 'function') {
+          lucide.createIcons();
+        }
+      } catch (err) {
+        console.warn("Lucide error suppressed:", err);
+      }
     }
 
     /* ======================================================== */
-    /* APPLICATION STATE & DEDUPLICATION                        */
+    /* APPLICATION STATE                                        */
     /* ======================================================== */
     let rawLocalComps = JSON.parse(localStorage.getItem('sap_companies') || '[]');
     const seenOnLoad = new Set();
     const cleanLocalComps = [];
     rawLocalComps.forEach(comp => {
-      const clean = (comp.name || '').trim().toLowerCase();
+      const clean = (comp && comp.name ? comp.name : '').trim().toLowerCase();
       if (clean && !seenOnLoad.has(clean)) {
         seenOnLoad.add(clean);
         cleanLocalComps.push(comp);
@@ -787,8 +740,6 @@
     };
 
     window.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-
       if (sessionStorage.getItem('sap_master_logged_in') === 'true') {
         window.AppState.isMasterAuthenticated = true;
       }
@@ -796,9 +747,10 @@
       initViewFromUrl();
       initRealtimeFirestoreSync();
       refreshAllDataViews();
+      safeLucide();
     });
 
-    // Real-Time Listener (Deduplicates by ID & Name)
+    // Real-Time Firebase Listener (Deduplicating names & IDs safely)
     function initRealtimeFirestoreSync() {
       if (!firestoreDb) return;
 
@@ -808,7 +760,7 @@
         const seenIds = new Set();
 
         snapshot.forEach(doc => {
-          const data = doc.data();
+          const data = doc.data() || {};
           const cleanName = (data.name || '').trim().toLowerCase();
           const docId = doc.id;
 
@@ -833,7 +785,7 @@
         snapshot.forEach(doc => {
           if (!seenAttIds.has(doc.id)) {
             seenAttIds.add(doc.id);
-            atts.push({ id: doc.id, ...doc.data() });
+            atts.push({ id: doc.id, ...(doc.data() || {}) });
           }
         });
 
@@ -854,7 +806,7 @@
       const compParam = getQueryParam('company') || getQueryParam('session');
       if (compParam) {
         const existing = window.AppState.companies.find(c => 
-          c.name.toLowerCase() === compParam.toLowerCase() || c.id === compParam
+          (c.name || '').toLowerCase() === compParam.toLowerCase() || c.id === compParam
         );
         window.AppState.activeCompanyId = existing ? existing.id : compParam;
       } else if (window.AppState.companies.length > 0) {
@@ -869,7 +821,7 @@
       renderAttendeesTable();
       renderCompaniesGrid();
       updateMetrics();
-      lucide.createIcons();
+      safeLucide();
     }
 
     function updateCustomerCompanyDisplay() {
@@ -877,10 +829,10 @@
       const compParam = getQueryParam('company') || getQueryParam('session');
       const activeComp = window.AppState.companies.find(c => 
         c.id === window.AppState.activeCompanyId || 
-        (compParam && c.name.toLowerCase() === compParam.toLowerCase())
+        (compParam && (c.name || '').toLowerCase() === compParam.toLowerCase())
       );
       if (label) {
-        label.innerText = activeComp ? activeComp.name : (compParam || "SAP Session");
+        label.innerText = activeComp ? (activeComp.name || "SAP Session") : (compParam || "SAP Session");
       }
     }
 
@@ -892,7 +844,7 @@
       window.AppState.companies.forEach(comp => {
         const opt = document.createElement('option');
         opt.value = comp.id;
-        opt.textContent = comp.name;
+        opt.textContent = comp.name || comp.id;
         filterSelect.appendChild(opt);
       });
       filterSelect.value = currentVal || 'ALL';
@@ -917,7 +869,7 @@
       const compParam = getQueryParam('company') || getQueryParam('session');
       const activeComp = window.AppState.companies.find(c => 
         c.id === window.AppState.activeCompanyId || 
-        (compParam && c.name.toLowerCase() === compParam.toLowerCase())
+        (compParam && (c.name || '').toLowerCase() === compParam.toLowerCase())
       ) || {
         id: 'comp_' + (compParam || 'general').toLowerCase().replace(/[^a-z0-9]/g, '_'),
         name: compParam || 'SAP Session'
@@ -927,7 +879,7 @@
         fullName: fullName,
         email: email,
         companyId: activeComp.id,
-        companyName: activeComp.name,
+        companyName: activeComp.name || 'SAP Session',
         timestamp: Date.now()
       };
 
@@ -956,11 +908,11 @@
       document.getElementById('customerEmailAddress').value = '';
       document.getElementById('customerSuccessCard').classList.add('hidden');
       document.getElementById('customerCheckInForm').classList.remove('hidden');
-      lucide.createIcons();
+      safeLucide();
     }
 
     /* ======================================================== */
-    /* VIEW SWITCHING & AUTH                                    */
+    /* VIEW SWITCHING & BULLETPROOF MASTER PORTAL ROUTING       */
     /* ======================================================== */
     function switchMainView(target) {
       const customerView = document.getElementById('customerView');
@@ -969,40 +921,44 @@
       const navBtnCustomer = document.getElementById('navBtnCustomer');
       const navBtnMaster = document.getElementById('navBtnMaster');
       const btnLogout = document.getElementById('btnMasterLogout');
-      const customerNavLinks = document.getElementById('customerNavLinks');
 
+      if (!customerView || !masterLoginView || !masterDashView) {
+        console.error("View container missing from DOM.");
+        return;
+      }
+
+      // Hide all containers safely
       customerView.classList.add('hidden');
       masterLoginView.classList.add('hidden');
       masterDashView.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (target === 'customer') {
         window.AppState.currentView = 'customer';
         customerView.classList.remove('hidden');
-        if (customerNavLinks) customerNavLinks.classList.remove('hidden');
 
-        navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition';
-        navBtnMaster.className = 'sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm';
-        btnLogout.classList.add('hidden');
+        if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition cursor-pointer';
+        if (navBtnMaster) navBtnMaster.className = 'sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer';
+        if (btnLogout) btnLogout.classList.add('hidden');
         updateCustomerCompanyDisplay();
       } else if (target === 'master') {
-        if (customerNavLinks) customerNavLinks.classList.add('hidden');
-        navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 transition';
-        navBtnMaster.className = 'px-4 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition flex items-center gap-1.5';
+        if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 transition cursor-pointer';
+        if (navBtnMaster) navBtnMaster.className = 'px-4 py-1.5 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 transition flex items-center gap-1.5 cursor-pointer';
 
         if (window.AppState.isMasterAuthenticated) {
           window.AppState.currentView = 'master-dash';
           masterDashView.classList.remove('hidden');
-          btnLogout.classList.remove('hidden');
-          renderAttendeesTable();
-          renderCompaniesGrid();
-          updateMetrics();
+          if (btnLogout) btnLogout.classList.remove('hidden');
+          try { renderAttendeesTable(); } catch (e) { console.error(e); }
+          try { renderCompaniesGrid(); } catch (e) { console.error(e); }
+          try { updateMetrics(); } catch (e) { console.error(e); }
         } else {
           window.AppState.currentView = 'master-login';
           masterLoginView.classList.remove('hidden');
-          btnLogout.classList.add('hidden');
+          if (btnLogout) btnLogout.classList.add('hidden');
         }
       }
-      lucide.createIcons();
+      safeLucide();
     }
 
     function handleMasterLogin(e) {
@@ -1044,7 +1000,7 @@
         inp.type = 'password';
         if (icon) icon.setAttribute('data-lucide', 'eye');
       }
-      lucide.createIcons();
+      safeLucide();
     }
 
     function switchMasterTab(tab) {
@@ -1057,8 +1013,8 @@
       tabAttendees.classList.add('hidden');
       tabCompanies.classList.add('hidden');
 
-      const activeClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white';
-      const inactiveClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200';
+      const activeClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white cursor-pointer';
+      const inactiveClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 cursor-pointer';
 
       btnAttendees.className = inactiveClass;
       btnCompanies.className = inactiveClass;
@@ -1072,7 +1028,7 @@
         btnCompanies.className = activeClass;
         renderCompaniesGrid();
       }
-      lucide.createIcons();
+      safeLucide();
     }
 
     /* ======================================================== */
@@ -1125,7 +1081,7 @@
             <td class="py-3.5 px-4 text-blue-600 font-mono text-xs">
               <div class="flex items-center gap-2">
                 <span>${escapeHtml(item.email || '')}</span>
-                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email: ${escapeHtml(item.email || '')}', 'success');" title="Copy email" class="opacity-0 group-hover:opacity-100 p-1 hover:text-slate-900 transition">
+                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email: ${escapeHtml(item.email || '')}', 'success');" title="Copy email" class="opacity-0 group-hover:opacity-100 p-1 hover:text-slate-900 transition cursor-pointer">
                   <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                 </button>
               </div>
@@ -1140,13 +1096,13 @@
             </td>
             <td class="py-3.5 px-4 text-right">
               <div class="flex items-center justify-end gap-1.5">
-                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email!', 'success');" class="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition" title="Copy Email">
+                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email!', 'success');" class="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition cursor-pointer" title="Copy Email">
                   <i data-lucide="copy" class="w-4 h-4"></i>
                 </button>
-                <button onclick="copyNameAndEmail('${escapeHtml(item.fullName)}', '${escapeHtml(item.email)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50 transition" title="Copy Name & Email">
+                <button onclick="copyNameAndEmail('${escapeHtml(item.fullName || '')}', '${escapeHtml(item.email || '')}')" class="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50 transition cursor-pointer" title="Copy Name & Email">
                   <i data-lucide="clipboard" class="w-4 h-4"></i>
                 </button>
-                <button onclick="promptDeleteAttendee('${item.id}', '${escapeHtml(item.fullName)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition" title="Delete record">
+                <button onclick="promptDeleteAttendee('${item.id}', '${escapeHtml(item.fullName || 'Attendee')}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer" title="Delete record">
                   <i data-lucide="trash-2" class="w-4 h-4"></i>
                 </button>
               </div>
@@ -1155,7 +1111,7 @@
           tbody.appendChild(tr);
         });
       }
-      lucide.createIcons();
+      safeLucide();
     }
 
     function copyNameAndEmail(name, email) {
@@ -1235,7 +1191,8 @@
       }
 
       list.forEach(comp => {
-        const count = window.AppState.attendees.filter(a => a.companyId === comp.id || (a.companyName && a.companyName.toLowerCase() === comp.name.toLowerCase())).length;
+        const cName = comp && comp.name ? comp.name : 'Session';
+        const count = window.AppState.attendees.filter(a => a.companyId === comp.id || (a.companyName && a.companyName.toLowerCase() === cName.toLowerCase())).length;
         const checkinUrl = getCompanyCheckInUrl(comp.id);
         const qrContainerId = `qr_card_${comp.id}`;
 
@@ -1246,7 +1203,7 @@
           <div>
             <div class="flex items-start justify-between gap-2">
               <div>
-                <h4 class="font-extrabold text-slate-900 text-base leading-snug">${escapeHtml(comp.name)}</h4>
+                <h4 class="font-extrabold text-slate-900 text-base leading-snug">${escapeHtml(cName)}</h4>
                 <p class="text-[11px] text-blue-600 font-bold uppercase tracking-wider mt-0.5">End-of-Session QR</p>
               </div>
               <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-600 font-bold border border-blue-100 whitespace-nowrap">
@@ -1261,22 +1218,22 @@
 
           <div class="space-y-2 pt-2 border-t border-slate-100">
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="copyCompanyLink('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center justify-center gap-1.5 border border-slate-200">
+              <button onclick="copyCompanyLink('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center justify-center gap-1.5 border border-slate-200 cursor-pointer">
                 <i data-lucide="link" class="w-3.5 h-3.5 text-blue-600"></i>
                 <span>Copy Link</span>
               </button>
-              <button onclick="openPresentationMode('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold sap-btn-dark text-white transition flex items-center justify-center gap-1.5 shadow-sm">
+              <button onclick="openPresentationMode('${comp.id}')" class="px-2.5 py-1.5 rounded-lg text-xs font-bold sap-btn-dark text-white transition flex items-center justify-center gap-1.5 shadow-sm cursor-pointer">
                 <i data-lucide="presentation" class="w-3.5 h-3.5"></i>
                 <span>Present</span>
               </button>
             </div>
 
             <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-              <button onclick="openCustomerViewForCompany('${comp.id}')" class="hover:text-blue-600 underline flex items-center gap-1">
+              <button onclick="openCustomerViewForCompany('${comp.id}')" class="hover:text-blue-600 underline flex items-center gap-1 cursor-pointer">
                 <i data-lucide="external-link" class="w-3 h-3"></i>
                 Open Customer Page
               </button>
-              <button onclick="promptDeleteCompany('${comp.id}', '${escapeHtml(comp.name)}')" class="text-rose-500 hover:text-rose-700 hover:underline">
+              <button onclick="promptDeleteCompany('${comp.id}', '${escapeHtml(cName)}')" class="text-rose-500 hover:text-rose-700 hover:underline cursor-pointer">
                 Remove
               </button>
             </div>
@@ -1301,12 +1258,12 @@
         }, 50);
       });
 
-      lucide.createIcons();
+      safeLucide();
     }
 
     function getCompanyCheckInUrl(companyId) {
       const comp = window.AppState.companies.find(c => c.id === companyId);
-      const cleanName = comp ? comp.name : companyId;
+      const cleanName = comp && comp.name ? comp.name : companyId;
       const url = new URL(window.location.origin + window.location.pathname);
       url.searchParams.set('company', cleanName);
       return url.toString();
@@ -1323,6 +1280,7 @@
       switchMainView('customer');
     }
 
+    // Company Creation with Duplicate Blocking
     async function handleCreateCompany(e) {
       e.preventDefault();
       const input = document.getElementById('newCompanyNameInput');
@@ -1330,7 +1288,7 @@
 
       if (!name) return;
 
-      const existing = window.AppState.companies.find(c => c.name.toLowerCase() === name.toLowerCase());
+      const existing = window.AppState.companies.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
       if (existing) {
         showToast(`Company "${name}" already exists!`, "error");
         input.value = '';
@@ -1364,7 +1322,7 @@
     }
 
     function saveCompanyLocally(newComp) {
-      if (!window.AppState.companies.some(c => c.id === newComp.id || c.name.toLowerCase() === newComp.name.toLowerCase())) {
+      if (!window.AppState.companies.some(c => c.id === newComp.id || (c.name || '').toLowerCase() === (newComp.name || '').toLowerCase())) {
         window.AppState.companies.unshift(newComp);
         localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
         refreshAllDataViews();
@@ -1383,7 +1341,7 @@
 
       const url = getCompanyCheckInUrl(companyId);
 
-      titleEl.innerText = comp.name;
+      titleEl.innerText = comp.name || 'SAP Session';
       urlText.innerText = url;
       qrDiv.innerHTML = '';
 
@@ -1408,7 +1366,7 @@
           let dataUrl = canvas ? canvas.toDataURL("image/png") : (img ? img.src : "");
           if (dataUrl) {
             const a = document.createElement('a');
-            a.download = `SAP_EndSession_QR_${comp.name.replace(/\s+/g, '_')}.png`;
+            a.download = `SAP_EndSession_QR_${(comp.name || 'session').replace(/\s+/g, '_')}.png`;
             a.href = dataUrl;
             document.body.appendChild(a);
             a.click();
@@ -1461,7 +1419,7 @@
         "This response will be removed from your records.",
         async () => {
           if (firestoreDb) {
-            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e {}
+            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
           }
           window.AppState.attendees = window.AppState.attendees.filter(a => a.id !== id);
           localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
@@ -1492,14 +1450,14 @@
       btnCancel.onclick = cleanup;
 
       modal.classList.remove('hidden');
-      lucide.createIcons();
+      safeLucide();
     }
 
     function openModal(id) {
       const el = document.getElementById(id);
       if (el) {
         el.classList.remove('hidden');
-        lucide.createIcons();
+        safeLucide();
       }
     }
 
@@ -1547,7 +1505,7 @@
       toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4 shrink-0 text-blue-600"></i><span>${escapeHtml(message)}</span>`;
 
       container.appendChild(toast);
-      lucide.createIcons();
+      safeLucide();
 
       setTimeout(() => {
         toast.classList.remove('opacity-0', 'translate-y-2');
