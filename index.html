@@ -135,15 +135,13 @@
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="relative z-10 flex-1 w-full mx-auto flex flex-col justify-center">
+  <main class="relative z-10 flex-1 w-full mx-auto flex flex-col justify-center pt-4 sm:pt-6 pb-12">
 
-    <!-- ======================================================== -->
-    <!-- VIEW 1: ATTENDEE CHECK-IN VIEW                           -->
-    <!-- ======================================================== -->
+    <!-- VIEW 1: ATTENDEE CHECK-IN VIEW -->
     <div id="customerView" class="w-full">
-      <section class="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <section class="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         
-        <!-- Left Column: Typography, Session Badge, Form -->
+        <!-- Left Column -->
         <div class="lg:col-span-7 space-y-6 text-left">
           
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest">
@@ -158,7 +156,6 @@
             Connected.
           </h1>
 
-          <!-- Clean Paragraph -->
           <p class="text-base sm:text-lg text-slate-600 max-w-lg leading-relaxed">
             Please register your attendance for today's session with your name and business email.
           </p>
@@ -227,7 +224,7 @@
                 <p id="submittedCustomerSummary" class="text-xs text-[#0070F2] mt-2 font-mono font-semibold"></p>
               </div>
               <div class="pt-2">
-                <button onclick="resetCustomerForm()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition border border-slate-200 flex items-center justify-center gap-2 mx-auto">
+                <button onclick="resetCustomerForm()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition border border-slate-200 flex items-center justify-center gap-2 mx-auto cursor-pointer">
                   <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
                   <span>Submit Another Response</span>
                 </button>
@@ -237,8 +234,8 @@
 
         </div>
 
-        <!-- Right Column: Saturated 3D Diamond with Dedicated Local Gradients -->
-        <div class="lg:col-span-5 flex items-center justify-center relative py-8">
+        <!-- Right Column: Saturated 3D Diamond -->
+        <div class="lg:col-span-5 flex items-center justify-center relative py-6">
           <div class="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center animate-diamond-float">
             
             <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-purple-600/40 via-blue-600/35 to-cyan-400/30 blur-3xl pointer-events-none animate-aura-glow"></div>
@@ -248,43 +245,43 @@
 
             <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_28px_45px_rgba(20,15,65,0.4)]" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="d1_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="main_bl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
                 </linearGradient>
-                <linearGradient id="d1_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_bml" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
                 </linearGradient>
-                <linearGradient id="d1_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
                 </linearGradient>
-                <linearGradient id="d1_br" x1="100%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_br" x1="100%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="d1_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_center" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="d1_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="main_tl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
                 </linearGradient>
-                <linearGradient id="d1_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="main_tr" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
                 </linearGradient>
-                <linearGradient id="d1_top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_top" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
                 </linearGradient>
               </defs>
 
-              <polygon points="40,120 170,295 105,175" fill="url(#d1_bl)"/>
-              <polygon points="105,175 170,295 170,175" fill="url(#d1_bml)"/>
-              <polygon points="170,175 170,295 235,175" fill="url(#d1_bmr)"/>
-              <polygon points="300,120 170,295 235,175" fill="url(#d1_br)"/>
-              <polygon points="105,120 235,120 170,175" fill="url(#d1_center)"/>
-              <polygon points="40,120 105,120 105,175" fill="url(#d1_tl)"/>
-              <polygon points="300,120 235,120 235,175" fill="url(#d1_tr)"/>
+              <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
+              <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
+              <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
+              <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
+              <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
+              <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
+              <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
               <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-              <polygon points="85,60 105,120 170,60" fill="url(#d1_tl)"/>
-              <polygon points="170,60 105,120 235,120" fill="url(#d1_top)"/>
-              <polygon points="170,60 235,120 255,60" fill="url(#d1_tr)"/>
+              <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
+              <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
+              <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
               <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
               <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -300,26 +297,19 @@
       </section>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- VIEW 2: MASTER USER LOGIN                                -->
-    <!-- ======================================================== -->
-    <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-12 px-4">
+    <!-- VIEW 2: MASTER USER LOGIN -->
+    <section id="masterLoginView" class="hidden w-full max-w-md mx-auto py-8 px-4">
       <div class="sap-card-white rounded-3xl p-7 sm:p-9 relative text-left shadow-2xl border border-slate-200">
         
         <div class="text-center mb-6 relative">
           <div class="w-16 h-16 mx-auto mb-2 relative flex items-center justify-center animate-diamond-float">
             <div class="absolute inset-0 rounded-full bg-purple-500/25 blur-lg"></div>
             <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
-              <defs>
-                <linearGradient id="d2_center" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#4f46e5"/>
-                </linearGradient>
-              </defs>
               <polygon points="40,120 170,295 105,175" fill="#0284c7"/>
               <polygon points="105,175 170,295 170,175" fill="#1d4ed8"/>
               <polygon points="170,175 170,295 235,175" fill="#7e22ce"/>
               <polygon points="300,120 170,295 235,175" fill="#c026d3"/>
-              <polygon points="105,120 235,120 170,175" fill="url(#d2_center)"/>
+              <polygon points="105,120 235,120 170,175" fill="#6d28d9"/>
               <polygon points="40,120 105,120 105,175" fill="#0369a1"/>
               <polygon points="300,120 235,120 235,175" fill="#a21caf"/>
               <polygon points="85,60 40,120 105,120" fill="#38bdf8"/>
@@ -388,7 +378,7 @@
             <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-500"></i>
             Firebase Connected
           </span>
-          <button onclick="switchMainView('customer')" class="hover:text-blue-600 font-semibold transition">
+          <button onclick="switchMainView('customer')" class="hover:text-blue-600 font-semibold transition cursor-pointer">
             ← Back to Check-In
           </button>
         </div>
@@ -396,10 +386,8 @@
       </div>
     </section>
 
-    <!-- ======================================================== -->
-    <!-- VIEW 3: MASTER DASHBOARD                                 -->
-    <!-- ======================================================== -->
-    <section id="masterDashboardView" class="hidden w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6">
+    <!-- VIEW 3: MASTER DASHBOARD -->
+    <section id="masterDashboardView" class="hidden w-full max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 space-y-6">
       
       <!-- Executive Master Banner -->
       <div class="sap-card-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden text-left">
@@ -416,52 +404,23 @@
           </p>
         </div>
 
-        <!-- Fully Saturated 3D Diamond with Dedicated Local Defs -->
-        <div class="w-32 h-32 sm:w-40 sm:h-40 shrink-0 relative flex items-center justify-center animate-diamond-float">
+        <div class="w-28 h-28 sm:w-36 sm:h-36 shrink-0 relative flex items-center justify-center animate-diamond-float">
           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/35 via-blue-600/30 to-cyan-400/30 blur-2xl pointer-events-none"></div>
           <div class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_18px_30px_rgba(20,15,65,0.35)]" fill="none">
-            <defs>
-              <linearGradient id="d3_bl" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
-              </linearGradient>
-              <linearGradient id="d3_bml" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
-              </linearGradient>
-              <linearGradient id="d3_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
-              </linearGradient>
-              <linearGradient id="d3_br" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
-              </linearGradient>
-              <linearGradient id="d3_center" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
-              </linearGradient>
-              <linearGradient id="d3_tl" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
-              </linearGradient>
-              <linearGradient id="d3_tr" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
-              </linearGradient>
-              <linearGradient id="d3_top" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
-              </linearGradient>
-            </defs>
-
-            <polygon points="40,120 170,295 105,175" fill="url(#d3_bl)"/>
-            <polygon points="105,175 170,295 170,175" fill="url(#d3_bml)"/>
-            <polygon points="170,175 170,295 235,175" fill="url(#d3_bmr)"/>
-            <polygon points="300,120 170,295 235,175" fill="url(#d3_br)"/>
-            <polygon points="105,120 235,120 170,175" fill="url(#d3_center)"/>
-            <polygon points="40,120 105,120 105,175" fill="url(#d3_tl)"/>
-            <polygon points="300,120 235,120 235,175" fill="url(#d3_tr)"/>
+            <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
             <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-            <polygon points="85,60 105,120 170,60" fill="url(#d3_tl)"/>
-            <polygon points="170,60 105,120 235,120" fill="url(#d3_top)"/>
-            <polygon points="170,60 235,120 255,60" fill="url(#d3_tr)"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
             <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
-
             <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
             <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.7"/>
             <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
@@ -685,9 +644,7 @@
     </div>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- MODAL 2: PRESENTATION MODE (CLEAN VERTICAL FLOW - NO OVERLAPPING WORDS)   -->
-  <!-- ========================================================================= -->
+  <!-- MODAL 2: PRESENTATION MODE -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-white/95 backdrop-blur-2xl overflow-y-auto hidden">
     
     <div class="fixed -top-12 -right-12 w-[500px] h-[500px] glow-violet pointer-events-none"></div>
@@ -697,10 +654,9 @@
       <i data-lucide="x" class="w-6 h-6"></i>
     </button>
 
-    <div class="w-full max-w-xl text-center space-y-4 my-auto relative z-10 py-6">
+    <div class="w-full max-w-xl text-center my-auto relative z-10 py-6">
       
-      <!-- SAP Official Logo -->
-      <div class="flex justify-center">
+      <div class="flex justify-center mb-4">
         <img 
           src="https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" 
           alt="SAP Logo" 
@@ -708,7 +664,6 @@
         >
       </div>
 
-      <!-- Company Title & Subtitle -->
       <div class="space-y-1 mb-5">
         <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest mb-1">
           <span>End-of-Session Check-In</span>
@@ -719,52 +674,23 @@
         <p class="text-xs sm:text-sm text-slate-500">Please scan the QR code to enter your Name and Business Email.</p>
       </div>
 
-      <!-- Dedicated Clean Flow: Mini Diamond Floating Directly Above White QR Frame Without Overlapping -->
       <div class="flex flex-col items-center justify-center">
         
-        <!-- MINI 3D DIAMOND sitting in its own line height with clearance -->
         <div class="w-14 h-14 relative flex items-center justify-center animate-diamond-float mb-2">
           <div class="absolute inset-0 rounded-full bg-purple-500/35 blur-md pointer-events-none"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
-            <defs>
-              <linearGradient id="d4_bl" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
-              </linearGradient>
-              <linearGradient id="d4_bml" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
-              </linearGradient>
-              <linearGradient id="d4_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
-              </linearGradient>
-              <linearGradient id="d4_br" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
-              </linearGradient>
-              <linearGradient id="d4_center" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
-              </linearGradient>
-              <linearGradient id="d4_tl" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
-              </linearGradient>
-              <linearGradient id="d4_tr" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
-              </linearGradient>
-              <linearGradient id="d4_top" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
-              </linearGradient>
-            </defs>
-
-            <polygon points="40,120 170,295 105,175" fill="url(#d4_bl)"/>
-            <polygon points="105,175 170,295 170,175" fill="url(#d4_bml)"/>
-            <polygon points="170,175 170,295 235,175" fill="url(#d4_bmr)"/>
-            <polygon points="300,120 170,295 235,175" fill="url(#d4_br)"/>
-            <polygon points="105,120 235,120 170,175" fill="url(#d4_center)"/>
-            <polygon points="40,120 105,120 105,175" fill="url(#d4_tl)"/>
-            <polygon points="300,120 235,120 235,175" fill="url(#d4_tr)"/>
+            <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
             <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-            <polygon points="85,60 105,120 170,60" fill="url(#d4_tl)"/>
-            <polygon points="170,60 105,120 235,120" fill="url(#d4_top)"/>
-            <polygon points="170,60 235,120 255,60" fill="url(#d4_tr)"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
             <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
             <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -775,15 +701,13 @@
           </svg>
         </div>
 
-        <!-- Crisp White QR Frame -->
         <div class="p-6 sm:p-7 bg-white rounded-3xl shadow-xl border-2 border-slate-100">
           <div id="presentationQrDiv" class="flex items-center justify-center"></div>
         </div>
 
       </div>
 
-      <!-- Actions -->
-      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-4">
         <button id="btnDownloadPresentQr" class="px-5 py-2.5 rounded-xl text-xs font-bold sap-btn-dark text-white flex items-center gap-2 cursor-pointer shadow-sm">
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>Save QR as PNG</span>
@@ -794,7 +718,7 @@
         </button>
       </div>
 
-      <p class="text-xs text-slate-400 font-mono" id="presentationUrlText"></p>
+      <p class="text-xs text-slate-400 font-mono mt-2" id="presentationUrlText"></p>
     </div>
   </div>
 
@@ -848,39 +772,28 @@
     }
 
     /* ======================================================== */
-    /* APPLICATION STATE                                        */
+    /* STATE MANAGEMENT                                         */
     /* ======================================================== */
-    let rawLocalComps = JSON.parse(localStorage.getItem('sap_companies') || '[]');
-    const seenOnLoad = new Set();
-    const cleanLocalComps = [];
-    rawLocalComps.forEach(comp => {
-      const clean = (comp && comp.name ? comp.name : '').trim().toLowerCase();
-      if (clean && !seenOnLoad.has(clean)) {
-        seenOnLoad.add(clean);
-        cleanLocalComps.push(comp);
-      }
-    });
-    localStorage.setItem('sap_companies', JSON.stringify(cleanLocalComps));
-
     window.AppState = {
-      isMasterAuthenticated: sessionStorage.getItem('sap_master_logged_in') === 'true',
+      isMasterAuthenticated: localStorage.getItem('sap_master_logged_in') === 'true',
       currentView: 'customer',
       currentMasterTab: 'attendees',
-      companies: cleanLocalComps,
-      attendees: JSON.parse(localStorage.getItem('sap_attendees') || '[]'),
+      companies: [],
+      attendees: [],
       activeCompanyId: null
     };
 
     window.addEventListener('DOMContentLoaded', () => {
       initViewFromUrl();
       initRealtimeFirestoreSync();
-      refreshAllDataViews();
       safeLucide();
     });
 
+    // Real-Time Firebase Listener with Hard Email-Based Cloud Deduplication
     function initRealtimeFirestoreSync() {
       if (!firestoreDb) return;
 
+      // Sync Companies
       firestoreDb.collection('companies').onSnapshot(snapshot => {
         const comps = [];
         const seenNames = new Set();
@@ -899,27 +812,46 @@
         });
 
         comps.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-
         window.AppState.companies = comps;
-        localStorage.setItem('sap_companies', JSON.stringify(comps));
         refreshAllDataViews();
       }, err => console.warn(err));
 
+      // Sync Attendees with Live Self-Cleaning Deduplication
       firestoreDb.collection('attendees').onSnapshot(snapshot => {
-        const atts = [];
-        const seenAttIds = new Set();
-
+        const rawDocs = [];
         snapshot.forEach(doc => {
-          if (!seenAttIds.has(doc.id)) {
-            seenAttIds.add(doc.id);
-            atts.push({ id: doc.id, ...(doc.data() || {}) });
+          rawDocs.push({ id: doc.id, ...(doc.data() || {}) });
+        });
+
+        // Group by email + company
+        const grouped = new Map();
+        rawDocs.forEach(item => {
+          const emailKey = (item.email || '').trim().toLowerCase();
+          const companyKey = (item.companyId || item.companyName || 'general').trim().toLowerCase();
+          const compositeKey = `${emailKey}_${companyKey}`;
+
+          if (!grouped.has(compositeKey)) {
+            grouped.set(compositeKey, [item]);
+          } else {
+            grouped.get(compositeKey).push(item);
           }
         });
 
-        atts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        const cleanList = [];
+        grouped.forEach((records) => {
+          records.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+          cleanList.push(records[0]);
 
-        window.AppState.attendees = atts;
-        localStorage.setItem('sap_attendees', JSON.stringify(atts));
+          // Automatically purge redundant duplicate docs from Firestore
+          if (records.length > 1) {
+            for (let i = 1; i < records.length; i++) {
+              firestoreDb.collection('attendees').doc(records[i].id).delete().catch(() => {});
+            }
+          }
+        });
+
+        cleanList.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        window.AppState.attendees = cleanList;
         refreshAllDataViews();
       }, err => console.warn(err));
     }
@@ -932,12 +864,7 @@
     function initViewFromUrl() {
       const compParam = getQueryParam('company') || getQueryParam('session');
       if (compParam) {
-        const existing = window.AppState.companies.find(c => 
-          (c && c.name ? c.name : '').toLowerCase() === compParam.toLowerCase() || (c && c.id === compParam)
-        );
-        window.AppState.activeCompanyId = existing ? existing.id : compParam;
-      } else if (window.AppState.companies.length > 0) {
-        window.AppState.activeCompanyId = window.AppState.companies[0].id;
+        window.AppState.activeCompanyId = compParam;
       }
       switchMainView('customer');
     }
@@ -954,7 +881,7 @@
     function updateCustomerCompanyDisplay() {
       const label = document.getElementById('customerCompanyNameDisplay');
       const compParam = getQueryParam('company') || getQueryParam('session');
-      const activeComp = window.AppState.companies.find(c => 
+      const activeComp = (window.AppState.companies || []).find(c => 
         (c && c.id === window.AppState.activeCompanyId) || 
         (compParam && c && (c.name || '').toLowerCase() === compParam.toLowerCase())
       );
@@ -979,7 +906,7 @@
     }
 
     /* ======================================================== */
-    /* CUSTOMER SUBMISSION (STRICT ANTI-SPAM SINGLE ENTRY)      */
+    /* SINGLE-SOURCE ATTENDEE SUBMISSION                        */
     /* ======================================================== */
     async function handleCustomerCheckIn(e) {
       e.preventDefault();
@@ -1004,22 +931,22 @@
         name: compParam || 'SAP Session'
       };
 
-      const alreadySubmittedLocally = (window.AppState.attendees || []).some(att => 
+      // Check against current live attendees in this company
+      const alreadyCheckedIn = (window.AppState.attendees || []).some(att => 
         att && (att.email || '').trim().toLowerCase() === email && 
         (att.companyId === activeComp.id || (att.companyName || '').toLowerCase() === (activeComp.name || '').toLowerCase())
       );
 
-      const lockKey = `sap_lock_${activeComp.id}_${email}`;
-      if (alreadySubmittedLocally || localStorage.getItem(lockKey)) {
+      if (alreadyCheckedIn) {
         showToast("This email has already checked in for this session!", "error");
         return;
       }
 
-      const safeEmailKey = email.replace(/[^a-z0-9]/g, '_');
-      const deterministicDocId = `att_${activeComp.id}_${safeEmailKey}`;
-
       submitBtn.disabled = true;
-      submitBtn.classList.add('opacity-70');
+      submitBtn.classList.add('opacity-60');
+
+      const safeEmailKey = email.replace(/[^a-z0-9]/g, '_');
+      const docId = `att_${activeComp.id}_${safeEmailKey}`;
 
       const record = {
         fullName: fullName,
@@ -1031,36 +958,20 @@
 
       if (firestoreDb) {
         try {
-          const docRef = firestoreDb.collection('attendees').doc(deterministicDocId);
-          const docSnap = await docRef.get();
-
-          if (docSnap.exists) {
-            showToast("This email has already checked in for this session!", "error");
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('opacity-70');
-            return;
-          }
-
-          await docRef.set(record);
+          await firestoreDb.collection('attendees').doc(docId).set(record);
         } catch (err) {
-          console.error("Firestore push error:", err);
+          console.error("Firestore error:", err);
         }
       }
 
-      localStorage.setItem(lockKey, 'true');
-
-      const localRecord = { id: deterministicDocId, ...record };
-      window.AppState.attendees.unshift(localRecord);
-      localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
-
+      // Hide form & show confirmation (NO double unshifting)
       document.getElementById('customerCheckInForm').classList.add('hidden');
       document.getElementById('customerSuccessCard').classList.remove('hidden');
       document.getElementById('submittedCustomerSummary').innerText = `${fullName} • ${email} • ${activeComp.name}`;
 
       showToast("Thank you! Your details have been submitted.", "success");
       submitBtn.disabled = false;
-      submitBtn.classList.remove('opacity-70');
-      refreshAllDataViews();
+      submitBtn.classList.remove('opacity-60');
     }
 
     function resetCustomerForm() {
@@ -1072,7 +983,7 @@
     }
 
     /* ======================================================== */
-    /* MASTER PORTAL ROUTING (FAIL-SAFE ERROR GUARDS)           */
+    /* MASTER PORTAL ROUTING                                    */
     /* ======================================================== */
     function switchMainView(target) {
       try { closeModal('presentationModal'); } catch (e) {}
@@ -1125,14 +1036,14 @@
     function handleMasterLogin(e) {
       if (e) e.preventDefault();
       window.AppState.isMasterAuthenticated = true;
-      sessionStorage.setItem('sap_master_logged_in', 'true');
+      localStorage.setItem('sap_master_logged_in', 'true');
       showToast("Master portal unlocked.", "success");
       switchMainView('master');
     }
 
     function handleMasterLogout() {
       window.AppState.isMasterAuthenticated = false;
-      sessionStorage.removeItem('sap_master_logged_in');
+      localStorage.removeItem('sap_master_logged_in');
       showToast("Master portal locked.", "info");
       switchMainView('customer');
     }
@@ -1182,7 +1093,7 @@
     }
 
     /* ======================================================== */
-    /* BULK EMAIL TOOLS & ATTENDEE DATABASE                     */
+    /* BULK EMAIL TOOLS & TABLE RENDER                          */
     /* ======================================================== */
     function getFilteredAttendees() {
       const searchTerm = (document.getElementById('searchAttendeeInput')?.value || '').toLowerCase();
@@ -1462,24 +1373,14 @@
         try {
           await firestoreDb.collection('companies').doc(newComp.id).set(newComp);
         } catch (err) {
-          saveCompanyLocally(newComp);
+          console.error("Firestore error:", err);
         }
-      } else {
-        saveCompanyLocally(newComp);
       }
 
       input.value = '';
       closeModal('createCompanyModal');
       showToast(`Company "${name}" created with End-of-Session QR!`, "success");
       openPresentationMode(newComp.id);
-    }
-
-    function saveCompanyLocally(newComp) {
-      if (!(window.AppState.companies || []).some(c => c && (c.id === newComp.id || (c.name || '').toLowerCase() === (newComp.name || '').toLowerCase()))) {
-        window.AppState.companies.unshift(newComp);
-        localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
-        refreshAllDataViews();
-      }
     }
 
     function openPresentationMode(companyId) {
@@ -1562,11 +1463,6 @@
           if (firestoreDb) {
             try { await firestoreDb.collection('companies').doc(id).delete(); } catch (e) {}
           }
-          window.AppState.companies = (window.AppState.companies || []).filter(c => c && c.id !== id);
-          localStorage.setItem('sap_companies', JSON.stringify(window.AppState.companies));
-          if (window.AppState.activeCompanyId === id) {
-            window.AppState.activeCompanyId = window.AppState.companies[0]?.id || null;
-          }
           refreshAllDataViews();
           showToast(`Company "${name}" removed.`, "info");
         }
@@ -1581,8 +1477,6 @@
           if (firestoreDb) {
             try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
           }
-          window.AppState.attendees = (window.AppState.attendees || []).filter(a => a && a.id !== id);
-          localStorage.setItem('sap_attendees', JSON.stringify(window.AppState.attendees));
           refreshAllDataViews();
           showToast(`Attendee record removed.`, "info");
         }
