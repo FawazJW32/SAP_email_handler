@@ -234,7 +234,7 @@
 
         </div>
 
-        <!-- Right Column: Saturated 3D Diamond -->
+        <!-- Right Column: Saturated 3D Diamond with Self-Contained Palette -->
         <div class="lg:col-span-5 flex items-center justify-center relative py-6">
           <div class="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center animate-diamond-float">
             
@@ -245,43 +245,43 @@
 
             <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_28px_45px_rgba(20,15,65,0.4)]" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="main_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="hero_bl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
                 </linearGradient>
-                <linearGradient id="main_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="hero_bml" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
                 </linearGradient>
-                <linearGradient id="main_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="hero_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
                 </linearGradient>
-                <linearGradient id="main_br" x1="100%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="hero_br" x1="100%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="main_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="hero_center" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="main_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="hero_tl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
                 </linearGradient>
-                <linearGradient id="main_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="hero_tr" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
                 </linearGradient>
-                <linearGradient id="main_top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="hero_top" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
                 </linearGradient>
               </defs>
 
-              <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
-              <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
-              <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
-              <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
-              <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
-              <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
-              <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
+              <polygon points="40,120 170,295 105,175" fill="url(#hero_bl)"/>
+              <polygon points="105,175 170,295 170,175" fill="url(#hero_bml)"/>
+              <polygon points="170,175 170,295 235,175" fill="url(#hero_bmr)"/>
+              <polygon points="300,120 170,295 235,175" fill="url(#hero_br)"/>
+              <polygon points="105,120 235,120 170,175" fill="url(#hero_center)"/>
+              <polygon points="40,120 105,120 105,175" fill="url(#hero_tl)"/>
+              <polygon points="300,120 235,120 235,175" fill="url(#hero_tr)"/>
               <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-              <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
-              <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
-              <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
+              <polygon points="85,60 105,120 170,60" fill="url(#hero_tl)"/>
+              <polygon points="170,60 105,120 235,120" fill="url(#hero_top)"/>
+              <polygon points="170,60 235,120 255,60" fill="url(#hero_tr)"/>
               <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
               <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -305,18 +305,38 @@
           <div class="w-16 h-16 mx-auto mb-2 relative flex items-center justify-center animate-diamond-float">
             <div class="absolute inset-0 rounded-full bg-purple-500/25 blur-lg"></div>
             <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
-              <polygon points="40,120 170,295 105,175" fill="#0284c7"/>
-              <polygon points="105,175 170,295 170,175" fill="#1d4ed8"/>
-              <polygon points="170,175 170,295 235,175" fill="#7e22ce"/>
-              <polygon points="300,120 170,295 235,175" fill="#c026d3"/>
-              <polygon points="105,120 235,120 170,175" fill="#6d28d9"/>
-              <polygon points="40,120 105,120 105,175" fill="#0369a1"/>
-              <polygon points="300,120 235,120 235,175" fill="#a21caf"/>
-              <polygon points="85,60 40,120 105,120" fill="#38bdf8"/>
-              <polygon points="85,60 105,120 170,60" fill="#2563eb"/>
-              <polygon points="170,60 105,120 235,120" fill="#e9d5ff"/>
-              <polygon points="170,60 235,120 255,60" fill="#d946ef"/>
-              <polygon points="255,60 235,120 300,120" fill="#f43f5e"/>
+              <defs>
+                <linearGradient id="l_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7"/><stop offset="100%" stop-color="#0f172a"/>
+                </linearGradient>
+                <linearGradient id="l_br" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#d946ef"/><stop offset="100%" stop-color="#1e1b4b"/>
+                </linearGradient>
+                <linearGradient id="l_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#4f46e5"/>
+                </linearGradient>
+                <linearGradient id="l_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
+                </linearGradient>
+                <linearGradient id="l_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f472b6"/><stop offset="100%" stop-color="#581c87"/>
+                </linearGradient>
+                <linearGradient id="l_top" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#7e22ce"/>
+                </linearGradient>
+              </defs>
+              <polygon points="40,120 170,295 105,175" fill="url(#l_bl)"/>
+              <polygon points="105,175 170,295 170,175" fill="#2563eb"/>
+              <polygon points="170,175 170,295 235,175" fill="#9333ea"/>
+              <polygon points="300,120 170,295 235,175" fill="url(#l_br)"/>
+              <polygon points="105,120 235,120 170,175" fill="url(#l_center)"/>
+              <polygon points="40,120 105,120 105,175" fill="url(#l_tl)"/>
+              <polygon points="300,120 235,120 235,175" fill="url(#l_tr)"/>
+              <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
+              <polygon points="85,60 105,120 170,60" fill="url(#l_tl)"/>
+              <polygon points="170,60 105,120 235,120" fill="url(#l_top)"/>
+              <polygon points="170,60 235,120 255,60" fill="url(#l_tr)"/>
+              <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
               <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="3"/>
             </svg>
           </div>
@@ -389,7 +409,7 @@
     <!-- VIEW 3: MASTER DASHBOARD -->
     <section id="masterDashboardView" class="hidden w-full max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 space-y-6">
       
-      <!-- Executive Master Banner -->
+      <!-- Executive Master Banner with Saturated Local Diamond -->
       <div class="sap-card-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden text-left">
         <div class="space-y-2 z-10">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[10px] font-extrabold uppercase tracking-widest">
@@ -409,18 +429,46 @@
           <div class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_18px_30px_rgba(20,15,65,0.35)]" fill="none">
-            <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
-            <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
-            <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
-            <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
-            <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
-            <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
-            <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
+            <defs>
+              <linearGradient id="dash_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+              <linearGradient id="dash_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
+              </linearGradient>
+              <linearGradient id="dash_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
+              </linearGradient>
+              <linearGradient id="dash_br" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="dash_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="dash_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+              <linearGradient id="dash_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
+              </linearGradient>
+              <linearGradient id="dash_top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
+              </linearGradient>
+            </defs>
+
+            <polygon points="40,120 170,295 105,175" fill="url(#dash_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#dash_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#dash_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#dash_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#dash_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#dash_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#dash_tr)"/>
             <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-            <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
-            <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
-            <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#dash_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#dash_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#dash_tr)"/>
             <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
+
             <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
             <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.7"/>
             <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
@@ -644,7 +692,7 @@
     </div>
   </div>
 
-  <!-- MODAL 2: PRESENTATION MODE -->
+  <!-- MODAL 2: PRESENTATION MODE (VIBRANT MINI DIAMOND OVER QR) -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-white/95 backdrop-blur-2xl overflow-y-auto hidden">
     
     <div class="fixed -top-12 -right-12 w-[500px] h-[500px] glow-violet pointer-events-none"></div>
@@ -676,21 +724,49 @@
 
       <div class="flex flex-col items-center justify-center">
         
-        <div class="w-14 h-14 relative flex items-center justify-center animate-diamond-float mb-2">
-          <div class="absolute inset-0 rounded-full bg-purple-500/35 blur-md pointer-events-none"></div>
+        <!-- Vibrant Mini Diamond with its Own Scoped Defs -->
+        <div class="w-16 h-16 relative flex items-center justify-center animate-diamond-float mb-2">
+          <div class="absolute inset-0 rounded-full bg-purple-500/40 blur-md pointer-events-none"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-md" fill="none">
-            <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
-            <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
-            <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
-            <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
-            <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
-            <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
-            <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
+            <defs>
+              <linearGradient id="pres_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+              <linearGradient id="pres_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
+              </linearGradient>
+              <linearGradient id="pres_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
+              </linearGradient>
+              <linearGradient id="pres_br" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="pres_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="pres_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+              <linearGradient id="pres_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
+              </linearGradient>
+              <linearGradient id="pres_top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
+              </linearGradient>
+            </defs>
+
+            <polygon points="40,120 170,295 105,175" fill="url(#pres_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#pres_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#pres_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#pres_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#pres_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#pres_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#pres_tr)"/>
             <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-            <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
-            <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
-            <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#pres_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#pres_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#pres_tr)"/>
             <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
             <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -789,7 +865,7 @@
       safeLucide();
     });
 
-    // Real-Time Firebase Listener with Hard Email-Based Cloud Deduplication
+    // Real-Time Firebase Listener with Hard Cloud Deduplication
     function initRealtimeFirestoreSync() {
       if (!firestoreDb) return;
 
@@ -816,7 +892,7 @@
         refreshAllDataViews();
       }, err => console.warn(err));
 
-      // Sync Attendees with Live Self-Cleaning Deduplication
+      // Sync Attendees with Self-Cleaning Cloud Deduplication
       firestoreDb.collection('attendees').onSnapshot(snapshot => {
         const rawDocs = [];
         snapshot.forEach(doc => {
@@ -842,7 +918,7 @@
           records.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
           cleanList.push(records[0]);
 
-          // Automatically purge redundant duplicate docs from Firestore
+          // Automatically purge duplicate documents directly from Firestore
           if (records.length > 1) {
             for (let i = 1; i < records.length; i++) {
               firestoreDb.collection('attendees').doc(records[i].id).delete().catch(() => {});
