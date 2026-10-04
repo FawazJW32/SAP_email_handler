@@ -137,11 +137,11 @@
   <!-- MAIN CONTAINER -->
   <main class="relative z-10 flex-1 w-full mx-auto flex flex-col justify-center pt-4 sm:pt-6 pb-12">
 
-    <!-- VIEW 1: ATTENDEE CHECK-IN VIEW -->
+    <!-- VIEW 1: ATTENDEE CHECK-IN & SURVEY VIEW -->
     <div id="customerView" class="w-full">
-      <section class="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <section class="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
-        <!-- Left Column -->
+        <!-- Left Column: Headers & Dynamic Survey Form -->
         <div class="lg:col-span-7 space-y-6 text-left">
           
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest">
@@ -169,8 +169,10 @@
           </div>
 
           <!-- Attendee Form Card -->
-          <div class="sap-card-white rounded-3xl p-6 sm:p-7 max-w-lg text-left">
+          <div class="sap-card-white rounded-3xl p-6 sm:p-7 max-w-xl text-left">
             <form id="customerCheckInForm" onsubmit="handleCustomerCheckIn(event)" class="space-y-4">
+              
+              <!-- Standard Attendee Inputs -->
               <div>
                 <label for="customerFullName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                   <i data-lucide="user" class="w-3.5 h-3.5 text-[#0070F2]"></i>
@@ -201,13 +203,22 @@
                 >
               </div>
 
+              <!-- DYNAMIC SURVEY SECTION -->
+              <div id="dynamicSurveySection" class="hidden space-y-4 pt-3 border-t border-slate-100">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="clipboard-check" class="w-4 h-4 text-[#0070F2]"></i>
+                  <h4 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider">Session Feedback & Survey</h4>
+                </div>
+                <div id="dynamicSurveyContainer" class="space-y-4"></div>
+              </div>
+
               <div class="pt-2">
                 <button 
                   type="submit" 
                   id="btnSubmitCustomer"
                   class="w-full sap-btn-dark text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer text-sm"
                 >
-                  <span>Submit Check-In</span>
+                  <span>Submit Check-In & Feedback</span>
                   <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
               </div>
@@ -220,7 +231,7 @@
               </div>
               <div>
                 <h3 class="text-xl font-extrabold text-slate-900">Thank you!</h3>
-                <p class="text-xs text-slate-600 mt-1">Your details have been registered successfully.</p>
+                <p class="text-xs text-slate-600 mt-1">Your check-in and survey feedback have been recorded.</p>
                 <p id="submittedCustomerSummary" class="text-xs text-[#0070F2] mt-2 font-mono font-semibold"></p>
               </div>
               <div class="pt-2">
@@ -234,8 +245,8 @@
 
         </div>
 
-        <!-- Right Column: Saturated 3D Diamond with Self-Contained Palette -->
-        <div class="lg:col-span-5 flex items-center justify-center relative py-6">
+        <!-- Right Column: Saturated 3D Diamond -->
+        <div class="lg:col-span-5 flex items-center justify-center relative py-6 sticky top-24">
           <div class="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center animate-diamond-float">
             
             <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-purple-600/40 via-blue-600/35 to-cyan-400/30 blur-3xl pointer-events-none animate-aura-glow"></div>
@@ -245,43 +256,43 @@
 
             <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_28px_45px_rgba(20,15,65,0.4)]" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="hero_bl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="main_bl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
                 </linearGradient>
-                <linearGradient id="hero_bml" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_bml" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
                 </linearGradient>
-                <linearGradient id="hero_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
                 </linearGradient>
-                <linearGradient id="hero_br" x1="100%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_br" x1="100%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="hero_center" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_center" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
                 </linearGradient>
-                <linearGradient id="hero_tl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="main_tl" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
                 </linearGradient>
-                <linearGradient id="hero_tr" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="main_tr" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
                 </linearGradient>
-                <linearGradient id="hero_top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="main_top" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
                 </linearGradient>
               </defs>
 
-              <polygon points="40,120 170,295 105,175" fill="url(#hero_bl)"/>
-              <polygon points="105,175 170,295 170,175" fill="url(#hero_bml)"/>
-              <polygon points="170,175 170,295 235,175" fill="url(#hero_bmr)"/>
-              <polygon points="300,120 170,295 235,175" fill="url(#hero_br)"/>
-              <polygon points="105,120 235,120 170,175" fill="url(#hero_center)"/>
-              <polygon points="40,120 105,120 105,175" fill="url(#hero_tl)"/>
-              <polygon points="300,120 235,120 235,175" fill="url(#hero_tr)"/>
+              <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
+              <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
+              <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
+              <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
+              <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
+              <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
+              <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
               <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-              <polygon points="85,60 105,120 170,60" fill="url(#hero_tl)"/>
-              <polygon points="170,60 105,120 235,120" fill="url(#hero_top)"/>
-              <polygon points="170,60 235,120 255,60" fill="url(#hero_tr)"/>
+              <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
+              <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
+              <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
               <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
 
               <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
@@ -409,7 +420,7 @@
     <!-- VIEW 3: MASTER DASHBOARD -->
     <section id="masterDashboardView" class="hidden w-full max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 space-y-6">
       
-      <!-- Executive Master Banner with Saturated Local Diamond -->
+      <!-- Executive Master Banner -->
       <div class="sap-card-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden text-left">
         <div class="space-y-2 z-10">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[10px] font-extrabold uppercase tracking-widest">
@@ -420,7 +431,7 @@
             Session Command Center
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 max-w-md">
-            Manage your company presentation QR codes, monitor attendee submissions in real-time, and copy emails for BCC outreach.
+            Manage custom survey questions, monitor incoming attendee responses, and export complete datasets to Excel.
           </p>
         </div>
 
@@ -429,46 +440,18 @@
           <div class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
           
           <svg viewBox="0 0 340 340" class="w-full h-full drop-shadow-[0_18px_30px_rgba(20,15,65,0.35)]" fill="none">
-            <defs>
-              <linearGradient id="dash_bl" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#0284c7"/><stop offset="50%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/>
-              </linearGradient>
-              <linearGradient id="dash_bml" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#172554"/>
-              </linearGradient>
-              <linearGradient id="dash_bmr" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#312e81"/>
-              </linearGradient>
-              <linearGradient id="dash_br" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#d946ef"/><stop offset="60%" stop-color="#7e22ce"/><stop offset="100%" stop-color="#1e1b4b"/>
-              </linearGradient>
-              <linearGradient id="dash_center" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#a855f7"/><stop offset="50%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#1e1b4b"/>
-              </linearGradient>
-              <linearGradient id="dash_tl" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
-              </linearGradient>
-              <linearGradient id="dash_tr" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#f472b6"/><stop offset="60%" stop-color="#c026d3"/><stop offset="100%" stop-color="#581c87"/>
-              </linearGradient>
-              <linearGradient id="dash_top" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/>
-              </linearGradient>
-            </defs>
-
-            <polygon points="40,120 170,295 105,175" fill="url(#dash_bl)"/>
-            <polygon points="105,175 170,295 170,175" fill="url(#dash_bml)"/>
-            <polygon points="170,175 170,295 235,175" fill="url(#dash_bmr)"/>
-            <polygon points="300,120 170,295 235,175" fill="url(#dash_br)"/>
-            <polygon points="105,120 235,120 170,175" fill="url(#dash_center)"/>
-            <polygon points="40,120 105,120 105,175" fill="url(#dash_tl)"/>
-            <polygon points="300,120 235,120 235,175" fill="url(#dash_tr)"/>
+            <polygon points="40,120 170,295 105,175" fill="url(#main_bl)"/>
+            <polygon points="105,175 170,295 170,175" fill="url(#main_bml)"/>
+            <polygon points="170,175 170,295 235,175" fill="url(#main_bmr)"/>
+            <polygon points="300,120 170,295 235,175" fill="url(#main_br)"/>
+            <polygon points="105,120 235,120 170,175" fill="url(#main_center)"/>
+            <polygon points="40,120 105,120 105,175" fill="url(#main_tl)"/>
+            <polygon points="300,120 235,120 235,175" fill="url(#main_tr)"/>
             <polygon points="85,60 40,120 105,120" fill="#0284c7"/>
-            <polygon points="85,60 105,120 170,60" fill="url(#dash_tl)"/>
-            <polygon points="170,60 105,120 235,120" fill="url(#dash_top)"/>
-            <polygon points="170,60 235,120 255,60" fill="url(#dash_tr)"/>
+            <polygon points="85,60 105,120 170,60" fill="url(#main_tl)"/>
+            <polygon points="170,60 105,120 235,120" fill="url(#main_top)"/>
+            <polygon points="170,60 235,120 255,60" fill="url(#main_tr)"/>
             <polygon points="255,60 235,120 300,120" fill="#a21caf"/>
-
             <line x1="85" y1="60" x2="255" y2="60" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.95"/>
             <line x1="40" y1="120" x2="300" y2="120" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.7"/>
             <line x1="170" y1="60" x2="170" y2="295" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
@@ -534,9 +517,9 @@
           </button>
         </div>
 
-        <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+        <button onclick="openCreateCompanyModal()" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
-          <span>Create Company QR</span>
+          <span>Create Company & Survey QR</span>
         </button>
       </div>
 
@@ -565,7 +548,7 @@
             </div>
           </div>
 
-          <!-- Bulk Email Suite -->
+          <!-- Bulk Actions & Excel/CSV Export -->
           <div class="flex items-center gap-2 shrink-0">
             <button 
               onclick="copyAllFilteredEmails()" 
@@ -587,10 +570,11 @@
 
             <button 
               onclick="exportAttendeesCSV()" 
-              class="p-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition cursor-pointer" 
-              title="Export CSV spreadsheet"
+              class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 transition flex items-center gap-1.5 cursor-pointer shadow-sm" 
+              title="Download Excel / CSV with survey responses"
             >
-              <i data-lucide="download" class="w-4 h-4"></i>
+              <i data-lucide="file-spreadsheet" class="w-4 h-4 text-[#0070F2]"></i>
+              <span>Export CSV & Survey</span>
             </button>
           </div>
         </div>
@@ -603,6 +587,7 @@
                   <th class="py-3.5 px-4">Attendee Name</th>
                   <th class="py-3.5 px-4">Email Address</th>
                   <th class="py-3.5 px-4">Company</th>
+                  <th class="py-3.5 px-4">Survey Status</th>
                   <th class="py-3.5 px-4">Submitted At</th>
                   <th class="py-3.5 px-4 text-right">Actions</th>
                 </tr>
@@ -616,7 +601,7 @@
               <i data-lucide="inbox" class="w-6 h-6"></i>
             </div>
             <p class="text-sm text-slate-700 font-semibold">No customer responses recorded yet.</p>
-            <p class="text-xs text-slate-400">Present the QR code at the end of the session to collect attendee names and emails.</p>
+            <p class="text-xs text-slate-400">Present the QR code at the end of the session to collect attendee names and feedback.</p>
           </div>
         </div>
       </div>
@@ -628,7 +613,7 @@
             <h3 class="text-base font-bold text-slate-900">End-of-Session QR Codes</h3>
             <p class="text-xs text-slate-500">Display full-screen on the projector at the end of your session or copy the QR link.</p>
           </div>
-          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+          <button onclick="openCreateCompanyModal()" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Add Company</span>
           </button>
@@ -641,8 +626,8 @@
             <i data-lucide="presentation" class="w-6 h-6"></i>
           </div>
           <h4 class="text-base font-bold text-slate-900">No Companies Created</h4>
-          <p class="text-xs text-slate-500 max-w-sm mx-auto">Create a company name to generate the end-of-session QR code.</p>
-          <button onclick="openModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white inline-flex items-center gap-1.5 cursor-pointer">
+          <p class="text-xs text-slate-500 max-w-sm mx-auto">Create a company name with custom survey questions to generate the QR code.</p>
+          <button onclick="openCreateCompanyModal()" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white inline-flex items-center gap-1.5 cursor-pointer">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Create Company QR</span>
           </button>
@@ -653,22 +638,24 @@
 
   </main>
 
-  <!-- MODAL 1: CREATE COMPANY QR -->
-  <div id="createCompanyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden">
-    <div class="sap-card-white max-w-md w-full rounded-3xl p-6 relative text-left">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+  <!-- ========================================================================= -->
+  <!-- MODAL 1: CREATE COMPANY & CUSTOM SURVEY QR                                -->
+  <!-- ========================================================================= -->
+  <div id="createCompanyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden overflow-y-auto">
+    <div class="sap-card-white max-w-lg w-full rounded-3xl p-6 relative text-left my-8 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
         <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
           <i data-lucide="building" class="w-4 h-4 text-[#0070F2]"></i>
-          <span>Create Company QR</span>
+          <span>Create Session & Custom Survey</span>
         </h3>
         <button onclick="closeModal('createCompanyModal')" class="text-slate-400 hover:text-slate-700 p-1 cursor-pointer">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <form id="createCompanyForm" onsubmit="handleCreateCompany(event)" class="space-y-4 mt-4">
+      <form id="createCompanyForm" onsubmit="handleCreateCompany(event)" class="space-y-4 mt-4 overflow-y-auto flex-1 pr-1">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">Company Name *</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">Company Session Name *</label>
           <input 
             type="text" 
             id="newCompanyNameInput" 
@@ -676,23 +663,49 @@
             placeholder="e.g. Aramco, Deloitte, STC" 
             class="w-full sap-input rounded-xl px-3.5 py-3 text-xs text-slate-900 placeholder-slate-400 outline-none"
           >
-          <p class="text-[11px] text-slate-500 mt-1">This company name will be locked on the check-in form for attendees who scan this QR.</p>
+          <p class="text-[11px] text-slate-500 mt-1">This company name will be locked on the check-in form for this QR.</p>
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+        <!-- Custom Survey Questions Builder -->
+        <div class="pt-2 border-t border-slate-100 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider">Survey Questions</h4>
+              <p class="text-[11px] text-slate-500">Optional: Add feedback questions for attendees to answer.</p>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="addSurveyQuestion('rating')" class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 transition flex items-center gap-1 cursor-pointer">
+                <i data-lucide="star" class="w-3 h-3 fill-amber-500 text-amber-500"></i>
+                <span>+ Star Rating</span>
+              </button>
+              <button type="button" onclick="addSurveyQuestion('text')" class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-blue-50 hover:bg-blue-100 text-[#0070F2] border border-blue-200 transition flex items-center gap-1 cursor-pointer">
+                <i data-lucide="align-left" class="w-3 h-3"></i>
+                <span>+ Written Question</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="surveyQuestionsBuilderList" class="space-y-2.5">
+            <p id="noQuestionsNotice" class="text-xs text-slate-400 italic py-2">No custom survey questions added yet. Attendees will only submit their Name & Email.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 shrink-0">
           <button type="button" onclick="closeModal('createCompanyModal')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 transition cursor-pointer">
             Cancel
           </button>
           <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold sap-btn-blue text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer">
             <i data-lucide="check" class="w-3.5 h-3.5"></i>
-            <span>Create & Show QR</span>
+            <span>Create Session & QR</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- MODAL 2: PRESENTATION MODE (VIBRANT MINI DIAMOND OVER QR) -->
+  <!-- ========================================================================= -->
+  <!-- MODAL 2: PRESENTATION MODE (PROPER FLOW - ZERO TEXT OVERLAP)             -->
+  <!-- ========================================================================= -->
   <div id="presentationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-white/95 backdrop-blur-2xl overflow-y-auto hidden">
     
     <div class="fixed -top-12 -right-12 w-[500px] h-[500px] glow-violet pointer-events-none"></div>
@@ -714,17 +727,17 @@
 
       <div class="space-y-1 mb-5">
         <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#0070F2] text-[11px] font-extrabold uppercase tracking-widest mb-1">
-          <span>End-of-Session Check-In</span>
+          <span>End-of-Session Check-In & Survey</span>
         </div>
         <h2 id="presentCompanyTitle" class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
           Company Name
         </h2>
-        <p class="text-xs sm:text-sm text-slate-500">Please scan the QR code to enter your Name and Business Email.</p>
+        <p class="text-xs sm:text-sm text-slate-500">Please scan the QR code to submit your Name, Email, and Session Feedback.</p>
       </div>
 
       <div class="flex flex-col items-center justify-center">
         
-        <!-- Vibrant Mini Diamond with its Own Scoped Defs -->
+        <!-- Vibrant Mini Diamond with Locally Scoped Defs -->
         <div class="w-16 h-16 relative flex items-center justify-center animate-diamond-float mb-2">
           <div class="absolute inset-0 rounded-full bg-purple-500/40 blur-md pointer-events-none"></div>
           
@@ -798,6 +811,61 @@
     </div>
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- MODAL 3: ATTENDEE SURVEY DETAILS & MARKDOWN EXPORT                       -->
+  <!-- ========================================================================= -->
+  <div id="attendeeDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden overflow-y-auto">
+    <div class="sap-card-white max-w-lg w-full rounded-3xl p-6 relative text-left my-8 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="user-check" class="w-4 h-4 text-[#0070F2]"></i>
+          <span>Attendee Response & Survey Breakdown</span>
+        </h3>
+        <button onclick="closeModal('attendeeDetailModal')" class="text-slate-400 hover:text-slate-700 p-1 cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="overflow-y-auto flex-1 space-y-4 pt-4 pr-1 text-xs">
+        
+        <!-- Header Info -->
+        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 id="detailAttendeeName" class="text-base font-extrabold text-slate-900"></h4>
+            <span id="detailAttendeeCompany" class="px-2.5 py-0.5 rounded-full bg-blue-100 text-[#0070F2] font-bold"></span>
+          </div>
+          <p id="detailAttendeeEmail" class="text-blue-600 font-mono"></p>
+          <p id="detailAttendeeTimestamp" class="text-slate-400 text-[11px]"></p>
+        </div>
+
+        <!-- Rendered Responses List -->
+        <div class="space-y-3">
+          <h5 class="font-extrabold text-slate-800 uppercase tracking-wider text-[11px]">Survey Feedback Responses</h5>
+          <div id="detailSurveyResponsesContainer" class="space-y-2.5"></div>
+        </div>
+
+        <!-- Formatted Markdown Output Box -->
+        <div class="pt-2 border-t border-slate-100 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 uppercase tracking-wider text-[10px]">Formatted Markdown View</span>
+            <button onclick="copyDetailMarkdown()" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold border border-emerald-200 transition flex items-center gap-1 cursor-pointer">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span>Copy Markdown</span>
+            </button>
+          </div>
+          <textarea id="detailMarkdownTextarea" readonly rows="5" class="w-full bg-slate-900 text-slate-200 font-mono text-[11px] p-3 rounded-xl outline-none resize-none"></textarea>
+        </div>
+
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex justify-end shrink-0">
+        <button onclick="closeModal('attendeeDetailModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Delete Confirmation Modal -->
   <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden">
     <div class="sap-card-white max-w-sm w-full rounded-2xl p-5 relative text-center space-y-4">
@@ -856,7 +924,9 @@
       currentMasterTab: 'attendees',
       companies: [],
       attendees: [],
-      activeCompanyId: null
+      activeCompanyId: null,
+      tempSurveyQuestions: [], // Used while building a company
+      activeSurveyRatingValues: {} // Used during attendee form entry
     };
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -947,6 +1017,7 @@
 
     function refreshAllDataViews() {
       try { updateCustomerCompanyDisplay(); } catch (e) {}
+      try { renderDynamicCustomerSurvey(); } catch (e) {}
       try { updateCompanyFilterDropdown(); } catch (e) {}
       try { renderAttendeesTable(); } catch (e) {}
       try { renderCompaniesGrid(); } catch (e) {}
@@ -954,35 +1025,112 @@
       safeLucide();
     }
 
-    function updateCustomerCompanyDisplay() {
-      const label = document.getElementById('customerCompanyNameDisplay');
+    function getActiveCompanyObject() {
       const compParam = getQueryParam('company') || getQueryParam('session');
-      const activeComp = (window.AppState.companies || []).find(c => 
+      return (window.AppState.companies || []).find(c => 
         (c && c.id === window.AppState.activeCompanyId) || 
         (compParam && c && (c.name || '').toLowerCase() === compParam.toLowerCase())
       );
+    }
+
+    function updateCustomerCompanyDisplay() {
+      const label = document.getElementById('customerCompanyNameDisplay');
+      const compParam = getQueryParam('company') || getQueryParam('session');
+      const activeComp = getActiveCompanyObject();
       if (label) {
         label.innerText = activeComp ? (activeComp.name || "SAP Session") : (compParam || "SAP Session");
       }
     }
 
-    function updateCompanyFilterDropdown() {
-      const filterSelect = document.getElementById('filterCompanySelect');
-      if (!filterSelect) return;
-      const currentVal = filterSelect.value;
-      filterSelect.innerHTML = '<option value="ALL">All Companies</option>';
-      (window.AppState.companies || []).forEach(comp => {
-        if (!comp) return;
-        const opt = document.createElement('option');
-        opt.value = comp.id;
-        opt.textContent = comp.name || comp.id;
-        filterSelect.appendChild(opt);
+    /* ======================================================== */
+    /* DYNAMIC SURVEY RENDERING (ATTENDEE SIDE)                 */
+    /* ======================================================== */
+    function renderDynamicCustomerSurvey() {
+      const section = document.getElementById('dynamicSurveySection');
+      const container = document.getElementById('dynamicSurveyContainer');
+      if (!section || !container) return;
+
+      const activeComp = getActiveCompanyObject();
+      const questions = (activeComp && Array.isArray(activeComp.questions)) ? activeComp.questions : [];
+
+      if (questions.length === 0) {
+        section.classList.add('hidden');
+        container.innerHTML = '';
+        return;
+      }
+
+      section.classList.remove('hidden');
+      container.innerHTML = '';
+      window.AppState.activeSurveyRatingValues = {};
+
+      questions.forEach((q, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl space-y-2';
+
+        if (q.type === 'rating') {
+          window.AppState.activeSurveyRatingValues[q.id] = 5; // Default 5 stars
+          qDiv.innerHTML = `
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold text-slate-800">
+                ${idx + 1}. ${escapeHtml(q.label)} <span class="text-rose-500">*</span>
+              </label>
+              <span id="rating_label_${q.id}" class="text-[11px] font-extrabold text-[#0070F2]">5 / 5 Stars</span>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1" id="stars_container_${q.id}">
+              ${[1, 2, 3, 4, 5].map(starNum => `
+                <button type="button" onclick="setSurveyStarRating('${q.id}', ${starNum})" class="p-1 text-amber-400 hover:scale-110 transition cursor-pointer" title="${starNum} Star${starNum > 1 ? 's' : ''}">
+                  <i data-lucide="star" class="w-6 h-6 fill-amber-400" id="star_icon_${q.id}_${starNum}"></i>
+                </button>
+              `).join('')}
+            </div>
+            <input type="hidden" name="survey_${q.id}" id="survey_input_${q.id}" value="5">
+          `;
+        } else {
+          // Open written question
+          qDiv.innerHTML = `
+            <label class="block text-xs font-bold text-slate-800 mb-1">
+              ${idx + 1}. ${escapeHtml(q.label)} <span class="text-rose-500">*</span>
+            </label>
+            <textarea 
+              name="survey_${q.id}" 
+              id="survey_input_${q.id}" 
+              required 
+              rows="2" 
+              placeholder="Your answer..." 
+              class="w-full sap-input rounded-xl px-3.5 py-2.5 text-xs text-slate-900 outline-none"
+            ></textarea>
+          `;
+        }
+
+        container.appendChild(qDiv);
       });
-      filterSelect.value = currentVal || 'ALL';
+
+      safeLucide();
+    }
+
+    function setSurveyStarRating(questionId, rating) {
+      window.AppState.activeSurveyRatingValues[questionId] = rating;
+      const inputEl = document.getElementById(`survey_input_${questionId}`);
+      const labelEl = document.getElementById(`rating_label_${questionId}`);
+      if (inputEl) inputEl.value = rating;
+      if (labelEl) labelEl.innerText = `${rating} / 5 Stars`;
+
+      for (let i = 1; i <= 5; i++) {
+        const star = document.getElementById(`star_icon_${questionId}_${i}`);
+        if (star) {
+          if (i <= rating) {
+            star.classList.add('fill-amber-400', 'text-amber-400');
+            star.classList.remove('text-slate-300', 'fill-transparent');
+          } else {
+            star.classList.remove('fill-amber-400', 'text-amber-400');
+            star.classList.add('text-slate-300', 'fill-transparent');
+          }
+        }
+      }
     }
 
     /* ======================================================== */
-    /* SINGLE-SOURCE ATTENDEE SUBMISSION                        */
+    /* SINGLE-SOURCE ATTENDEE & SURVEY SUBMISSION               */
     /* ======================================================== */
     async function handleCustomerCheckIn(e) {
       e.preventDefault();
@@ -999,15 +1147,13 @@
       }
 
       const compParam = getQueryParam('company') || getQueryParam('session');
-      const activeComp = (window.AppState.companies || []).find(c => 
-        (c && c.id === window.AppState.activeCompanyId) || 
-        (compParam && c && (c.name || '').toLowerCase() === compParam.toLowerCase())
-      ) || {
+      const activeComp = getActiveCompanyObject() || {
         id: 'comp_' + (compParam || 'general').toLowerCase().replace(/[^a-z0-9]/g, '_'),
-        name: compParam || 'SAP Session'
+        name: compParam || 'SAP Session',
+        questions: []
       };
 
-      // Check against current live attendees in this company
+      // Deduplication check
       const alreadyCheckedIn = (window.AppState.attendees || []).some(att => 
         att && (att.email || '').trim().toLowerCase() === email && 
         (att.companyId === activeComp.id || (att.companyName || '').toLowerCase() === (activeComp.name || '').toLowerCase())
@@ -1017,6 +1163,20 @@
         showToast("This email has already checked in for this session!", "error");
         return;
       }
+
+      // Collect survey responses
+      const responses = [];
+      const questions = activeComp.questions || [];
+      questions.forEach(q => {
+        const inputEl = document.getElementById(`survey_input_${q.id}`);
+        const answerVal = inputEl ? inputEl.value.trim() : '';
+        responses.push({
+          questionId: q.id,
+          questionLabel: q.label,
+          type: q.type,
+          answer: q.type === 'rating' ? Number(answerVal || 5) : answerVal
+        });
+      });
 
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-60');
@@ -1029,6 +1189,7 @@
         email: email,
         companyId: activeComp.id,
         companyName: activeComp.name || 'SAP Session',
+        surveyResponses: responses,
         timestamp: Date.now()
       };
 
@@ -1040,12 +1201,11 @@
         }
       }
 
-      // Hide form & show confirmation (NO double unshifting)
       document.getElementById('customerCheckInForm').classList.add('hidden');
       document.getElementById('customerSuccessCard').classList.remove('hidden');
       document.getElementById('submittedCustomerSummary').innerText = `${fullName} • ${email} • ${activeComp.name}`;
 
-      showToast("Thank you! Your details have been submitted.", "success");
+      showToast("Thank you! Your details and feedback have been submitted.", "success");
       submitBtn.disabled = false;
       submitBtn.classList.remove('opacity-60');
     }
@@ -1055,122 +1215,212 @@
       document.getElementById('customerEmailAddress').value = '';
       document.getElementById('customerSuccessCard').classList.add('hidden');
       document.getElementById('customerCheckInForm').classList.remove('hidden');
+      renderDynamicCustomerSurvey();
       safeLucide();
     }
 
     /* ======================================================== */
-    /* MASTER PORTAL ROUTING                                    */
+    /* SURVEY BUILDER (MASTER SIDE)                             */
     /* ======================================================== */
-    function switchMainView(target) {
-      try { closeModal('presentationModal'); } catch (e) {}
-      try { closeModal('createCompanyModal'); } catch (e) {}
-      try { closeModal('deleteConfirmModal'); } catch (e) {}
+    function openCreateCompanyModal() {
+      window.AppState.tempSurveyQuestions = [];
+      document.getElementById('newCompanyNameInput').value = '';
+      renderSurveyBuilderList();
+      openModal('createCompanyModal');
+    }
 
-      const customerView = document.getElementById('customerView');
-      const masterLoginView = document.getElementById('masterLoginView');
-      const masterDashView = document.getElementById('masterDashboardView');
-      const navBtnCustomer = document.getElementById('navBtnCustomer');
-      const navBtnMaster = document.getElementById('navBtnMaster');
-      const btnLogout = document.getElementById('btnMasterLogout');
+    function addSurveyQuestion(type) {
+      const qId = 'q_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+      const defaultLabel = type === 'rating' ? 'How would you rate today\'s session overall?' : 'What was your primary takeaway from this presentation?';
+      window.AppState.tempSurveyQuestions.push({
+        id: qId,
+        type: type,
+        label: defaultLabel
+      });
+      renderSurveyBuilderList();
+    }
 
-      if (!customerView || !masterLoginView || !masterDashView) return;
+    function removeSurveyQuestion(id) {
+      window.AppState.tempSurveyQuestions = window.AppState.tempSurveyQuestions.filter(q => q.id !== id);
+      renderSurveyBuilderList();
+    }
 
-      customerView.classList.add('hidden');
-      masterLoginView.classList.add('hidden');
-      masterDashView.classList.add('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function renderSurveyBuilderList() {
+      const list = document.getElementById('surveyQuestionsBuilderList');
+      if (!list) return;
 
-      if (target === 'customer') {
-        window.AppState.currentView = 'customer';
-        customerView.classList.remove('hidden');
+      const questions = window.AppState.tempSurveyQuestions;
+      if (questions.length === 0) {
+        list.innerHTML = `<p class="text-xs text-slate-400 italic py-2">No custom survey questions added yet. Attendees will only submit their Name & Email.</p>`;
+        return;
+      }
 
-        if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#0070F2] bg-blue-50 border border-blue-200 transition cursor-pointer';
-        if (navBtnMaster) navBtnMaster.className = 'sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer';
-        if (btnLogout) btnLogout.classList.add('hidden');
-        try { updateCustomerCompanyDisplay(); } catch (e) {}
-      } else if (target === 'master') {
-        if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 transition cursor-pointer';
-        if (navBtnMaster) navBtnMaster.className = 'px-4 py-1.5 rounded-xl text-xs font-bold text-[#0070F2] bg-blue-50 border border-blue-200 transition flex items-center gap-1.5 cursor-pointer';
+      list.innerHTML = '';
+      questions.forEach((q, idx) => {
+        const item = document.createElement('div');
+        item.className = 'p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-2.5';
 
-        if (window.AppState.isMasterAuthenticated) {
-          window.AppState.currentView = 'master-dash';
-          masterDashView.classList.remove('hidden');
-          if (btnLogout) btnLogout.classList.remove('hidden');
-          try { switchMasterTab(window.AppState.currentMasterTab || 'attendees'); } catch (e) {}
-          try { renderAttendeesTable(); } catch (e) {}
-          try { renderCompaniesGrid(); } catch (e) {}
-          try { updateMetrics(); } catch (e) {}
-        } else {
-          window.AppState.currentView = 'master-login';
-          masterLoginView.classList.remove('hidden');
-          if (btnLogout) btnLogout.classList.add('hidden');
+        const isRating = q.type === 'rating';
+        const badgeClass = isRating ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-[#0070F2]';
+        const badgeLabel = isRating ? '1-5 Stars' : 'Open Text';
+
+        item.innerHTML = `
+          <span class="px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider shrink-0 ${badgeClass}">${badgeLabel}</span>
+          <input 
+            type="text" 
+            value="${escapeHtml(q.label)}" 
+            onchange="updateTempQuestionLabel('${q.id}', this.value)" 
+            placeholder="Type your question..." 
+            class="flex-1 sap-input text-xs rounded-xl px-3 py-1.5 outline-none text-slate-900"
+          >
+          <button type="button" onclick="removeSurveyQuestion('${q.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 transition shrink-0" title="Delete Question">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        `;
+        list.appendChild(item);
+      });
+
+      safeLucide();
+    }
+
+    function updateTempQuestionLabel(id, newLabel) {
+      const target = window.AppState.tempSurveyQuestions.find(q => q.id === id);
+      if (target) target.label = newLabel.trim();
+    }
+
+    async function handleCreateCompany(e) {
+      e.preventDefault();
+      const input = document.getElementById('newCompanyNameInput');
+      const name = (input.value || '').trim();
+
+      if (!name) return;
+
+      const existing = (window.AppState.companies || []).find(c => c && (c.name || '').toLowerCase() === name.toLowerCase());
+      if (existing) {
+        showToast(`Company "${name}" already exists!`, "error");
+        input.value = '';
+        closeModal('createCompanyModal');
+        openPresentationMode(existing.id);
+        return;
+      }
+
+      const compId = 'comp_' + name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      const newComp = {
+        id: compId,
+        name: name,
+        questions: window.AppState.tempSurveyQuestions,
+        createdAt: Date.now()
+      };
+
+      if (firestoreDb) {
+        try {
+          await firestoreDb.collection('companies').doc(newComp.id).set(newComp);
+        } catch (err) {
+          console.error("Firestore error:", err);
         }
       }
-      safeLucide();
+
+      input.value = '';
+      window.AppState.tempSurveyQuestions = [];
+      closeModal('createCompanyModal');
+      showToast(`Company "${name}" created with custom survey!`, "success");
+      openPresentationMode(newComp.id);
     }
 
-    function handleMasterLogin(e) {
-      if (e) e.preventDefault();
-      window.AppState.isMasterAuthenticated = true;
-      localStorage.setItem('sap_master_logged_in', 'true');
-      showToast("Master portal unlocked.", "success");
-      switchMainView('master');
-    }
+    /* ======================================================== */
+    /* ATTENDEE DETAIL & MARKDOWN VIEWER                        */
+    /* ======================================================== */
+    function openAttendeeDetails(attendeeId) {
+      const att = (window.AppState.attendees || []).find(a => a && a.id === attendeeId);
+      if (!att) return;
 
-    function handleMasterLogout() {
-      window.AppState.isMasterAuthenticated = false;
-      localStorage.removeItem('sap_master_logged_in');
-      showToast("Master portal locked.", "info");
-      switchMainView('customer');
-    }
+      document.getElementById('detailAttendeeName').innerText = att.fullName || 'Attendee';
+      document.getElementById('detailAttendeeCompany').innerText = att.companyName || 'Session';
+      document.getElementById('detailAttendeeEmail').innerText = att.email || '';
+      document.getElementById('detailAttendeeTimestamp').innerText = att.timestamp ? new Date(att.timestamp).toLocaleString() : 'Just now';
 
-    function togglePasswordVisibility(id) {
-      const inp = document.getElementById(id);
-      const icon = document.getElementById('masterEyeIcon');
-      if (!inp) return;
-      if (inp.type === 'password') {
-        inp.type = 'text';
-        if (icon) icon.setAttribute('data-lucide', 'eye-off');
+      const responses = Array.isArray(att.surveyResponses) ? att.surveyResponses : [];
+      const responsesContainer = document.getElementById('detailSurveyResponsesContainer');
+      responsesContainer.innerHTML = '';
+
+      if (responses.length === 0) {
+        responsesContainer.innerHTML = `<p class="text-xs text-slate-400 italic">No survey questions were attached to this session.</p>`;
       } else {
-        inp.type = 'password';
-        if (icon) icon.setAttribute('data-lucide', 'eye');
+        responses.forEach((r, idx) => {
+          const div = document.createElement('div');
+          div.className = 'p-3 bg-white border border-slate-200/80 rounded-xl space-y-1';
+
+          if (r.type === 'rating') {
+            const stars = Number(r.answer || 0);
+            div.innerHTML = `
+              <p class="font-bold text-slate-800 text-xs">${idx + 1}. ${escapeHtml(r.questionLabel)}</p>
+              <div class="flex items-center gap-1.5 pt-0.5">
+                <div class="flex text-amber-400">
+                  ${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}
+                </div>
+                <span class="font-extrabold text-[#0070F2] text-[11px]">(${stars} / 5 Stars)</span>
+              </div>
+            `;
+          } else {
+            div.innerHTML = `
+              <p class="font-bold text-slate-800 text-xs">${idx + 1}. ${escapeHtml(r.questionLabel)}</p>
+              <p class="text-slate-600 bg-slate-50 p-2 rounded-lg font-mono text-[11px] mt-1 whitespace-pre-wrap">${escapeHtml(r.answer || 'No response')}</p>
+            `;
+          }
+          responsesContainer.appendChild(div);
+        });
       }
-      safeLucide();
+
+      // Generate Clean Markdown String
+      let md = `### SAP Session Check-In & Feedback\n`;
+      md += `- **Attendee Name:** ${att.fullName || 'Unknown'}\n`;
+      md += `- **Business Email:** ${att.email || 'N/A'}\n`;
+      md += `- **Company Session:** ${att.companyName || 'General Session'}\n`;
+      md += `- **Submitted At:** ${att.timestamp ? new Date(att.timestamp).toLocaleString() : 'N/A'}\n\n`;
+
+      if (responses.length > 0) {
+        md += `#### Survey Feedback Responses:\n`;
+        responses.forEach((r, idx) => {
+          if (r.type === 'rating') {
+            md += `${idx + 1}. **${r.questionLabel}:** ${'★'.repeat(Number(r.answer || 0))} (${r.answer}/5 Stars)\n`;
+          } else {
+            md += `${idx + 1}. **${r.questionLabel}:** ${r.answer || 'N/A'}\n`;
+          }
+        });
+      } else {
+        md += `*No survey questions were attached to this session.*\n`;
+      }
+
+      document.getElementById('detailMarkdownTextarea').value = md;
+      openModal('attendeeDetailModal');
     }
 
-    function switchMasterTab(tab) {
-      window.AppState.currentMasterTab = tab;
-      const tabAttendees = document.getElementById('tabContentAttendees');
-      const tabCompanies = document.getElementById('tabContentCompanies');
-      const btnAttendees = document.getElementById('tabBtnAttendees');
-      const btnCompanies = document.getElementById('tabBtnCompanies');
-
-      if (!tabAttendees || !tabCompanies) return;
-
-      tabAttendees.classList.add('hidden');
-      tabCompanies.classList.add('hidden');
-
-      const activeClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white cursor-pointer';
-      const inactiveClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 cursor-pointer';
-
-      if (btnAttendees) btnAttendees.className = inactiveClass;
-      if (btnCompanies) btnCompanies.className = inactiveClass;
-
-      if (tab === 'attendees') {
-        tabAttendees.classList.remove('hidden');
-        if (btnAttendees) btnAttendees.className = activeClass;
-        try { renderAttendeesTable(); } catch (e) {}
-      } else if (tab === 'companies') {
-        tabCompanies.classList.remove('hidden');
-        if (btnCompanies) btnCompanies.className = activeClass;
-        try { renderCompaniesGrid(); } catch (e) {}
+    function copyDetailMarkdown() {
+      const textarea = document.getElementById('detailMarkdownTextarea');
+      if (textarea) {
+        copyToClipboard(textarea.value);
+        showToast("Attendee summary copied as Markdown!", "success");
       }
-      safeLucide();
     }
 
     /* ======================================================== */
     /* BULK EMAIL TOOLS & TABLE RENDER                          */
     /* ======================================================== */
+    function updateCompanyFilterDropdown() {
+      const filterSelect = document.getElementById('filterCompanySelect');
+      if (!filterSelect) return;
+      const currentVal = filterSelect.value;
+      filterSelect.innerHTML = '<option value="ALL">All Companies</option>';
+      (window.AppState.companies || []).forEach(comp => {
+        if (!comp) return;
+        const opt = document.createElement('option');
+        opt.value = comp.id;
+        opt.textContent = comp.name || comp.id;
+        filterSelect.appendChild(opt);
+      });
+      filterSelect.value = currentVal || 'ALL';
+    }
+
     function getFilteredAttendees() {
       const searchTerm = (document.getElementById('searchAttendeeInput')?.value || '').toLowerCase();
       const filterComp = document.getElementById('filterCompanySelect')?.value || 'ALL';
@@ -1199,7 +1449,7 @@
         filtered.forEach(item => {
           if (!item) return;
           const tr = document.createElement('tr');
-          tr.className = 'hover:bg-slate-50 transition group';
+          tr.className = 'hover:bg-slate-50 transition group cursor-pointer';
 
           const timeDisplay = item.timestamp ? new Date(item.timestamp).toLocaleString(undefined, {
             month: 'short',
@@ -1208,8 +1458,13 @@
             minute: '2-digit'
           }) : 'Just now';
 
+          const responsesCount = Array.isArray(item.surveyResponses) ? item.surveyResponses.length : 0;
+          const surveyBadge = responsesCount > 0 
+            ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200">${responsesCount} Answer${responsesCount > 1 ? 's' : ''}</span>`
+            : `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-500">None</span>`;
+
           tr.innerHTML = `
-            <td class="py-3.5 px-4 font-bold text-slate-900 whitespace-nowrap">
+            <td class="py-3.5 px-4 font-bold text-slate-900 whitespace-nowrap" onclick="openAttendeeDetails('${item.id}')">
               <div class="flex items-center gap-2.5">
                 <div class="w-7 h-7 rounded-lg bg-blue-50 text-[#0070F2] flex items-center justify-center font-bold text-xs">
                   ${(item.fullName || 'A').charAt(0).toUpperCase()}
@@ -1217,29 +1472,27 @@
                 <span>${escapeHtml(item.fullName || 'Attendee')}</span>
               </div>
             </td>
-            <td class="py-3.5 px-4 text-[#0070F2] font-mono text-xs">
-              <div class="flex items-center gap-2">
-                <span>${escapeHtml(item.email || '')}</span>
-                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email: ${escapeHtml(item.email || '')}', 'success');" title="Copy email" class="opacity-0 group-hover:opacity-100 p-1 hover:text-slate-900 transition cursor-pointer">
-                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                </button>
-              </div>
+            <td class="py-3.5 px-4 text-[#0070F2] font-mono text-xs" onclick="openAttendeeDetails('${item.id}')">
+              <span>${escapeHtml(item.email || '')}</span>
             </td>
-            <td class="py-3.5 px-4">
+            <td class="py-3.5 px-4" onclick="openAttendeeDetails('${item.id}')">
               <span class="inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                 ${escapeHtml(item.companyName || 'General Session')}
               </span>
             </td>
-            <td class="py-3.5 px-4 text-slate-400 text-xs whitespace-nowrap">
+            <td class="py-3.5 px-4" onclick="openAttendeeDetails('${item.id}')">
+              ${surveyBadge}
+            </td>
+            <td class="py-3.5 px-4 text-slate-400 text-xs whitespace-nowrap" onclick="openAttendeeDetails('${item.id}')">
               ${timeDisplay}
             </td>
             <td class="py-3.5 px-4 text-right">
               <div class="flex items-center justify-end gap-1.5">
-                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email!', 'success');" class="p-1.5 rounded-lg text-slate-400 hover:text-[#0070F2] hover:bg-blue-50 transition cursor-pointer" title="Copy Email">
-                  <i data-lucide="copy" class="w-4 h-4"></i>
+                <button onclick="openAttendeeDetails('${item.id}')" class="p-1.5 rounded-lg text-slate-400 hover:text-[#0070F2] hover:bg-blue-50 transition cursor-pointer" title="View Answers & Markdown">
+                  <i data-lucide="eye" class="w-4 h-4"></i>
                 </button>
-                <button onclick="copyNameAndEmail('${escapeHtml(item.fullName || '')}', '${escapeHtml(item.email || '')}')" class="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50 transition cursor-pointer" title="Copy Name & Email">
-                  <i data-lucide="clipboard" class="w-4 h-4"></i>
+                <button onclick="copyToClipboard('${escapeHtml(item.email || '')}'); showToast('Copied email!', 'success');" class="p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition cursor-pointer" title="Copy Email">
+                  <i data-lucide="copy" class="w-4 h-4"></i>
                 </button>
                 <button onclick="promptDeleteAttendee('${item.id}', '${escapeHtml(item.fullName || 'Attendee')}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer" title="Delete record">
                   <i data-lucide="trash-2" class="w-4 h-4"></i>
@@ -1285,30 +1538,65 @@
       showToast(`Copied ${filtered.length} Name & Email pair(s)!`, "success");
     }
 
+    /* ======================================================== */
+    /* EXCEL / CSV EXPORT WITH DYNAMIC SURVEY COLUMNS           */
+    /* ======================================================== */
     function exportAttendeesCSV() {
-      const list = window.AppState.attendees || [];
+      const list = getFilteredAttendees();
       if (list.length === 0) {
         showToast("No attendee records to export.", "error");
         return;
       }
 
-      const headers = ["Full Name", "Email Address", "Company", "Check-In Timestamp"];
-      const rows = list.filter(Boolean).map(item => [
-        `"${(item.fullName || '').replace(/"/g, '""')}"`,
-        `"${(item.email || '').replace(/"/g, '""')}"`,
-        `"${(item.companyName || '').replace(/"/g, '""')}"`,
-        `"${item.timestamp ? new Date(item.timestamp).toISOString() : ''}"`
-      ]);
+      // 1. Gather all unique survey question labels
+      const allQuestionLabels = [];
+      const questionLabelSet = new Set();
 
-      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      list.forEach(item => {
+        const responses = Array.isArray(item.surveyResponses) ? item.surveyResponses : [];
+        responses.forEach(r => {
+          if (r.questionLabel && !questionLabelSet.has(r.questionLabel)) {
+            questionLabelSet.add(r.questionLabel);
+            allQuestionLabels.push(r.questionLabel);
+          }
+        });
+      });
+
+      // 2. Build CSV Headers
+      const headers = ["Full Name", "Business Email", "Company", "Submitted At", ...allQuestionLabels];
+
+      // 3. Build CSV Rows
+      const rows = list.map(item => {
+        const responses = Array.isArray(item.surveyResponses) ? item.surveyResponses : [];
+        const responseMap = {};
+        responses.forEach(r => {
+          responseMap[r.questionLabel] = r.type === 'rating' ? `${r.answer} Stars` : r.answer;
+        });
+
+        const rowData = [
+          `"${(item.fullName || '').replace(/"/g, '""')}"`,
+          `"${(item.email || '').replace(/"/g, '""')}"`,
+          `"${(item.companyName || '').replace(/"/g, '""')}"`,
+          `"${item.timestamp ? new Date(item.timestamp).toISOString() : ''}"`
+        ];
+
+        allQuestionLabels.forEach(qLabel => {
+          const val = responseMap[qLabel] !== undefined ? String(responseMap[qLabel]) : "";
+          rowData.push(`"${val.replace(/"/g, '""')}"`);
+        });
+
+        return rowData.join(",");
+      });
+
+      const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.map(h => `"${h}"`).join(","), ...rows].join("\n");
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `sap_attendees_${new Date().toISOString().slice(0, 10)}.csv`);
+      link.setAttribute("download", `sap_session_survey_export_${new Date().toISOString().slice(0, 10)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showToast("CSV file exported successfully!", "success");
+      showToast("Excel/CSV with survey responses exported!", "success");
     }
 
     /* ======================================================== */
@@ -1335,6 +1623,7 @@
         const count = (window.AppState.attendees || []).filter(a => a && (a.companyId === comp.id || ((a.companyName || '').toLowerCase() === cName.toLowerCase()))).length;
         const checkinUrl = getCompanyCheckInUrl(comp.id);
         const qrContainerId = `qr_card_${comp.id}`;
+        const qCount = Array.isArray(comp.questions) ? comp.questions.length : 0;
 
         const card = document.createElement('div');
         card.className = 'sap-card-white rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-blue-300 transition relative text-left';
@@ -1344,7 +1633,10 @@
             <div class="flex items-start justify-between gap-2">
               <div>
                 <h4 class="font-extrabold text-slate-900 text-base leading-snug">${escapeHtml(cName)}</h4>
-                <p class="text-[11px] text-[#0070F2] font-bold uppercase tracking-wider mt-0.5">End-of-Session QR</p>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                  <span class="text-[10px] text-[#0070F2] font-black uppercase tracking-wider">End-of-Session QR</span>
+                  ${qCount > 0 ? `<span class="text-[10px] px-1.5 py-0.2 bg-purple-50 text-purple-700 rounded-md font-bold">${qCount} Survey Qs</span>` : ''}
+                </div>
               </div>
               <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-50 text-[#0070F2] font-bold border border-blue-100 whitespace-nowrap">
                 ${count} ${count === 1 ? 'Attendee' : 'Attendees'}
@@ -1420,43 +1712,6 @@
     function openCustomerViewForCompany(companyId) {
       window.AppState.activeCompanyId = companyId;
       switchMainView('customer');
-    }
-
-    async function handleCreateCompany(e) {
-      e.preventDefault();
-      const input = document.getElementById('newCompanyNameInput');
-      const name = (input.value || '').trim();
-
-      if (!name) return;
-
-      const existing = (window.AppState.companies || []).find(c => c && (c.name || '').toLowerCase() === name.toLowerCase());
-      if (existing) {
-        showToast(`Company "${name}" already exists!`, "error");
-        input.value = '';
-        closeModal('createCompanyModal');
-        openPresentationMode(existing.id);
-        return;
-      }
-
-      const compId = 'comp_' + name.toLowerCase().replace(/[^a-z0-9]/g, '_');
-      const newComp = {
-        id: compId,
-        name: name,
-        createdAt: Date.now()
-      };
-
-      if (firestoreDb) {
-        try {
-          await firestoreDb.collection('companies').doc(newComp.id).set(newComp);
-        } catch (err) {
-          console.error("Firestore error:", err);
-        }
-      }
-
-      input.value = '';
-      closeModal('createCompanyModal');
-      showToast(`Company "${name}" created with End-of-Session QR!`, "success");
-      openPresentationMode(newComp.id);
     }
 
     function openPresentationMode(companyId) {
@@ -1551,7 +1806,7 @@
         "This response will be removed from your records.",
         async () => {
           if (firestoreDb) {
-            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e) {}
+            try { await firestoreDb.collection('attendees').doc(id).delete(); } catch (e {}
           }
           refreshAllDataViews();
           showToast(`Attendee record removed.`, "info");
@@ -1580,6 +1835,118 @@
       btnCancel.onclick = cleanup;
 
       modal.classList.remove('hidden');
+      safeLucide();
+    }
+
+    /* ======================================================== */
+    /* MASTER PORTAL ROUTING                                    */
+    /* ======================================================== */
+    function switchMainView(target) {
+      try { closeModal('presentationModal'); } catch (e) {}
+      try { closeModal('createCompanyModal'); } catch (e) {}
+      try { closeModal('deleteConfirmModal'); } catch (e) {}
+      try { closeModal('attendeeDetailModal'); } catch (e) {}
+
+      const customerView = document.getElementById('customerView');
+      const masterLoginView = document.getElementById('masterLoginView');
+      const masterDashView = document.getElementById('masterDashboardView');
+      const navBtnCustomer = document.getElementById('navBtnCustomer');
+      const navBtnMaster = document.getElementById('navBtnMaster');
+      const btnLogout = document.getElementById('btnMasterLogout');
+
+      if (!customerView || !masterLoginView || !masterDashView) return;
+
+      customerView.classList.add('hidden');
+      masterLoginView.classList.add('hidden');
+      masterDashView.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (target === 'customer') {
+        window.AppState.currentView = 'customer';
+        customerView.classList.remove('hidden');
+
+        if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#0070F2] bg-blue-50 border border-blue-200 transition cursor-pointer';
+        if (navBtnMaster) navBtnMaster.className = 'sap-btn-dark px-4 py-1.5 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm cursor-pointer';
+        if (btnLogout) btnLogout.classList.add('hidden');
+        try { updateCustomerCompanyDisplay(); } catch (e) {}
+        try { renderDynamicCustomerSurvey(); } catch (e) {}
+      } else if (target === 'master') {
+        if (navBtnCustomer) navBtnCustomer.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 transition cursor-pointer';
+        if (navBtnMaster) navBtnMaster.className = 'px-4 py-1.5 rounded-xl text-xs font-bold text-[#0070F2] bg-blue-50 border border-blue-200 transition flex items-center gap-1.5 cursor-pointer';
+
+        if (window.AppState.isMasterAuthenticated) {
+          window.AppState.currentView = 'master-dash';
+          masterDashView.classList.remove('hidden');
+          if (btnLogout) btnLogout.classList.remove('hidden');
+          try { switchMasterTab(window.AppState.currentMasterTab || 'attendees'); } catch (e) {}
+          try { renderAttendeesTable(); } catch (e) {}
+          try { renderCompaniesGrid(); } catch (e) {}
+          try { updateMetrics(); } catch (e) {}
+        } else {
+          window.AppState.currentView = 'master-login';
+          masterLoginView.classList.remove('hidden');
+          if (btnLogout) btnLogout.classList.add('hidden');
+        }
+      }
+      safeLucide();
+    }
+
+    function handleMasterLogin(e) {
+      if (e) e.preventDefault();
+      window.AppState.isMasterAuthenticated = true;
+      localStorage.setItem('sap_master_logged_in', 'true');
+      showToast("Master portal unlocked.", "success");
+      switchMainView('master');
+    }
+
+    function handleMasterLogout() {
+      window.AppState.isMasterAuthenticated = false;
+      localStorage.removeItem('sap_master_logged_in');
+      showToast("Master portal locked.", "info");
+      switchMainView('customer');
+    }
+
+    function togglePasswordVisibility(id) {
+      const inp = document.getElementById(id);
+      const icon = document.getElementById('masterEyeIcon');
+      if (!inp) return;
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        if (icon) icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        inp.type = 'password';
+        if (icon) icon.setAttribute('data-lucide', 'eye');
+      }
+      safeLucide();
+    }
+
+    function switchMasterTab(tab) {
+      window.AppState.currentMasterTab = tab;
+      const tabAttendees = document.getElementById('tabContentAttendees');
+      const tabCompanies = document.getElementById('tabContentCompanies');
+      const btnAttendees = document.getElementById('tabBtnAttendees');
+      const btnCompanies = document.getElementById('tabBtnCompanies');
+
+      if (!tabAttendees || !tabCompanies) return;
+
+      tabAttendees.classList.add('hidden');
+      tabCompanies.classList.add('hidden');
+
+      const activeClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 sap-btn-dark text-white cursor-pointer';
+      const inactiveClass = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 cursor-pointer';
+
+      if (btnAttendees) btnAttendees.className = inactiveClass;
+      if (btnCompanies) btnCompanies.className = inactiveClass;
+
+      if (tab === 'attendees') {
+        tabAttendees.classList.remove('hidden');
+        if (btnAttendees) btnAttendees.className = activeClass;
+        try { renderAttendeesTable(); } catch (e) {}
+      } else if (tab === 'companies') {
+        tabCompanies.classList.remove('hidden');
+        if (btnCompanies) btnCompanies.className = activeClass;
+        try { renderCompaniesGrid(); } catch (e) {}
+      }
       safeLucide();
     }
 
